@@ -253,6 +253,38 @@ main{min-width:0}
 .vid figcaption a{color:var(--ink);text-decoration:none}.vid figcaption a:hover{text-decoration:underline}
 .vid figcaption span{font-size:12px;color:var(--muted)}
 .srcs{margin:0;padding-left:18px;font-size:14px}.srcs li{margin:4px 0}.srcs span{color:var(--muted);font-size:12px}
+.tabbar{display:none}
+@media (max-width:900px){
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1.5px solid var(--line);
+    padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));box-shadow:0 -4px 16px rgba(0,0,0,.12)}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;text-decoration:none;color:var(--muted);font:600 11px var(--body);border-radius:8px}
+  .tabbar a svg{width:22px;height:22px}
+  .tabbar a.on{color:var(--accent)}
+  .wrap{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .region{gap:6px 8px;padding:8px 0}
+  .region .rlab,.region .rhint{display:none}
+  .region select{flex:1 1 140px;font-size:13px;padding:6px}
+  .top{gap:10px;padding-bottom:10px}
+  .brand b{font-size:24px}
+  .intro{gap:10px;margin-bottom:16px}
+  .intro h1{font-size:34px}
+  .intro p,.legend{display:none}
+  .finder{padding:14px}
+  .finder h2{font-size:24px;margin-bottom:10px}
+  .askform .btn{flex:1 1 auto;justify-content:center}
+  .ex{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .ex .chip{white-space:nowrap}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gal figcaption{padding:6px 8px;font-size:12px}
+  .vids{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .card h3{font-size:19px}
+  .card p{display:none}
+  .card .body{padding:10px 10px 12px}
+  .card .foot{font-size:11px}
+  .plan h1{font-size:30px}
+  .code-table td{padding:8px 6px;font-size:14px}
+}
 .note{font-size:13px;color:var(--muted);margin-top:28px;padding-top:12px;border-top:1px solid var(--line)}
 
 /* scene drawing */
@@ -323,6 +355,12 @@ main{min-width:0}
     <main id="view"></main>
   </div>
 </div>
+<nav class="tabbar" id="tabbar" aria-label="Quick links">
+  <a href="#home" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg><span>Guides</span></a>
+  <a href="#ask" data-tab="ask"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Ask</span></a>
+  <a href="#ask" data-tab="cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg><span>Photo</span></a>
+  <a href="#tools" data-tab="tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9a4 4 0 0 1-2-2z"/></svg><span>Tools</span></a>
+</nav>
 
 <script>
 // ---------- drawing helpers ----------
@@ -3367,7 +3405,13 @@ function play(t){
 }
 function stop(){ if(timer){clearInterval(timer);timer=null} const s=$('#play span'); if(s) s.textContent='Play walkthrough'}
 
+document.addEventListener('click',e=>{const a=e.target.closest('#tabbar a[data-tab="cam"]'); if(!a) return; e.preventDefault();
+  pendingAsk='';pendingImg=null; if(location.hash!=='#ask') history.pushState(null,'','#ask'); finder(); const f=$('#camfile'); if(f) f.click();});
+function markTab(){const h=location.hash.slice(1)||'home'; const k=h==='ask'?'ask':h==='tools'?'tools':'home';
+  document.querySelectorAll('#tabbar a').forEach(a=>a.classList.toggle('on',a.dataset.tab===k))}
+addEventListener('hashchange',markTab);
 function route(){
+  setTimeout(markTab,0);
   const id=location.hash.slice(1); const t=D.find(x=>x.id===id);
   if(id==='ask'){ctl?.abort();finder();return}
   ctl?.abort();
