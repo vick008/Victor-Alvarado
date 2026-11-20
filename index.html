@@ -221,6 +221,29 @@ main{min-width:0}
 .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
 .tooli{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);min-width:0}
 .tooli b{font-weight:600}.tooli span{font-size:13px;color:var(--muted)}.tooli span a{color:var(--blue)}
+.vtabs{display:flex;gap:4px;padding:8px 10px 0;background:var(--panel)}
+.vtabs button{font:600 13px var(--body);padding:6px 12px;border:1.5px solid var(--line);border-radius:6px 6px 0 0;background:var(--panel2);color:var(--muted);cursor:pointer}
+.vtabs button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pv{margin:0;background:var(--panel)}
+.pv>img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--panel2);max-width:100%}
+.pv figcaption{display:flex;flex-direction:column;gap:2px;padding:8px 14px 0;font-size:14px}
+.pv figcaption a{font-size:11px;color:var(--muted);text-decoration:none;overflow-wrap:anywhere}
+.pv figcaption a:hover{text-decoration:underline}
+.pvthumbs{display:flex;gap:6px;padding:8px 14px 10px;overflow-x:auto}
+.pvthumbs button{flex:none;width:64px;height:48px;padding:0;border:2px solid transparent;border-radius:4px;overflow:hidden;cursor:pointer;background:var(--panel2)}
+.pvthumbs button.on{border-color:var(--accent)}
+.pvthumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.phwait{position:absolute;inset:0;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(110deg,var(--panel2) 30%,var(--panel) 50%,var(--panel2) 70%);background-size:300% 100%;animation:shim 1.6s linear infinite}
+.phwait span{font:700 22px var(--display);text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.card .thumb[data-ph]{position:relative;min-height:0;aspect-ratio:16/10;padding:0}
+.card .thumb[data-ph]>.scene{padding:10px 14px}
+.card .thumb.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@keyframes shim{from{background-position:100% 0}to{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.phwait{animation:none}}
+.pv.loading>img{animation:shim 1.6s linear infinite;background:linear-gradient(110deg,var(--panel2) 30%,var(--panel) 50%,var(--panel2) 70%);background-size:300% 100%}
+.pv.none>img{display:none}
+.pv.none figcaption{padding:40px 14px;align-items:center;text-align:center;font-size:16px}
+.pv.none figcaption a{font-size:14px;color:var(--accent)}
 .note{font-size:13px;color:var(--muted);margin-top:28px;padding-top:12px;border-top:1px solid var(--line)}
 
 /* scene drawing */
@@ -1769,7 +1792,7 @@ addCompact([
  'Roofing shovel;Pry bar;Circular saw;Harness','Plywood or OSB;Nails;Tarps','Tear-off is heavy, dusty and dangerous; use fall protection.',
  [["Protect the property", "Tarp landscaping and park a dumpster close to the eave."], ["Strip from the top", "Strip shingles and underlayment with a roofing shovel, working from the ridge down."], ["Remove fasteners", "Pull or drive flat all nails so the deck is smooth."], ["Inspect the deck", "Walk the deck and probe for soft, delaminated or rotted sheathing."], ["Replace bad sheathing", "Cut out damaged sheathing to the centers of rafters and nail in new panels of the same thickness."], ["Dry in the same day", "Cover stripped areas with underlayment before you stop work."]],
  [['IRC R908.2','Tear-off required when there are already two layers.'],['Permit','Required.']]],
-['underlayment','Roofing','roof','Apply roof underlayment','Intermediate','Half day','Yes','Install ice barrier and underlayment before shingles.','how to install roof underlayment ice and water shield',
+['roof-underlayment','Roofing','roof','Apply roof underlayment','Intermediate','Half day','Yes','Install ice barrier and underlayment before shingles.','how to install roof underlayment ice and water shield',
  'Utility knife;Stapler;Chalk line','Ice and water membrane;Synthetic underlayment;Drip edge','Use fall protection.',
  [["Install eave drip edge", "Nail drip edge along the eaves, under the underlayment."], ["Lay ice barrier at the eaves", "In cold climates, apply self-adhered ice barrier from the eave edge to at least 24 in inside the exterior wall line."], ["Roll out underlayment", "Roll synthetic underlayment from the bottom up, parallel to the eave."], ["Lap the courses", "Lap each course over the one below by the amount marked on the underlayment (often 4–6 in) and fasten as labeled."], ["Install rake drip edge", "Install drip edge on the rakes over the underlayment."], ["Line the valleys", "Run ice barrier down every valley before shingling."]],
  [['IRC R905.1.2','Ice barrier where ice dams are likely.'],['IRC R905.2.8.5','Drip edge required.']]],
@@ -2641,6 +2664,59 @@ const LIB={
  Wallpaper:[['Measure and estimate wallpaper','Count rolls with pattern repeat and waste'],['Hang wallpaper','',"wallpaper"],['Wallpaper inside and outside corners','Wrap and overlap corners so seams stay plumb'],['Wallpaper around windows and doors','Cut relief slits and trim around casings'],['Wallpaper a recessed window','Line the sides and top of a window recess'],['Wallpaper an archway','Paper the inside curve of an arch'],['Wallpaper around outlets and fixtures','Cut neat openings with the power off'],['Wallpaper a ceiling','Hang ceiling strips safely with a helper and scaffold'],['Repair wallpaper seams and bubbles','Re-glue lifted seams and flatten bubbles'],['Hang a wallpaper border','Level borders on painted walls or over paper'],['Combine two wallpapers','Use a chair-rail border to join two patterns'],['Remove old wallpaper','',"remove-wallpaper"]],
  Plumbing:[['Glue PVC drain pipe','Prime and solvent-weld PVC joints that don’t leak'],['Join CPVC water pipe','Cut and cement CPVC supply lines'],['Glue ABS drain pipe','Solvent-weld black ABS drain and vent pipe'],['Solder copper pipe','Clean, flux and sweat copper joints'],['Fix a frozen or leaking pipe','Emergency thaw and temporary leak repairs'],['Run new PEX supply lines','Plan and connect PEX with crimp or expansion fittings'],['Add a fixture shutoff valve','',"shutoff-valve"],['Replace a sink strainer','Reseal a leaking kitchen sink basket strainer'],['Replace a sink P-trap','',"plumbing"],['Unclog a sink drain','',"unclog-drain"],['Unjam a garbage disposer','Free a stuck disposer with a hex key and reset it'],['Unclog a tub or shower drain','Pull hair clogs from tub and shower drains'],['Unclog a toilet','Plunge or auger a clogged toilet'],['Fix a compression faucet','Replace washers in an older two-handle faucet'],['Replace a faucet valve seat','Remove and replace a worn seat in a compression faucet'],['Repair a ceramic-disk faucet','Clean or replace the disk cylinder seals'],['Replace a faucet cartridge','',"faucet-cartridge"],['Repair a ball-type faucet','Rebuild a single-handle ball faucet'],['Repair a two-handle tub and shower faucet','Stop drips from a two-handle tub valve'],['Fix a tub diverter','Repair a diverter that leaks to the spout'],['Replace a tub spout','Swap a slip-on or threaded tub spout'],['Clean a showerhead','Remove mineral buildup for full flow'],['Adjust toilet handle and water level','Fix weak flushes and a running toilet'],['Fix a leaking toilet tank','Replace tank bolts and gaskets'],['Replace a toilet fill valve','',"toilet-fill-valve"],['Replace a toilet flapper','',"toilet-flapper"],['Install a drop-in countertop sink','Set and seal a self-rimming sink'],['Install a wall-hung or pedestal sink','Block, mount and level a pedestal sink'],['Install a bathroom faucet','',"install-faucet"],['Install a pop-up drain','Replace a lavatory pop-up assembly'],['Remove an old bathtub','Disconnect and get a tub out safely'],['Install a bathtub in an alcove','Set, level and connect a new tub'],['Install a shower surround','Glue up a panel shower surround'],['Install a new toilet','',"install-toilet"],['Install a garbage disposer','Mount and wire a new disposer'],['Replace a dishwasher','Disconnect, set and hook up a dishwasher'],['Replace an electric water heater','',"water-heater"],['Replace a gas water heater','What to prepare; gas and venting need a licensed plumber'],['Install a tankless water heater','Sizing, gas or electric supply, and venting']]
 };
+
+// ---------- real photos from Wikimedia Commons (website only; Claude's viewer blocks outside images) ----------
+const PQ={"air-conditioning": "air conditioner condenser", "electrical": "GFCI receptacle", "generator-inlet": "portable generator", "plumbing": "sink p-trap", "toilet-flapper": "toilet flapper", "toilet-fill-valve": "toilet fill valve", "install-toilet": "new toilet", "faucet-cartridge": "faucet cartridge", "install-faucet": "bathroom faucet", "unclog-drain": "sink drain", "shutoff-valve": "fixture shutoff valve", "water-heater": "electric water heater", "glue-pvc": "pvc drain pipe", "join-cpvc": "cpvc water pipe", "glue-abs": "abs drain pipe", "solder-copper": "copper pipe", "frozen-pipe": "frozen pipe", "pex-lines": "PEX pipe", "sink-strainer": "sink strainer", "disposer-jam": "garbage disposer", "unclog-tub": "tub or shower drain", "unclog-toilet": "toilet plunger", "compression-faucet": "compression faucet", "valve-seat": "faucet valve seat", "ceramic-disk": "ceramic-disk faucet", "ball-faucet": "ball-type faucet", "two-handle-tub": "bathtub faucet", "tub-diverter": "tub diverter", "tub-spout": "tub spout", "clean-showerhead": "showerhead", "toilet-handle": "toilet tank", "toilet-tank-leak": "toilet tank", "drop-in-sink": "kitchen sink", "pedestal-sink": "pedestal sink", "pop-up-drain": "pop-up drain", "remove-tub": "bathtub", "install-tub": "bathtub", "shower-surround": "shower surround", "install-disposer": "garbage disposer", "replace-dishwasher": "dishwasher", "gas-water-heater": "gas water heater", "tankless-heater": "tankless water heater", "painting": "painting wall roller", "exterior-paint": "house painting exterior", "paint-sheen": "paint cans", "color-scheme": "color wheel paint", "brushes-rollers": "brushes and rollers", "protective-gear": "respirator mask", "degloss": "sanding sponge", "stains-mildew": "mildew wall", "paint-over-wallpaper": "painting wallpaper", "doors-trim": "painting door", "paint-windows": "painting window frame", "stain-trim": "wood stain", "paint-brick": "painted brick fireplace", "paint-concrete": "painted concrete floor", "paint-disposal": "paint cans", "sponge-rag": "sponge painting", "stipple-texture": "textured wall paint", "ext-trim": "painting exterior trim", "wallpaper": "wallpaper", "remove-wallpaper": "wallpaper removal", "measure-wallpaper": "wallpaper rolls", "wallpaper-corners": "wallpaper", "wallpaper-windows-doors": "wallpaper", "wallpaper-recessed": "wallpaper window", "wallpaper-arch": "archway", "wallpaper-outlets": "wallpaper", "wallpaper-ceiling": "wallpapered ceiling", "wallpaper-repair": "wallpaper", "wallpaper-border": "wallpaper border", "combine-wallpapers": "wallpaper border", "walls-ceilings": "drywall repair", "flooring": "vinyl plank flooring", "doors": "interior door", "windows": "window installation", "cabinets": "kitchen cabinets", "countertops": "butcher block countertop", "shelving": "wall shelf brackets", "exterior": "wooden deck", "heating": "thermostat", "ventilation": "bathroom exhaust fan", "structure": "wall framing studs", "ext-basics": "house exterior", "ext-toolkit": "extension ladder", "water-infiltration": "downspout", "sagging-gutters": "rain gutter", "leaky-gutters": "rain gutter", "gutter-joints": "rain gutter", "replace-gutter-section": "metal gutter", "vinyl-gutters": "vinyl gutter", "wood-siding": "wood siding", "vinyl-siding": "vinyl siding", "repair-stucco": "stucco", "replace-fascia": "fascia board", "plywood-soffit": "soffit", "tg-soffit": "soffit", "roof-basics": "roof shingles", "roof-toolkit": "roofing nailer", "roof-prep": "roofing", "roof-problems": "damaged roof shingles", "roof-safety": "roofer harness", "roof-repair": "roof shingles", "roof-tearoff": "roof tear off", "underlayment": "plywood subfloor", "valley-flashing": "roof valley", "chimney-flashing": "chimney flashing", "vent-flashing": "roof vent pipe", "step-flashing": "roof flashing", "shingle-basics": "asphalt shingles", "hips-ridges": "roof ridge shingles", "closed-valley": "roof valley shingles", "metal-valley": "roof valley", "roof-dormer": "dormer roof", "reroof-over": "asphalt shingles", "roll-roofing": "roll roofing", "oil-furnace-works": "oil furnace", "gas-furnace-works": "gas furnace", "forced-air-works": "air duct", "hot-water-works": "boiler", "heat-pump-works": "heat pump", "window-ac-maintenance": "window air conditioner", "install-window-ac": "window air conditioner", "evaporative-cooler": "evaporative cooler", "oil-filter": "oil burner", "oil-fan": "oil burner", "oil-firing-assembly": "oil burner", "oil-strainer": "oil burner", "gas-leaks": "gas meter", "light-pilot": "pilot light", "clean-pilot": "pilot light", "thermocouple": "thermocouple", "clean-burner": "gas burner flame", "igniter": "furnace igniter", "choose-filter": "furnace filter", "clean-filter": "furnace filter", "fan-motor-maintain": "furnace blower", "fan-motor-diagnose": "furnace blower", "replace-fan-motor": "blower motor", "bleed-radiators": "radiator valve", "waterlogged-tank": "expansion tank", "replace-expansion-tank": "expansion tank", "aquastat": "aquastat", "circulator-pump": "circulator pump", "heat-pump-outdoor": "heat pump", "heat-pump-indoor": "air handler", "heat-pump-wont-start": "heat pump", "heat-pump-ice": "heat pump frost", "electric-baseboard": "electric baseboard heater", "hot-water-baseboard": "hot-water baseboard heater", "heat-run": "air duct", "aux-gas-heater": "gas heater", "vent-free-heater": "gas space heater", "vented-heater": "gas wall heater", "direct-vent-heater": "gas wall heater", "ca-general": "house construction", "ca-plumbing": "plumbing pipes", "ca-electrical": "electrical panel", "ca-roofing": "roof shingles", "ca-hvac": "furnace", "door-basics": "door", "door-toolkit": "door hinge", "locksets": "locksets and latches", "latch-problems": "door latch", "sticking-door": "door", "install-door-lock": "deadbolt", "remove-entry-door": "front door", "door-opening": "door framing", "make-header": "door header framing", "split-jamb-door": "interior door", "door-molding": "door casing", "prehung-entry-door": "prehung entry door", "storm-door": "storm door", "patio-door": "hinged patio door", "garage-door": "garage door", "garage-balance": "garage door springs", "garage-opener": "garage door opener", "opener-maintain": "garage door opener", "opener-safety": "garage door sensor", "window-basics": "window", "window-maintenance": "window", "sash-cords": "sash window", "window-toolkit": "glazing", "cut-glass": "glass cutter", "install-glass": "window glazing", "replace-screen": "window screen", "window-security": "window lock", "remove-window": "window replacement", "install-window": "window installation", "storm-window": "storm window", "skylight": "skylight", "cabinet-basics": "kitchen cabinets", "cabinet-toolkit": "cabinet", "cabinet-hardware": "cabinet hardware", "cabinet-doors": "cabinet doors and drawers", "cabinet-refacing": "kitchen cabinets", "remove-cabinets": "kitchen cabinets", "remove-countertop": "kitchen countertop", "kitchen-island": "kitchen island", "countertop-basics": "kitchen countertop", "laminate-countertop": "laminate countertop", "tile-countertop": "tile countertop", "add-closet": "closet", "bookshelves": "bookshelves", "wire-shelving": "wire shelving", "insulation-basics": "insulation", "insulation-toolkit": "insulation", "energy-audit": "thermal image house", "weatherproof-entry": "weatherstripping", "weatherproof-threshold": "door threshold", "weatherproof-other-doors": "weatherstripping", "weatherproof-windows": "weatherstripping", "weatherproof-other-windows": "casement window", "soffit-vent": "soffit vent", "roof-vent": "roof vent", "insulate-attic": "attic insulation", "loose-fill": "blown insulation", "basement-walls": "basement insulation", "elec-system": "electrical panel", "elec-safety": "electrical tester", "elec-tools": "electrician tools", "wires-cables": "electrical wire", "wire-connectors": "wire nut", "receptacles-switches": "receptacles and switches", "how-circuit-works": "circuit breaker", "grounding": "electrical outlet", "using-testers": "voltage tester", "strip-splice": "wire stripper", "wire-terminal": "electrical outlet wiring", "device-wiring": "light switch wiring", "replace-receptacle": "electrical outlet", "outdoor-receptacle": "outdoor receptacle", "switch-ceiling-fixture": "light switch", "switched-outlet": "electrical outlet", "three-way-switch": "three-way switch", "dimmer-switch": "dimmer switch", "choose-boxes": "electrical box", "remodel-box": "electrical box", "ceiling-box": "ceiling box", "junction-box": "junction box", "nm-new-walls": "electrical wiring studs", "nm-cable": "Romex cable", "fish-cable": "fish tape", "armored-cable": "armored cable", "run-conduit": "electrical conduit", "add-circuit": "circuit breaker panel", "kitchen-lighting": "kitchen lighting", "bathroom-lighting": "bathroom vanity light", "living-lighting": "living room lighting", "can-lighting-plan": "recessed lighting", "ceiling-fixtures": "ceiling fixtures", "bulbs": "LED bulb", "wall-lights": "wall lights", "hanging-fixture": "hanging fixture", "recessed-lights": "recessed lighting", "halogen-lighting": "halogen lamp", "fluorescent-lighting": "fluorescent lighting", "track-lighting": "track lighting", "motion-lights": "motion-sensor lights", "ceiling-fan": "ceiling fan", "attic-fan": "attic fan", "whole-house-fan": "whole-house fan", "range-hood": "range hood", "data-wiring": "Cat 6 cable", "coax-cable": "coaxial cable", "door-chime": "doorbell", "thermostat-troubleshoot": "thermostat", "surge-protection": "surge protector", "wall-basics": "wall framing", "wall-toolkit": "drywall tools", "plaster-repair": "plaster walls", "ceiling-tile": "ceiling tile", "hang-suspended-ceiling": "suspended ceiling", "light-suspended-ceiling": "suspended ceiling", "remove-wall": "wall demolition", "attach-partition": "wall framing", "drywall-cut-screw": "drywall", "drywall-ceiling": "drywall ceiling", "hang-drywall": "drywall installation", "finish-drywall": "drywall taping", "paneling": "paneling", "tile-wall": "wall tile", "chair-rail": "chair and picture rails", "cope-chair-rail": "chair rail", "custom-molding": "custom moldings", "crown-molding": "crown molding", "miter-outside": "miter saw", "no-miter-crown": "no-miter crown molding", "beadboard": "beadboard wainscoting", "hang-pictures": "picture frames wall", "floor-materials": "flooring materials", "floor-toolkit": "flooring tools", "floor-squeaks": "hardwood floor", "patch-concrete": "concrete floor crack", "measure-flooring": "tape measure floor", "prep-removal": "flooring", "remove-carpet": "carpet", "remove-tile": "ceramic tile", "remove-wood": "wood flooring", "flooring-template": "sheet vinyl", "sheet-vinyl": "sheet vinyl", "vinyl-seams": "vinyl flooring", "vinyl-tile": "vinyl tile floor", "backerboard": "cement board", "tile-layout": "tile floor", "set-tile": "tile floor", "special-cuts": "tile cutting", "cut-tile": "tile cutter", "grout-tile": "grout tile", "parquet-tile": "parquet tile", "refinish-floor": "floor sanding", "strip-wood": "hardwood floor", "floor-border": "hardwood floor border", "floor-inlay": "floor medallion", "wide-plank": "wide-plank flooring", "laminate-floor": "laminate flooring", "engineered-glue": "engineered wood flooring", "carpet-pad": "carpet installation", "baseboard": "baseboard", "thresholds": "floor transition", "roof-underlayment": "roofing underlayment"};
+const phMem={}; let phActive=0; const phQueue=[];
+const PH_BAD=/\((1[5-9]\d\d)\)|journal|magazine|catalogue|catalog |cyclopedia|DPLA|review|manual of|handbook|railway|advertisement|book|page \d|map of|plan of|diagram|drawing|patent|logo|icon|chart|graph|statistic|sales|facade|church|cathedral|museum|monument|preview|sphere|poster|stamp|coat of arms|LCCN|engraving|illustration/i;
+function phRun(){while(phActive<3&&phQueue.length){const job=phQueue.shift();phActive++;job().finally(()=>{phActive--;phRun()})}}
+function getPhotos(t){
+  if(!SITE) return Promise.resolve(PHOTOS[t.id]||[]);
+  if(phMem[t.id]) return phMem[t.id];
+  return phMem[t.id]=new Promise(res=>{
+    try{const c=JSON.parse(localStorage.getItem('lp-ph3-'+t.id)||'null');if(c&&Date.now()-c.at<30*864e5){return res(mergePh(t,c.p))}}catch(e){}
+    phQueue.push(async()=>{
+      let list=null;
+      try{
+        const u='https://commons.wikimedia.org/w/api.php?'+new URLSearchParams({origin:'*',action:'query',format:'json',generator:'search',gsrsearch:(PQ[t.id]||t.title)+' filetype:bitmap',gsrnamespace:'6',gsrlimit:'20',prop:'imageinfo',iiprop:'url|extmetadata|mime|size',iiurlwidth:'800'});
+        const d=await (await fetch(u)).json(); list=[];
+        const pages=Object.values((d.query&&d.query.pages)||{}).sort((a,b)=>a.index-b.index);
+        for(const pg of pages){const ii=pg.imageinfo&&pg.imageinfo[0]; if(!ii||!/jpeg|webp/.test(ii.mime)||ii.width<500||PH_BAD.test(pg.title)) continue;
+          const m=ii.extmetadata||{}; const artist=((m.Artist&&m.Artist.value)||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().slice(0,60)||'Unknown author';
+          list.push({src:ii.thumburl,cap:pg.title.replace(/^File:/,'').replace(/\.\w+$/,'').replace(/_/g,' ').replace(/\s*\(\d{5,}\)$/,''),credit:artist+' · '+((m.LicenseShortName&&m.LicenseShortName.value)||'see source'),page:ii.descriptionurl});
+          if(list.length>=6) break;}
+        try{localStorage.setItem('lp-ph3-'+t.id,JSON.stringify({at:Date.now(),p:list}))}catch(e){}
+      }catch(e){}
+      res(mergePh(t,list||[]));
+    }); phRun();
+  });
+}
+function mergePh(t,list){const seen=new Set(),out=[];for(const p of [...(PHOTOS[t.id]||[]),...list]){if(seen.has(p.page))continue;seen.add(p.page);out.push(p)}return out}
+// fill card thumbnails with a photo once they scroll into view
+const phObs=('IntersectionObserver' in window)?new IntersectionObserver(es=>{for(const e of es){if(!e.isIntersecting)continue;phObs.unobserve(e.target);fillThumb(e.target)}},{rootMargin:'200px'}):null;
+function fillThumb(el){const t=D.find(x=>x.id===el.dataset.ph); if(!t) return;
+  getPhotos(t).then(ps=>{if(!ps.length||!el.isConnected) return; const p=ps[0];
+    const keep=el.innerHTML; el.classList.add('ph'); el.innerHTML=`<img src="${p.src}" alt="${esc(p.cap)}" loading="lazy">`;
+    el.querySelector('img').addEventListener('error',()=>{el.classList.remove('ph');el.innerHTML=keep},{once:true});});}
+function thumbFallback(t,label){return SITE?`<div class="phwait"><span>${esc(label||t.trade||t.name)}</span></div>`:svgOf(t)}
+function hydratePhotos(){if(!SITE) return; document.querySelectorAll('[data-ph]').forEach(el=>{if(el.dataset.done) return; el.dataset.done=1; phObs?phObs.observe(el):fillThumb(el)})}
+function showViewer(t){
+  const pv=$('#pv'), tabs=$('#vtabs'); if(!pv) return;
+  if(SITE){$('#pvimg').removeAttribute('src');$('#pv').classList.add('loading')}
+  getPhotos(t).then(ps=>{ if(!$('#pv')) return; $('#pv').classList.remove('loading');
+    if(!ps.length){ if(SITE&&t.base){$('#pv').classList.add('none');$('#pvcap').textContent='No matching photos found for this project yet.';const a=$('#pvcredit');a.href=yt(t.vq||t.title);a.textContent='▶ Watch video guides instead';} else {setView('diagram')} return }
+    let i=0; $('#pvimg').onerror=()=>{ps.splice(i,1); if(!ps.length){$('#vtabs').hidden=true; if(t.base){$('#pv').classList.add('none');$('#pvcap').textContent='No matching photos found for this project yet.'} else setView('diagram'); return} $('#pvthumbs').children[i]&&$('#pvthumbs').children[i].remove(); [...$('#pvthumbs').children].forEach((b,k)=>b.dataset.k=k); i=Math.min(i,ps.length-1); draw()};
+    const draw=()=>{const p=ps[i]; $('#pvimg').src=p.src; $('#pvimg').alt=p.cap; $('#pvcap').textContent=p.cap; const a=$('#pvcredit'); a.href=p.page; a.textContent='Photo: '+p.credit+' ↗';
+      document.querySelectorAll('#pvthumbs button').forEach((b,k)=>b.classList.toggle('on',k===i))};
+    $('#pvthumbs').innerHTML=ps.map((p,k)=>`<button type="button" data-k="${k}" aria-label="Photo ${k+1}"><img src="${p.src}" alt="" loading="lazy"></button>`).join('');
+    $('#pvthumbs').onclick=e=>{const b=e.target.closest('button'); if(b){i=+b.dataset.k; draw()}};
+    tabs.hidden=!!tabs.dataset.nodiag; setView('photo'); draw();
+    tabs.onclick=e=>{const b=e.target.closest('button'); if(b) setView(b.dataset.v)};
+  });
+}
+function setView(v){const pv=$('#pv'),art=$('#art'); if(!pv) return; pv.hidden=v!=='photo'; art.hidden=v==='photo';
+  document.querySelectorAll('#vtabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+
 function libList(trade,skipId){
   const ps=D.filter(t=>(t.trade||t.name)===trade&&t.id!==skipId); if(!ps.length) return '';
   return `<div class="lib">${ps.map(t=>`<a class="libi guide" href="#${t.id}"><b>${t.title}</b><span>${t.lvl} · ${t.time}</span></a>`).join('')}</div>`;
@@ -2816,12 +2892,12 @@ function toolsPage(){
 function tradePage(tr){
   stop(); const ps=inTrade(tr);
   $('#view').innerHTML=`<div class="crumb"><a href="#home">All trades</a> / ${tr}</div>
-   <div class="guide-head"><h1>${tr}</h1><p>${ps.length} step-by-step guides with illustrations, tools and materials, safety and code checks for ${esc(where())}.</p></div>
+   <div class="guide-head"><h1>${tr}</h1><p>${ps.length} step-by-step guides with photos, tools and materials, safety and code checks for ${esc(where())}.</p></div>
    <div class="grid" style="margin-top:20px">${ps.map(cardHtml).join('')}</div>`;
-  nav('t-'+slug(tr)); scrollTo(0,0);
+  nav('t-'+slug(tr)); hydratePhotos(); scrollTo(0,0);
 }
 const tradeCard=tr=>{const ps=inTrade(tr),t=ps[0];return `
-    <a class="card" href="${tradeHref(tr)}"><div class="thumb${PHOTOS[t.id]?' ph':''}">${PHOTOS[t.id]?`<img src="${PHOTOS[t.id][0].src}" alt="" loading="lazy"><span class="mini">${svgOf(t)}</span>`:svgOf(t)}</div>
+    <a class="card" href="${tradeHref(tr)}"><div class="thumb" data-ph="${t.id}">${thumbFallback(t,tr)}</div>
      <div class="body"><span class="kicker">${ps.length} guide${ps.length>1?'s':''}</span><h3>${tr}</h3><p>${ps.slice(0,3).map(x=>x.title).join(' · ')}${ps.length>3?' …':''}</p></div></a>`};
 
 const STOP=new Set('how to do i a an the in on my of for and with your can is it into from at by this that want need diy project projects home house step steps install installing build building create make put add new'.split(' '));
@@ -2834,7 +2910,7 @@ function match(q){
    .filter(x=>x.sc>=Math.max(1,Math.ceil(ts.length*0.4))).sort((x,y)=>y.sc-x.sc).map(x=>x.t);
 }
 const cardHtml=t=>`
-    <a class="card" href="#${t.id}"><div class="thumb${PHOTOS[t.id]?' ph':''}">${PHOTOS[t.id]?`<img src="${PHOTOS[t.id][0].src}" alt="" loading="lazy"><span class="mini">${svgOf(t)}</span>`:svgOf(t)}</div>
+    <a class="card" href="#${t.id}"><div class="thumb" data-ph="${t.id}">${thumbFallback(t)}</div>
      <div class="body"><span class="kicker">${t.trade||t.name}</span><h3>${t.title}</h3><p>${t.blurb}</p>
      <div class="foot"><span>${t.lvl} · ${t.time}</span><span class="bar" title="${prog(t)} of ${t.steps.length} steps done"><i style="width:${prog(t)/t.steps.length*100}%"></i></span></div></div></a>`;
 function home(q=''){
@@ -2849,7 +2925,7 @@ function home(q=''){
    <p class="crumb">${list.length} matching guide${list.length===1?'':'s'}</p>`:''}
   ${!ql?`<div class="grid">${TRADES().map(tradeCard).join('')}</div>`:list.length?`<div class="grid">${list.map(cardHtml).join('')}</div>`
    :`<div class="empty">No ready-made guide matches yet. Use <b>Plan this project</b> above to get a custom plan.</div>`}`;
-  wireLauncher(); nav(null);
+  wireLauncher(); nav(null); hydratePhotos();
 }
 const EXAMPLES=['How to install a generator inlet outlet in my home','How to build a non-load-bearing wall in my basement','How to replace a toilet wax ring','How to add a dimmer switch','How to tile a shower wall','How to install a ceiling fan'];
 function launcher(v=''){
@@ -2975,7 +3051,7 @@ ${PLAN_SHAPE}`;
   try{
     const p=await AI.json(prompt,{signal:ctl.signal,cache:{gcTime:3600000},schema:PLAN_SCHEMA});
     if(!p||!Array.isArray(p.steps)) throw {code:'invalid_json'};
-    box.querySelector('.planwait').outerHTML=renderPlan(p);
+    box.querySelector('.planwait').outerHTML=renderPlan(p); hydratePhotos();
     wirePlan(box,p);
   }catch(e){
     const msg={no_key:'Add your Claude API key above to turn on the AI features.',bad_key:'That API key was not accepted. Check it, or remove it and paste a new one.',network:'Could not reach Claude. Check your connection and try again.',cancelled:'Stopped.',not_granted:'Claude was not allowed for this page, so custom plans are off. The ready-made guides still work.',rate_limited:'Too many requests right now. Try again in a minute.',refused:'Claude could not write a plan for that request. Try describing the project differently.',invalid_json:'The plan came back incomplete. Try again.',sampling_disabled:'Claude is not available for this account.'}[e&&e.code]||'Something went wrong while writing the plan. Try again.';
@@ -3046,7 +3122,7 @@ function finder(){
   wireLauncher(); nav('ask');
   const box=$('#result');
   if(pendingImg){const f=pendingImg;pendingImg=null;runIdentify(f,pendingAsk,box)}
-  else if(pendingAsk){runPlan(pendingAsk,box)}
+  else if(pendingAsk){runPlan(pendingAsk,box);setTimeout(hydratePhotos,50)}
   else box.innerHTML=`<section class="sec"><h2>Browse all guides</h2>${TRADES().map(tr=>`<div class="box-title" style="margin-top:14px">${tr}</div>${libList(tr)}`).join('')}</section>`;
   scrollTo(0,0);
 }
@@ -3058,10 +3134,11 @@ function guide(t){
   <div class="crumb"><a href="#home">All trades</a> / ${t.name}</div>
   <div class="guide-head"><h1>${t.title}</h1><p>${t.blurb}</p>
    <div class="meta"><span class="chip">${t.lvl}</span><span class="chip">⏱ ${t.time}</span>${permitChip(t.permit)}<span class="chip code">${t.code.length} code checks</span><span class="chip">Region: ${esc(where())}</span></div>${topNote(t)}</div>
-  ${gallery(t)}
   <div class="guide">
    <div class="board" aria-live="polite">
-     <div class="paper" id="art">${svgOf(t)}</div>
+     <div class="vtabs" id="vtabs" hidden${SITE&&t.base?' data-nodiag="1"':''}><button type="button" data-v="photo" class="on">Photos</button><button type="button" data-v="diagram">Diagram</button></div>
+     <figure class="pv" id="pv" ${SITE?'':'hidden'}><img id="pvimg" alt=""><figcaption><span id="pvcap"></span><a id="pvcredit" target="_blank" rel="noopener"></a></figcaption><div class="pvthumbs" id="pvthumbs"></div></figure>
+     <div class="paper" id="art" ${SITE?'hidden':''}>${svgOf(t)}</div>
      <div class="cap"><b id="capn"></b><div id="capt"></div></div>
      <div class="controls">
        <button class="btn" id="prev" aria-label="Previous step"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2 4 7l5 5"/></svg></button>
@@ -3111,6 +3188,7 @@ function guide(t){
     if(e.target.closest('label'))return;
     const li=e.target.closest('.step'); if(li){stop();go(+li.dataset.i); if(innerWidth<900) $('.board').scrollIntoView({behavior:'smooth',block:'start'})}
   });
+  showViewer(t);
   $('#chg').onclick=()=>{scrollTo({top:0,behavior:'smooth'});$('#rc').focus()};
   paint(t); nav(t.id); scrollTo(0,0);
 }
