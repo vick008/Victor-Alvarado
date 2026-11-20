@@ -246,6 +246,13 @@ main{min-width:0}
 .pv.none figcaption a{font-size:14px;color:var(--accent)}
 .nokey{margin-top:16px;padding:16px;border:2px solid var(--accent);border-radius:8px;background:var(--accent-soft);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .nokey p{margin:0;font-size:15px}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-items:start}
+.vid{margin:0;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
+.vid iframe{display:block;width:100%;aspect-ratio:16/9;border:0;max-width:100%}
+.vid figcaption{padding:8px 10px;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.vid figcaption a{color:var(--ink);text-decoration:none}.vid figcaption a:hover{text-decoration:underline}
+.vid figcaption span{font-size:12px;color:var(--muted)}
+.srcs{margin:0;padding-left:18px;font-size:14px}.srcs li{margin:4px 0}.srcs span{color:var(--muted);font-size:12px}
 .note{font-size:13px;color:var(--muted);margin-top:28px;padding-top:12px;border-top:1px solid var(--line)}
 
 /* scene drawing */
@@ -3045,28 +3052,34 @@ const getKey=()=>{try{return localStorage.getItem('lp-api-key')||''}catch(e){ret
 async function initAI(){
   try{const smp=window.claude&&window.claude.use?await window.claude.use('sample'):null;
     if(smp){let lim=null;try{lim=await smp.limits()}catch(e){}
-      return{mode:'claude',ready:true,images:!!(lim&&lim.images),json:(prompt,o)=>{const{schema,...rest}=o||{};return smp.json(prompt,rest)}}}}catch(e){}
+      return{mode:'claude',ready:true,images:!!(lim&&lim.images),json:(prompt,o)=>{const{schema,web,...rest}=o||{};return smp.json(prompt,rest)}}}}catch(e){}
   if(!SITE) return null;
   const proxy=(window.LP_CONFIG.proxyUrl||'').replace(/\/$/,'');
   return{mode:proxy?'proxy':'key',get ready(){return !!(proxy||getKey())},images:true,json:(prompt,o)=>apiJson(prompt,o||{},proxy)};
 }
 let SDK=null;
-async function apiJson(prompt,{images,signal,schema},proxy){
+async function apiJson(prompt,{images,signal,schema,web},proxy){
   const key=getKey(); if(!proxy&&!key) throw{code:'no_key'};
   if(!SDK) SDK=(await import('./vendor/anthropic.mjs')).default;
   const client=new SDK({apiKey:proxy?'via-proxy':key,baseURL:proxy||undefined,dangerouslyAllowBrowser:true,maxRetries:1});
   const content=[];
   for(const img of images||[]) content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:await toJpegB64(img)}});
   content.push({type:'text',text:prompt});
+  // Web research mode: Claude searches and reads web pages (code sites, videos) itself. JSON comes back as text,
+  // because structured outputs can't be combined with web search citations.
+  const tools=web?[{type:'web_search_20260209',name:'web_search',max_uses:8},{type:'web_fetch_20260209',name:'web_fetch',max_uses:4}]:undefined;
+  const base={model:'claude-opus-5-5',max_tokens:16000,betas:['server-side-fallback-2026-07-01'],fallbacks:'default',
+    output_config:{effort:'medium',...(schema&&!web?{format:{type:'json_schema',schema}}:{})},...(tools?{tools}:{})};
+  const messages=[{role:'user',content}];
   let r;
   try{
-    r=await client.beta.messages.create({
-      model:'claude-opus-5-5',max_tokens:16000,
-      betas:['server-side-fallback-2026-07-01'],fallbacks:'default',
-      output_config:{effort:'medium',...(schema?{format:{type:'json_schema',schema}}:{})},
-      messages:[{role:'user',content}]},{signal});
+    r=await client.beta.messages.create({...base,messages},{signal});
+    for(let n=0;r.stop_reason==='pause_turn'&&n<4;n++){   // long searches pause; resend to resume
+      r=await client.beta.messages.create({...base,messages:[...messages,{role:'assistant',content:r.content}]},{signal});
+    }
   }catch(e){
     if(e instanceof SDK.APIUserAbortError||(signal&&signal.aborted)) throw{code:'cancelled'};
+    if(web&&e instanceof SDK.BadRequestError&&/web_(search|fetch)|tool/i.test(String(e.message))) return apiJson(prompt,{images,signal,schema,web:false},proxy);
     if(e instanceof SDK.AuthenticationError||e instanceof SDK.PermissionDeniedError) throw{code:'bad_key'};
     if(e instanceof SDK.RateLimitError) throw{code:'rate_limited'};
     if(e instanceof SDK.APIConnectionError) throw{code:'network'};
@@ -3074,8 +3087,17 @@ async function apiJson(prompt,{images,signal,schema},proxy){
   }
   if(r.stop_reason==='refusal') throw{code:'refused'};
   if(r.stop_reason==='max_tokens') throw{code:'invalid_json'};
-  const text=r.content.filter(b=>b.type==='text').map(b=>b.text).join('');
-  try{return JSON.parse(text)}catch(e){throw{code:'invalid_json'}}
+  let last=-1; r.content.forEach((b,i)=>{if(/_tool_result$/.test(b.type))last=i});
+  const text=r.content.slice(last+1).filter(b=>b.type==='text').map(b=>b.text).join('');
+  const out=parseLooseJson(text); if(!out) throw{code:'invalid_json'};
+  out._searched=r.content.filter(b=>b.type==='server_tool_use').length;
+  return out;
+}
+function parseLooseJson(t){
+  try{return JSON.parse(t)}catch(e){}
+  const f=t.match(/```(?:json)?\s*([\s\S]*?)```/); if(f){try{return JSON.parse(f[1])}catch(e){}}
+  const i=t.indexOf('{'),j=t.lastIndexOf('}'); if(i>=0&&j>i){try{return JSON.parse(t.slice(i,j+1))}catch(e){}}
+  return null;
 }
 async function toJpegB64(file){
   const bmp=await createImageBitmap(file,{imageOrientation:'from-image'}).catch(()=>null);
@@ -3125,6 +3147,14 @@ const PLAN_SCHEMA=OBJ({title:S_('string'),summary:S_('string'),difficulty:{type:
   codes:{type:'array',items:OBJ({ref:S_('string'),text:S_('string')})},video:S_('string'),inspect:STRS});
 const ID_SCHEMA=OBJ({kind:{type:'string',enum:['tool','device','material','fixture','remodel idea','problem','unknown']},name:S_('string'),confidence:{type:'string',enum:['high','medium','low']},
   whatItIs:S_('string'),details:STRS,howToUse:STRS,safety:STRS,codeNotes:STRS,projects:STRS,buyTips:S_('string')});
+const WEB_INSTR=`
+
+RESEARCH FIRST: use web_search (and web_fetch when a page needs reading) before answering.
+1. Find which code edition this region actually enforces and the specific sections for this project, preferring official or authoritative sources (codes.iccsafe.org, up.codes, nfpa.org, state or city building department sites, iapmo.org, nrc.canada.ca, gov.uk). Put each real section in "codes" with its source URL.
+2. Find 2–4 specific YouTube how-to videos for this exact project from reputable channels (manufacturers, licensed trades, well-known DIY channels). Put them in "videos".
+3. Only include URLs that appeared in your search results; never invent a URL.
+Then reply with ONLY the JSON object. Extra fields for this mode:
+"videos":[{"title":string,"url":string,"channel":string}],"codes":[{"ref":string,"text":string,"url":string}],"sources":[{"title":string,"url":string}],"photo":string (a 2–3 word noun phrase naming the main object, for a photo search, e.g. "lawn sprinkler")`;
 const PLAN_SHAPE=`{"title":string,"summary":string (2 sentences),"difficulty":"Beginner"|"Intermediate"|"Advanced"|"Hire a pro","time":string,"permit":"Usually not"|"Varies"|"Yes",
 "stopFirst":string|null (a blunt warning if this is dangerous, illegal for homeowners in this region, or usually structural — e.g. exterior walls are normally load-bearing or shear walls; else an empty string),
 "tools":[string],"materials":[{"item":string,"qty":string}],"safety":[string],
@@ -3134,7 +3164,7 @@ async function runPlan(q,box){
   ctl?.abort(); ctl=new AbortController();
   const local=match(q).slice(0,3);
   box.innerHTML=`${local.length?`<div class="box-title">Ready-made guides that match</div><div class="grid small">${local.map(cardHtml).join('')}</div>`:''}
-   <div class="planwait"><span class="spin"></span><div><b>Writing your plan for ${esc(where())}…</b><p>This usually takes 20–60 seconds${AI&&AI.mode==='claude'?'. If Claude asks for permission, allow it to continue':''}.</p></div><button class="btn" id="stopai" type="button">Stop</button></div>`;
+   <div class="planwait"><span class="spin"></span><div><b>Writing your plan for ${esc(where())}…</b><p>${AI&&AI.mode!=='claude'?'Searching the web for your local code, videos and photos. This usually takes 1–2 minutes.':'This usually takes 20–60 seconds. If Claude asks for permission, allow it to continue.'}</p></div><button class="btn" id="stopai" type="button">Stop</button></div>`;
   $('#stopai').onclick=()=>ctl.abort();
   if(!AI||!AI.ready){box.innerHTML=`<div class="nokey"><b>Custom plans need the AI planner turned on</b><p>${AI&&AI.mode==='key'?'Paste a Claude API key in the box above, then press <b>Plan it</b> again.':'The AI planner isn’t available on this page.'} Meanwhile, watch videos on this project or browse the matching guides below.</p><a class="btn primary" href="${yt(q)}" target="_blank" rel="noopener">▶ Watch videos: ${esc(q.slice(0,60))}</a></div>`+(local.length?`<div class="box-title" style="margin-top:16px">Ready-made guides that match</div><div class="grid small">${local.map(cardHtml).join('')}</div>`:'<p class="crumb" style="margin-top:16px">No ready-made guide matches this yet.</p>'); hydratePhotos(); const k=$('#apikey'); if(k) k.focus(); return}
   const prompt=`You are a licensed general contractor and code inspector writing a do-it-yourself plan for a homeowner.
@@ -3144,7 +3174,7 @@ Follow the codes in force for this region (cite real section numbers from the mo
 Reply with ONLY one JSON object of this shape:
 ${PLAN_SHAPE}`;
   try{
-    const p=await AI.json(prompt,{signal:ctl.signal,cache:{gcTime:3600000},schema:PLAN_SCHEMA});
+    const p=await AI.json(prompt+(AI.mode!=='claude'?WEB_INSTR:''),{signal:ctl.signal,cache:{gcTime:3600000},schema:PLAN_SCHEMA,web:AI.mode!=='claude'});
     if(!p||!Array.isArray(p.steps)) throw {code:'invalid_json'};
     box.querySelector('.planwait').outerHTML=renderPlan(p); hydratePhotos();
     wirePlan(box,p);
@@ -3154,6 +3184,39 @@ ${PLAN_SHAPE}`;
   }
 }
 const L1=v=>Array.isArray(v)?v.filter(Boolean).map(x=>typeof x==='string'?x:JSON.stringify(x)):[];
+const safeUrl=u=>typeof u==='string'&&/^https:\/\/[^\s"'<>]+$/.test(u);
+const hostOf=u=>{try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return ''}};
+function ytId(u){try{const x=new URL(u);if(/youtu\.be$/.test(x.hostname))return x.pathname.slice(1).split('/')[0];if(/youtube\.com$/.test(x.hostname)){if(x.searchParams.get('v'))return x.searchParams.get('v');const m=x.pathname.match(/\/(shorts|embed|live)\/([\w-]{6,})/);if(m)return m[2]}}catch(e){}return null}
+function vimeoId(u){try{const x=new URL(u);if(/vimeo\.com$/.test(x.hostname)){const m=x.pathname.match(/\/(\d{5,})/);if(m)return m[1]}}catch(e){}return null}
+function videoBlock(p){
+  const vs=(Array.isArray(p.videos)?p.videos:[]).filter(v=>v&&safeUrl(v.url)).slice(0,4);
+  if(!vs.length) return '';
+  return `<div class="vids">${vs.map(v=>{const y=ytId(v.url),vm=vimeoId(v.url);
+    const player=SITE&&y?`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(y)}" title="${esc(v.title||'Video')}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+      :SITE&&vm?`<iframe src="https://player.vimeo.com/video/${vm}" title="${esc(v.title||'Video')}" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>`:'';
+    return `<figure class="vid">${player}<figcaption><a href="${esc(v.url)}" target="_blank" rel="noopener"><b>${esc(v.title||'Video')}</b></a><span>${esc(v.channel||hostOf(v.url))}${player?'':' · opens in a new tab'}</span></figcaption></figure>`}).join('')}</div>`;
+}
+async function commonsPhotos(q){
+  if(!SITE||!q) return [];
+  const k='lp-phq-'+q.toLowerCase();
+  try{const c=JSON.parse(localStorage.getItem(k)||'null');if(c&&Date.now()-c.at<30*864e5)return c.p}catch(e){}
+  try{
+    const u='https://commons.wikimedia.org/w/api.php?'+new URLSearchParams({origin:'*',action:'query',format:'json',generator:'search',gsrsearch:q+' filetype:bitmap',gsrnamespace:'6',gsrlimit:'20',prop:'imageinfo',iiprop:'url|extmetadata|mime|size',iiurlwidth:'800'});
+    const d=await (await fetch(u)).json(); const list=[];
+    for(const pg of Object.values((d.query&&d.query.pages)||{}).sort((a,b)=>a.index-b.index)){const ii=pg.imageinfo&&pg.imageinfo[0]; if(!ii||!/jpeg|webp/.test(ii.mime)||ii.width<500||PH_BAD.test(pg.title)) continue;
+      const m=ii.extmetadata||{}; list.push({src:ii.thumburl,cap:pg.title.replace(/^File:/,'').replace(/\.\w+$/,'').replace(/_/g,' '),credit:(((m.Artist&&m.Artist.value)||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().slice(0,60)||'Unknown author')+' · '+((m.LicenseShortName&&m.LicenseShortName.value)||'see source'),page:ii.descriptionurl}); if(list.length>=6) break;}
+    try{localStorage.setItem(k,JSON.stringify({at:Date.now(),p:list}))}catch(e){}
+    return list;
+  }catch(e){return []}
+}
+function fillPlanPhotos(p){
+  const q=(typeof p.photo==='string'&&p.photo.trim())||'';
+  const local=match(p.title||'')[0];
+  const go=q?commonsPhotos(q):local?getPhotos(local):Promise.resolve([]);
+  go.then(ps=>{const sec=$('#plan-photos'); if(!sec||!ps.length) return; sec.hidden=false;
+    $('#plan-gal').innerHTML=ps.slice(0,6).map(x=>`<figure><img src="${x.src}" alt="${esc(x.cap)}" loading="lazy"><figcaption><b>${esc(x.cap)}</b><a href="${x.page}" target="_blank" rel="noopener">Photo: ${esc(x.credit)} ↗</a></figcaption></figure>`).join('');
+    $('#plan-gal').querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>img.closest('figure').remove(),{once:true}));});
+}
 function renderPlan(p){
   const steps=Array.isArray(p.steps)?p.steps:[];
   return `<article class="plan">
@@ -3170,15 +3233,17 @@ function renderPlan(p){
     <li class="step"><span class="n">${String(i+1).padStart(2,'0')}</span><div><h3>${esc(st.title||'')}</h3><p>${esc(st.detail||'')}</p>
      <div class="srow">${st.code?`<span class="ref">§ ${esc(st.code)}</span>`:''}<a class="vlink" href="${yt((p.title||'')+' '+(st.title||''))}" target="_blank" rel="noopener">▶ Watch this step</a></div></div>
      <label title="Mark done"><input type="checkbox" aria-label="Mark step ${i+1} done"></label></li>`).join('')}</ol></section>
-   <section class="sec"><h2>Video guides</h2><div class="video"><div><h3>Watch it done: ${esc(p.title||'')}</h3><p>Opens a YouTube search in a new tab.</p></div><div class="acts"><a class="btn primary" href="${yt(p.video||p.title||'')}" target="_blank" rel="noopener">Watch videos</a></div></div></section>
+   <section class="sec" id="plan-photos" hidden><h2>Photos</h2><div class="gal" id="plan-gal"></div></section>
+   <section class="sec"><h2>Video guides</h2>${videoBlock(p)}<div class="video" style="margin-top:12px"><div><h3>More videos: ${esc(p.title||'')}</h3><p>There are many more DIY videos on this. Opens a YouTube search in a new tab.</p></div><div class="acts"><a class="btn primary" href="${yt(p.video||p.title||'')}" target="_blank" rel="noopener">Search YouTube</a></div></div></section>
    <section class="sec"><h2>Meeting code</h2>
-    <div style="overflow-x:auto"><table class="code-table"><thead><tr><th>Section</th><th>Requirement</th><th>Your code</th></tr></thead>${(Array.isArray(p.codes)?p.codes:[]).map(c=>`<tr><td>${esc(c.ref||'')}</td><td>${esc(c.text||'')}</td><td class="lk">${refLink(String(c.ref||''))||`<a href="${gs((c.ref||'')+' '+where())}" target="_blank" rel="noopener">Look up ↗</a>`}</td></tr>`).join('')}</table></div>
+    <div style="overflow-x:auto"><table class="code-table"><thead><tr><th>Section</th><th>Requirement</th><th>Your code</th></tr></thead>${(Array.isArray(p.codes)?p.codes:[]).map(c=>`<tr><td>${esc(c.ref||'')}</td><td>${esc(c.text||'')}</td><td class="lk">${safeUrl(c.url)?`<a href="${esc(c.url)}" target="_blank" rel="noopener">Source ↗</a>`:(refLink(String(c.ref||''))||`<a href="${gs((c.ref||'')+' '+where())}" target="_blank" rel="noopener">Look up ↗</a>`)}</td></tr>`).join('')}</table></div>
+    ${(Array.isArray(p.sources)&&p.sources.some(x=>safeUrl(x.url)))?`<div class="box-title" style="margin-top:14px">Sources found on the web</div><ul class="srcs">${p.sources.filter(x=>safeUrl(x.url)).slice(0,10).map(x=>`<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title||x.url)}</a> <span>${esc(hostOf(x.url))}</span></li>`).join('')}</ul>`:''}
     ${L1(p.inspect).length?`<div class="box-title" style="margin-top:14px">What the inspector checks</div><ul class="list">${L1(p.inspect).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
    </section>
-   <p class="note">This plan was written by AI for ${esc(where())}. Section numbers can be wrong or out of date. Confirm them with the code links above and your building department before you start.</p>
+   <p class="note">${p._searched?`Researched with ${p._searched} live web searches. `:''}This plan was written by AI for ${esc(where())}. Section numbers can be wrong or out of date. Confirm them with the code links above and your building department before you start.</p>
   </article>`;
 }
-function wirePlan(box,p){box.querySelectorAll('.plan .step input').forEach(i=>i.onchange=()=>i.closest('.step').classList.toggle('done',i.checked))}
+function wirePlan(box,p){fillPlanPhotos(p);box.querySelectorAll('.plan .step input').forEach(i=>i.onchange=()=>i.closest('.step').classList.toggle('done',i.checked))}
 
 const ID_SHAPE=`{"kind":"tool"|"device"|"material"|"fixture"|"remodel idea"|"problem"|"unknown","name":string,"confidence":"high"|"medium"|"low",
 "whatItIs":string (2 sentences),"details":[string] (specs or identifying features visible: brand/model if readable, size, rating),

@@ -11,7 +11,7 @@ Easy step-by-step DIY home improvement guides with illustrations, photos, videos
 - Each trade has its own page listing its guides; the **Project Finder** covers anything else.
 - Each guide shows real photos from Wikimedia Commons (credited), plus tools and materials lists, safety warnings, a "Watch this step" video link on every step, and the code sections an inspector checks.
 - **Code region picker** (US states, Canadian provinces, UK nations, Australian states) with links to the code that applies there and local rules, such as licensed-only electrical work in Australia.
-- **Project Finder:** describe any project in plain words and get a full plan with materials, tools, safety, steps and code references.
+- **Project Finder:** describe any project in plain words. Claude searches the web live for your region's building code sections (with source links) and specific how-to videos (YouTube and Vimeo play on the page), the page adds matching Wikimedia photos, and you get a full plan with materials, tools, safety and steps. Web search must be enabled for your Anthropic organization in the Console and is billed per search on top of tokens.
 - **Photo search:** take or upload a photo of a tool, device, material or problem and get it identified, with related projects.
 - **Installable app** that works offline: on a phone, open the site and choose *Add to Home Screen*.
 

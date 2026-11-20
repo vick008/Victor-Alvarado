@@ -24,10 +24,18 @@ export default {
 
     let body;
     try { body = await request.json(); } catch { return json({ error: 'invalid JSON' }, 400, cors); }
-    // Only allow the app's own kind of request: one model, bounded output, no tools.
+    // Only allow the app's own kind of request: one model, bounded output, and only the
+    // web search / web fetch server tools (capped), no custom tools or MCP servers.
     body.model = MODEL;
     body.max_tokens = Math.min(Number(body.max_tokens) || MAX_TOKENS, MAX_TOKENS);
-    delete body.tools; delete body.mcp_servers; delete body.container;
+    if (Array.isArray(body.tools)) {
+      body.tools = body.tools
+        .filter(t => t && /^web_(search|fetch)_\d{8}$/.test(t.type))
+        .map(t => ({ type: t.type, name: t.type.startsWith('web_search') ? 'web_search' : 'web_fetch',
+                     max_uses: Math.min(Number(t.max_uses) || 4, t.type.startsWith('web_search') ? 8 : 4) }));
+      if (!body.tools.length) delete body.tools;
+    }
+    delete body.mcp_servers; delete body.container;
 
     const headers = new Headers({
       'content-type': 'application/json',
