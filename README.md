@@ -6,7 +6,8 @@ Easy step-by-step DIY home improvement guides with illustrations, photos, videos
 
 ## What's inside
 
-- **244 illustrated step-by-step guides across 17 trades**: Electrical (52), Plumbing (39), Flooring (32), Walls & Ceilings (23), Doors (20, including garage doors and openers), Painting (18), Windows (13), Insulation & Weatherproofing (13), Wallpaper (12), Cabinets (8), Countertops (5), Shelving & storage (4), plus Air Conditioning, Exterior, Heating, Ventilation and Structure.
+- **321 illustrated step-by-step guides across 19 trades**: Electrical (52), Plumbing (39), Heating (33: oil and gas furnaces, forced air, boilers and hot-water heat, space heaters), Flooring (32), Walls & Ceilings (23), Doors (20), Roofing (19), Painting (18), Exterior (15: gutters, siding, stucco, fascia and soffits), Windows (13), Insulation & Weatherproofing (13), Wallpaper (12), Air Conditioning (8, including heat pumps), Cabinets (8), Countertops (5), Canadian Code (5), Shelving (4), Ventilation and Structure.
+- **Tool glossary**: every tool used across the guides, searchable, with the projects that use it and a video link.
 - Each trade has its own page listing its guides; the **Project Finder** covers anything else.
 - Each guide has an animated step-by-step drawing, tools and materials lists, safety warnings, a "Watch this step" video link on every step, and the code sections an inspector checks.
 - **Code region picker** (US states, Canadian provinces, UK nations, Australian states) with links to the code that applies there and local rules, such as licensed-only electrical work in Australia.
