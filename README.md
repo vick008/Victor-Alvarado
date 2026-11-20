@@ -6,7 +6,7 @@ Easy step-by-step DIY home improvement guides with illustrations, photos, videos
 
 ## What's inside
 
-- **83 illustrated step-by-step guides across 16 trades:** Air Conditioning, Electrical (GFCI outlet, generator inlet & interlock), Plumbing (39 guides: pipe joining, drains, faucets, toilets, tubs, sinks, disposers, dishwashers, water heaters), Painting (18), Wallpaper (12), Walls & Ceilings, Flooring, Doors, Windows, Cabinets, Countertops, Shelving, Exterior, Heating, Ventilation, Structure.
+- **186 illustrated step-by-step guides across 16 trades**, including Electrical (52: wiring basics, receptacles, switches, boxes, cable and conduit, circuits, lighting, fans, data/coax, surge protection), Plumbing (39), Flooring (32), Walls & Ceilings (23: drywall, plaster, suspended ceilings, tile, trim and molding), Painting (18) and Wallpaper (12), plus Air Conditioning, Doors, Windows, Cabinets, Countertops, Shelving, Exterior, Heating, Ventilation and Structure.
 - Each trade has its own page listing its guides; the **Project Finder** covers anything else.
 - Each guide has an animated step-by-step drawing, tools and materials lists, safety warnings, a "Watch this step" video link on every step, and the code sections an inspector checks.
 - **Code region picker** (US states, Canadian provinces, UK nations, Australian states) with links to the code that applies there and local rules, such as licensed-only electrical work in Australia.
