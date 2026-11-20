@@ -211,6 +211,12 @@ main{min-width:0}
 .keyform{display:flex;flex-direction:column;gap:8px;width:100%}
 .keyform label{display:flex;flex-direction:column;gap:2px}.keyform label span{color:var(--muted)}
 .keyrow{display:flex;gap:8px;flex-wrap:wrap}.keyrow input{flex:1 1 220px;min-width:0;padding:9px 10px;font:inherit;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.libi{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);min-width:0}
+.libi b{font-weight:600;font-size:15px}.libi span{font-size:13px;color:var(--muted)}
+.libi.guide{text-decoration:none;color:var(--ink);border-color:var(--ink)}.libi.guide span{color:var(--accent);font-weight:600}
+.libi.guide:hover{background:var(--panel2)}
+.libact{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.libact .chip{cursor:pointer;text-decoration:none;color:var(--ink);font-family:var(--body)}
 .note{font-size:13px;color:var(--muted);margin-top:28px;padding-top:12px;border-top:1px solid var(--line)}
 
 /* scene drawing */
@@ -449,6 +455,101 @@ gen:()=>[
   G(7,R(224,34,74,28,'ao',3)+R(254,30,8,10,'a',1)+T(222,212,'interlock plate')),
   G(8,R(20,152,60,36,'f',4)+C(32,192,6,'f2')+C(68,192,6,'f2')+R(30,160,18,10,'f2',1)+P('M80,166 C110,166 118,126 140,124','o d')+T(16,136,'generator ≥ 20 ft')+T(16,146,'from openings')),
 ],
+flapper:()=>[
+  R(70,30,180,150,'f2',6), R(64,22,192,12,'f',3), P('M78,60 H242','o d'), T(244,58,'water line'), R(150,70,10,100,'f'), T(164,80,'overflow'), R(112,170,46,10,'f',2), T(96,198,'flush valve seat'),
+  R(60,40,24,8,'f',2), L(84,44,128,44),
+  G(1,C(50,200,8,'f')+L(50,192,50,180)+T(10,216,'shutoff: turn clockwise')),
+  G(2,P('M78,150 H242','ao')+T(170,146,'flush & hold to drain')),
+  G(3,arrow(135,166,135,130)+T(170,120,'unhook old flapper')),
+  G(4,P('M110,170 q25,-14 50,0','f')+C(112,166,3,'a')+C(158,166,3,'a')+T(170,166,'clip to ears')),
+  G(5,P('M128,44 v80 q4,10 8,0','ao')+T(40,100,'chain: ½ in slack')),
+  G(6,C(200,120,4,'a')+C(210,130,3,'a')+T(176,104,'dye test: no color')+T(176,114,'in bowl after 30 min')),
+],
+fillv:()=>[
+  R(70,30,180,150,'f2',6), R(64,22,192,12,'f',3), R(150,70,10,100,'f'), T(164,80,'overflow'), L(74,180,246,180),
+  G(1,C(100,204,8,'f')+L(100,196,100,180)+T(112,208,'water off, flush, sponge dry')),
+  G(2,R(92,60,18,120,'o d')+arrow(101,186,101,214)+T(10,96,'unscrew lock nut')+T(10,106,'lift old valve out')),
+  G(3,R(90,54,22,126,'f')+R(84,46,34,12,'f',3)+T(10,140,'set height: CL mark')+T(10,150,'≥ 1 in above overflow')),
+  G(4,P('M112,64 C130,64 140,70 150,74','ao')+T(116,58,'refill tube → overflow')),
+  G(5,P('M80,90 H240','ao')+T(170,98,'water ½–1 in below')+T(170,108,'top of overflow')),
+  G(6,T(176,150,'turn on, check leaks','tb')),
+],
+toilet:()=>[
+  L(10,200,310,200), T(14,214,'FLOOR'),
+  G(1,R(130,192,60,8,'a')+T(100,186,'flange: level, secure')),
+  G(2,R(140,180,40,12,'f',4)+T(190,190,'new wax ring')),
+  G(3,L(132,200,132,176,'wb')+L(188,200,188,176,'wb')+T(200,176,'closet bolts')),
+  G(4,P('M110,176 Q100,120 140,112 H200 Q232,118 226,150 L210,176 Z','f')+R(150,60,90,52,'f',4)+T(40,110,'lower straight down,')+T(40,120,'rock to seat')),
+  G(5,C(132,172,4,'a')+C(188,172,4,'a')+T(40,160,'alternate nuts, snug only')),
+  G(6,P('M244,100 C270,100 272,160 270,196','wb')+C(270,198,5,'f')+T(244,92,'supply tube')),
+  G(7,T(30,40,'caulk front & sides; leave back open','tb')),
+],
+cartridge:()=>[
+  R(100,120,120,70,'f',4), L(60,190,260,190), T(224,186,'VALVE BODY'),
+  G(1,C(70,204,7,'f')+T(84,210,'shutoffs off; plug drain')),
+  G(2,R(130,30,60,20,'f',6)+C(160,40,4,'a')+T(196,40,'pry cap, remove handle')),
+  G(3,R(140,100,40,10,'f',2)+T(190,106,'retaining nut / clip')),
+  G(4,R(146,60,28,70,'f2',3)+arrow(160,58,160,24)+T(184,74,'pull cartridge straight up')),
+  G(5,T(30,150,'match the new one','tb')+T(30,162,'by brand & part no.')),
+  G(6,R(146,70,28,60,'f',3)+L(146,90,174,90,'o th')+T(184,128,'hot on left')),
+  G(7,T(190,160,'run water,')+T(190,170,'check for drips')),
+],
+faucet:()=>[
+  R(30,110,260,14,'f'), P('M80,124 v30 q0,14 14,14 h80 q14,0 14,-14 v-30'), L(40,200,280,200),
+  G(1,C(70,190,6,'f')+C(250,190,6,'f')+T(40,214,'close both shutoffs')),
+  G(2,arrow(150,96,150,60)+T(160,70,'remove old faucet')),
+  G(3,R(120,104,80,6,'a')+T(210,104,'gasket / putty')),
+  G(4,P('M130,104 V70 Q130,52 152,52 H176 V62','f')+R(176,56,10,12,'f')+R(122,96,20,8,'f',2)),
+  G(5,R(132,124,8,22,'f')+T(144,140,'mounting nut')),
+  G(6,P('M134,146 C134,170 70,170 70,184','ao')+P('M140,146 C140,170 250,170 250,184','ao')+T(180,160,'supply lines')),
+  G(7,T(30,40,'remove aerator, flush lines','tb')),
+],
+clog:()=>[
+  R(40,40,200,12), P('M80,52 v40 q0,14 14,14 h90 q14,0 14,-14 v-40'), P('M150,106 v20','p'), P('M150,106 v20','pi'),
+  P('M150,126 v24 a14,14 0 0 0 28,0 v-10 h110','p'), P('M150,126 v24 a14,14 0 0 0 28,0 v-10 h110','pi'), L(290,30,290,210),
+  G(1,R(110,20,80,14,'f',3)+T(100,14,'no chemicals if you’ll open the trap')),
+  G(2,C(150,60,14,'f')+L(150,46,150,10,'wb')+T(170,40,'plunge: cover overflow')),
+  G(3,P('M140,196 l8,14 h44 l8,-14 z','f')+T(204,206,'bucket under trap')),
+  G(4,P('M178,140 h40 q20,0 20,20 t30,20','ao')+T(200,190,'snake the trap arm')),
+  G(5,T(30,190,'reassemble, run hot water','tb')),
+],
+shutoff:()=>[
+  R(260,20,40,190,'f2'), T(264,14,'WALL'), P('M260,120 H200','p'), P('M260,120 H200','pi'),
+  G(1,T(20,40,'main water off, drain lines','tb')),
+  G(2,L(206,108,206,132,'ao')+T(150,100,'cut square, deburr')),
+  G(3,R(226,104,10,32,'f',2)+T(206,152,'escutcheon')),
+  G(4,R(170,110,32,20,'f',4)+C(180,104,8,'f')+L(180,96,180,90,'wb')+T(110,90,'push-fit stop valve')),
+  G(5,P('M170,120 C140,120 120,90 110,40','ao')+T(40,60,'supply tube')),
+  G(6,T(40,190,'water on slowly, check leaks','tb')),
+],
+heater:()=>[
+  R(110,40,100,160,'f',10), L(20,210,300,210), T(120,124,'ELECTRIC'),T(124,134,'WATER HEATER'),
+  G(1,R(20,40,40,30,'f',3)+R(30,46,10,16,'a',2)+T(16,84,'breaker OFF')+T(16,94,'verify dead')),
+  G(2,P('M130,40 V20 H60','p')+P('M130,40 V20 H60','pi')+P('M190,40 V20 H290','p')+P('M190,40 V20 H290','pi')+T(70,14,'COLD in')+T(240,14,'HOT out')),
+  G(3,R(96,198,128,10,'f',2)+T(230,206,'drain pan')),
+  G(4,R(210,60,14,10,'a',2)+P('M224,65 H240 V196','o')+T(244,120,'T&P discharge')+T(244,130,'≤ 6 in to floor')),
+  G(5,C(80,34,12,'f')+T(40,110,'expansion tank')+T(40,120,'(if check valve)')),
+  G(6,L(110,80,210,80,'ao')+L(110,170,210,170,'ao')+T(14,170,'seismic straps')+T(14,180,'(where required)')),
+  G(7,T(120,186,'fill BEFORE power','tb')),
+],
+extpaint:()=>[
+  R(20,20,280,180,'f2'), rep(12,i=>L(20,32+i*15,300,32+i*15,'o th')), R(200,60,60,70,'bg'),
+  G(1,T(30,214,'wash, let dry 1–2 days','t')),
+  G(2,R(60,80,30,10,'f',2)+L(90,85,110,95)+T(30,70,'scrape loose paint')),
+  G(3,L(200,60,200,130,'ao')+L(260,60,260,130,'ao')+T(206,146,'caulk gaps')),
+  G(4,C(75,150,8,'f')+T(90,154,'spot-prime bare wood')),
+  G(5,P('M20,200 L60,20 M44,200 L84,20','o')+rep(6,i=>L(24+i*6.5,184-i*30,48+i*6.5,184-i*30))+T(90,30,'ladder 4:1, top down')),
+  G(6,T(120,190,'2 coats, 50 °F+, no rain','tb')),
+],
+unpaper:()=>[
+  R(20,20,280,180,'f2'), rep(6,i=>L(20+i*46,20,20+i*46,200,'o th')),
+  G(1,T(30,40,'power off at outlets; drop cloth','tb')),
+  G(2,rep(12,i=>C(60+(i%4)*60,70+Math.floor(i/4)*40,2,'a'))+T(30,190,'score the surface')),
+  G(3,P('M250,60 l20,-10 v40 l-20,-10 z','f')+rep(4,i=>L(248,70,210,52+i*10,'o d'))+T(196,40,'soak 15 min')),
+  G(4,R(120,140,40,10,'f',2)+L(160,145,190,165)+T(196,170,'scrape at low angle')),
+  G(5,T(30,110,'wash off paste, rinse','tb')),
+  G(6,T(30,130,'prime before painting','t')),
+],
 frame:()=>[
   L(10,24,310,24), L(10,206,310,206), T(14,18,'CEILING JOISTS'), T(14,218,'FLOOR'),
   G(1,L(20,212,300,212,'ao')+T(200,218,'chalk line')),
@@ -513,7 +614,7 @@ const D=[
  ],
  code:[['NEC 702.5','Transfer equipment (a transfer switch or a listed interlock) is required to prevent the generator from backfeeding the utility.'],['NEC 408.36(D)','Plug-in breakers that are backfed must be secured with an additional fastener (hold-down kit).'],['NEC 702.7','Install a sign at the service equipment showing that a standby power source is connected.'],['NEC 250.34 / 250.35','Most interlock setups keep the neutral solidly connected. Use a generator with a floating neutral, or a neutral-switching transfer switch if your generator\'s neutral is bonded.'],['NEC 445.20','Portable generators 15 kW or smaller need GFCI protection on their 125 V and 125/250 V receptacles. Some bonded-neutral generators trip when connected through an inlet, so check with the manufacturer.'],['Utility','Many utilities require notice of a generator connection. Check your utility\'s rules.'],['Permit','Generator inlet and interlock installations require an electrical permit and inspection in nearly every jurisdiction.']]},
 
-{id:'plumbing',name:'Plumbing',scene:'plumb',title:'Replace a Sink P-Trap',lvl:'Beginner',time:'30 min',permit:false,
+{id:'plumbing',trade:'Plumbing',name:'Plumbing',scene:'plumb',title:'Replace a Sink P-Trap',lvl:'Beginner',time:'30 min',permit:false,
  blurb:'Fix a leaking or clogged trap under a bathroom or kitchen sink with slip-joint fittings.',
  vq:'how to replace p trap under sink',
  tools:['Bucket and rags','Groove-joint pliers','Hacksaw or PVC cutter (if trimming)','Flashlight'],
@@ -529,7 +630,138 @@ const D=[
  ],
  code:[['IPC 1002.4','Trap seal must be 2 to 4 inches deep.'],['IPC 1002.3','S-traps, bell traps and drum traps are prohibited.'],['IPC 906.1','Max trap-arm length to the vent: 5 ft for 1¼ in, 6 ft for 1½ in pipe.'],['IPC 405.8','Slip joints must remain accessible; never bury them in a wall.']]},
 
-{id:'painting',name:'Painting',scene:'paint',title:'Paint an Interior Room',lvl:'Beginner',time:'1–2 days',permit:false,
+{id:'toilet-flapper',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'flapper',title:'Replace a Toilet Flapper',lvl:'Beginner',time:'20 min',permit:false,
+ blurb:'Stop a toilet that runs or refills on its own by swapping the rubber seal at the bottom of the tank.',
+ vq:'how to replace a toilet flapper',
+ tools:['Rubber gloves','Sponge or old towel','Food coloring (for the leak test)'],
+ mats:['Replacement flapper sized to your flush valve (2 in or 3 in; check the toilet brand)'],
+ safety:'Toilet tank water is clean, but lids are heavy porcelain: set the lid on a towel on the floor where it can’t be kicked.',
+ steps:[
+  ['Shut off the water','Turn the shutoff valve behind the toilet clockwise until it stops.'],
+  ['Drain the tank','Flush and hold the handle down so the tank empties. Sponge out what’s left around the flush valve.'],
+  ['Remove the old flapper','Unhook the chain from the handle arm and slide the flapper’s ears off the pegs on the overflow tube. Take it with you to the store to match the size.'],
+  ['Install the new flapper','Clip the new flapper onto the pegs (or slide the ring over the overflow tube) and check that it sits centered on the seat.'],
+  ['Set the chain','Hook the chain so it has about ½ in of slack with the flapper closed. Too tight keeps it open; too loose can stop it lifting.'],
+  ['Refill and test','Turn the water back on. Put a few drops of food coloring in the tank and wait 30 minutes without flushing. Color in the bowl means it still leaks.'],
+ ],
+ code:[['Federal (EPAct)','New toilets sold in the U.S. use 1.6 gallons per flush or less; many states and WaterSense models use 1.28. Use the flapper the manufacturer specifies to keep the rated flush volume.'],['IPC 606.2','Each toilet must have its own accessible shutoff valve. If yours won’t close, replace it (see Add a Shutoff Valve).']]},
+
+{id:'toilet-fill-valve',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'fillv',title:'Replace a Toilet Fill Valve',lvl:'Beginner',time:'30–45 min',permit:false,
+ blurb:'Fix a toilet that hisses, refills slowly or overflows into the tube by replacing the valve that refills the tank.',
+ vq:'how to replace a toilet fill valve',
+ tools:['Adjustable wrench or groove-joint pliers','Sponge and bucket','Towel'],
+ mats:['Universal anti-siphon fill valve (ASSE 1002 listed)','New supply tube if the old one is braided steel over 5 years old or plastic'],
+ safety:'Never overtighten plastic nuts; hand-tight plus a quarter turn is enough, and cracked nuts can flood a floor.',
+ steps:[
+  ['Shut off and empty the tank','Close the shutoff, flush, and sponge the tank dry.'],
+  ['Remove the old valve','Disconnect the supply tube under the tank. Unscrew the lock nut under the tank and lift the old valve out.'],
+  ['Set the height','Adjust the new valve so its critical-level mark (CL) is at least 1 in above the top of the overflow tube.','ASSE 1002 / IPC 425.3.1'],
+  ['Install and connect','Insert the valve with its gasket, tighten the lock nut hand-tight plus a quarter turn, and clip the refill tube to the overflow tube so it sits above the water line.'],
+  ['Set the water level','Turn the water on and adjust the float so water stops ½–1 in below the top of the overflow tube (or at the line marked in the tank).'],
+  ['Check for leaks','Look under the tank and at the supply connection; tighten slightly if anything weeps.'],
+ ],
+ code:[['IPC 425.3.1','Tank fill valves must be anti-siphon (ASSE 1002) with the critical-level mark at least 1 in above the overflow so tank water can’t be siphoned into the drinking water.'],['IPC 606.2','An accessible shutoff valve is required on the toilet supply.']]},
+
+{id:'install-toilet',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'toilet',title:'Install a New Toilet',lvl:'Intermediate',time:'2–3 hrs',permit:'Varies',
+ blurb:'Pull the old toilet, check the flange and set a new one with a fresh wax seal so it doesn’t rock or leak.',
+ vq:'how to remove and install a toilet',
+ tools:['Adjustable wrench','Putty knife','Hacksaw or oscillating tool (for long bolts)','Level','Bucket, sponge and gloves','Tape measure'],
+ mats:['Toilet matching your rough-in (usually 12 in from wall to bolt center)','Wax ring (or wax-free seal)','Closet bolts','Supply tube','Shims (plastic)','Silicone or tub-and-tile caulk'],
+ safety:'A toilet weighs 60–100 lb. Lift with your legs or get help. Plug the open drain with a rag to block sewer gas while you work.',
+ steps:[
+  ['Check the flange','Remove the old toilet, scrape off the old wax, and check that the flange is level with or slightly above the finished floor and screwed down solid. Repair a broken flange with a repair ring.','IPC 405.4 — flanges secured to the floor'],
+  ['Place the new wax ring','Set the wax ring on the flange (or on the toilet horn), centered.'],
+  ['Set the closet bolts','Slide new closet bolts into the flange slots so they point straight up, parallel to the wall.'],
+  ['Lower the toilet','Lower the bowl straight down over the bolts in one motion, then press down and rock gently to compress the wax. Don’t lift it again or the seal is ruined.'],
+  ['Tighten the nuts','Alternate side to side, a little at a time, until the bowl doesn’t move. Shim if the floor is uneven. Cut off excess bolt length and snap on the caps.'],
+  ['Mount the tank and supply','Bolt on the tank if it’s separate, then connect a new supply tube. Turn on the water and check every joint.'],
+  ['Caulk the base','Caulk the front and sides to the floor, leaving the back open so a future leak shows up instead of rotting the subfloor.'],
+ ],
+ code:[['IPC 405.3.1','Toilet center must be at least 15 in from any side wall or obstruction and have at least 21 in of clear space in front.'],['IPC 405.4','Floor flanges must be secured to the building structure; the toilet must be bolted to the flange.'],['Federal (EPAct)','New toilets: 1.6 gallons per flush maximum; check your state for lower limits such as 1.28 gpf.']]},
+
+{id:'faucet-cartridge',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'cartridge',title:'Replace a Faucet Cartridge',lvl:'Beginner',time:'45 min',permit:false,
+ blurb:'Fix a dripping single-handle faucet by swapping the cartridge inside it.',
+ vq:'how to replace a single handle faucet cartridge',
+ tools:['Hex (Allen) keys and screwdrivers','Small flat screwdriver or pick','Groove-joint pliers','Cartridge puller (some Moen models)','Rag'],
+ mats:['Replacement cartridge matching the faucet brand and model','Silicone faucet grease'],
+ safety:'Plug or cover the drain so small screws and clips can’t fall in.',
+ steps:[
+  ['Shut off the water','Close the hot and cold shutoffs under the sink and open the faucet to release pressure. Plug the drain.'],
+  ['Remove the handle','Pry off the decorative cap, remove the handle screw, and lift off the handle.'],
+  ['Remove the retaining nut or clip','Unscrew the bonnet nut or pull the U-shaped retaining clip with pliers. Note how it was installed.'],
+  ['Pull the old cartridge','Pull the cartridge straight up. Note which way the stem or tabs faced so the hot and cold sides stay correct.'],
+  ['Match the part','Take the old cartridge to the store, or look up the faucet model number, to get the exact replacement.'],
+  ['Install the new cartridge','Coat the O-rings with faucet grease, push the cartridge in with the same orientation, and reinstall the clip or nut and the handle.'],
+  ['Test','Turn the shutoffs back on, run hot and cold, and check for drips at the spout and under the handle.'],
+ ],
+ code:[['NSF 61 / 372','Replacement parts that touch drinking water must be certified lead-free.'],['IPC 424.3','If this is a tub or shower valve, the replacement must keep pressure-balance or thermostatic scald protection (ASSE 1016).']]},
+
+{id:'install-faucet',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'faucet',title:'Install a Bathroom Faucet',lvl:'Beginner',time:'1–2 hrs',permit:false,
+ blurb:'Swap an old lavatory faucet for a new one, including the supply lines.',
+ vq:'how to install a bathroom faucet',
+ tools:['Basin wrench','Adjustable wrench','Flashlight','Bucket and towel','Putty knife'],
+ mats:['New faucet (check 1-hole, 4 in or 8 in spread)','Two braided supply lines sized to your shutoffs','Plumber’s putty or silicone (if the faucet has no gasket)'],
+ safety:'Work under the sink with a light and safety glasses; old corroded fittings can snap and spray.',
+ steps:[
+  ['Shut off the water','Close both shutoffs and open the faucet to drain the lines.'],
+  ['Remove the old faucet','Disconnect the supply lines, use a basin wrench to remove the mounting nuts, and lift the old faucet out. Clean the sink deck.'],
+  ['Seal the base','Place the faucet gasket, or a thin bead of putty if there’s no gasket, on the sink deck.'],
+  ['Set the faucet','Insert the faucet through the holes and center it.'],
+  ['Tighten the mounting nut','From below, tighten the mounting nut by hand, then snug with the basin wrench.'],
+  ['Connect the supply lines','Connect hot (left) and cold (right) supply lines from the faucet to the shutoffs. Hand-tight plus a quarter turn.'],
+  ['Flush and test','Remove the aerator, run water for a minute to flush debris, reinstall the aerator and check for leaks.'],
+ ],
+ code:[['IPC 604.4','Lavatory faucets are limited to 2.2 gpm at 60 psi (many states and WaterSense: 1.5 gpm).'],['NSF 61 / 372','Faucets and supply lines must be certified lead-free.'],['IPC 606.2','Hot and cold supplies each need an accessible shutoff valve.']]},
+
+{id:'unclog-drain',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'clog',title:'Unclog a Sink Drain',lvl:'Beginner',time:'30–60 min',permit:false,
+ blurb:'Clear a slow or stopped sink with a plunger, then the trap, then a hand snake.',
+ vq:'how to unclog a bathroom sink drain',
+ tools:['Cup plunger','Bucket','Groove-joint pliers','¼ in hand drain snake (auger)','Rubber gloves and eye protection'],
+ mats:['Rags','Replacement slip washers (in case old ones tear)'],
+ safety:'If you already poured chemical drain cleaner in, don’t plunge or open the trap: the water can burn skin and eyes. Flush with lots of water first and wear gloves and goggles.',
+ steps:[
+  ['Skip the chemicals','Chemical cleaners rarely clear hair clogs and make opening the trap dangerous. Start mechanically.'],
+  ['Plunge','Remove the pop-up stopper, plug the overflow hole with a wet rag, add 2 in of water, and plunge firmly 10–15 times.'],
+  ['Clean the trap','Put a bucket under the trap, loosen the slip nuts, and clean out the trap. Most bathroom clogs are hair right here.'],
+  ['Snake the trap arm','If the trap was clear, feed the snake into the trap arm toward the wall, crank it through the clog, and pull the debris back.'],
+  ['Reassemble and flush','Reconnect the trap, then run hot water for a minute and check the joints for drips.'],
+ ],
+ code:[['IPC 708','Cleanouts must stay accessible. Never cover one with drywall or tile.'],['IPC 1002.4','A trap must hold a 2–4 in water seal; reinstall it the same way so sewer gas stays out.']]},
+
+{id:'shutoff-valve',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'shutoff',title:'Add a Fixture Shutoff Valve',lvl:'Intermediate',time:'1 hr',permit:'Varies',
+ blurb:'Install a push-fit stop valve under a sink or toilet so you can shut that fixture off without shutting off the house.',
+ vq:'how to install a push fit shut off valve',
+ tools:['Tubing cutter','Deburring tool','Depth gauge or marker','Bucket and towels'],
+ mats:['Push-fit quarter-turn stop valve sized to your pipe (½ in copper, CPVC or PEX)','Supply tube','Escutcheon (trim ring)'],
+ safety:'Shut off the main and open a low faucet to drain the line before cutting. Cut pipe can hold a lot of water.',
+ steps:[
+  ['Shut off the main','Close the main water valve and open the lowest faucet in the house to drain the lines.'],
+  ['Cut the pipe square','Cut the stub-out squarely with a tubing cutter, leaving enough length for the valve’s insertion depth. Deburr inside and out.'],
+  ['Slide on the escutcheon','Put the trim ring on before the valve.'],
+  ['Push on the valve','Mark the insertion depth, then push the valve on firmly until it reaches the mark.','ASSE 1061 — push-fit fittings'],
+  ['Connect the supply tube','Connect the fixture supply tube from the valve outlet to the faucet or toilet.'],
+  ['Turn the water on slowly','Open the main slowly with the new valve closed, check for leaks, then open the valve.'],
+ ],
+ code:[['IPC 606.2','Every fixture needs its own accessible shutoff valve on the supply.'],['ASSE 1061','Push-fit fittings must be listed to ASSE 1061 and inserted to the full marked depth.'],['IPC 605','Pipe and fittings must be rated for potable water.']]},
+
+{id:'water-heater',trade:'Plumbing',nk:'plumbing',name:'Plumbing',scene:'heater',title:'Replace an Electric Water Heater',lvl:'Advanced',time:'4–6 hrs',permit:'Yes',
+ blurb:'Swap a failing electric tank for a new one with the relief valve, expansion tank and wiring done to code.',
+ vq:'how to replace an electric water heater',
+ tools:['Voltage tester','Garden hose','Pipe wrenches / tubing cutter','Screwdrivers and wire strippers','Appliance dolly','Level'],
+ mats:['Electric water heater (same voltage and wattage, or check circuit)','Water heater connectors or pipe and fittings','T&P discharge pipe (copper, CPVC or PEX rated for it)','Drain pan with drain line','Thermal expansion tank (if there is a check valve or PRV)','Seismic strap kit (where required)','Wire connectors'],
+ safety:'Gas water heaters involve gas lines and venting: hire a licensed plumber. For electric, turn off the breaker and test the wires; never power the heater before it is full of water or the elements will burn out in seconds.',
+ steps:[
+  ['Shut off the power','Turn off the water heater breaker and verify the wires in the heater’s junction box are dead.','NEC 422.31 — disconnect'],
+  ['Drain and disconnect','Close the cold supply valve, attach a hose to the drain valve, open a hot faucet, and drain the tank. Disconnect the water lines and wiring.'],
+  ['Set the pan and new heater','Place a drain pan piped to a drain or outside where a leak could cause damage, then set the new heater level.','IPC 504.7 — pan where leakage can damage'],
+  ['Install the relief valve and discharge pipe','Install the temperature and pressure (T&P) relief valve and run a full-size discharge pipe down to within 6 in of the floor or to an approved drain, with no valve and no threads on the end.','IPC 504.6'],
+  ['Connect water lines and expansion tank','Connect cold in and hot out with listed connectors. Add a thermal expansion tank on the cold side if the house has a check valve or pressure-reducing valve.','IPC 607.3'],
+  ['Strap the heater','Install two seismic straps (upper and lower third) where required, such as in California.'],
+  ['Fill, then power','Open a hot faucet, open the cold supply, and wait until water runs steadily from the faucet. Only then reconnect the wiring, restore the breaker and set the thermostat to 120 °F.'],
+ ],
+ code:[['IPC 504.4–504.6','A T&P relief valve is required; its discharge pipe must be full size, drain by gravity, end within 6 in of the floor or at an approved receptor, and have no valve or threaded end.'],['IPC 504.7','A drain pan is required where a leak would damage the building.'],['IPC 607.3','Thermal expansion control is required where a check valve or backflow preventer creates a closed system.'],['NEC 422.13','The branch circuit must be rated at least 125% of the heater’s rated current.'],['NEC 422.31','A disconnect must be within sight of the heater or lockable in the off position.'],['Permit','Water heater replacement needs a permit and inspection in most jurisdictions.']]},
+
+{id:'painting',trade:'Painting',name:'Painting',scene:'paint',title:'Paint an Interior Room',lvl:'Beginner',time:'1–2 days',permit:false,
  blurb:'Prep, cut in and roll for crisp edges and a finish without lap marks.',
  vq:'how to paint a room like a pro cutting in rolling',
  tools:['2½ in angled sash brush','9 in roller frame and ⅜ in nap cover','Extension pole','Tray','Putty knife','Sanding sponge'],
@@ -546,7 +778,23 @@ const D=[
  ],
  code:[['EPA RRP (40 CFR 745)','Paid contractors working on pre-1978 homes must be lead-safe certified. DIYers should follow the same practices.'],['IRC R302.9','Wall and ceiling finishes must have a flame-spread index of 200 or less; standard paints qualify.']]},
 
-{id:'wallpaper',name:'Wallpaper',scene:'paper',title:'Hang Wallpaper',lvl:'Intermediate',time:'4–6 hrs',permit:false,
+{id:'exterior-paint',trade:'Painting',name:'Painting',scene:'extpaint',title:'Paint Exterior Walls',lvl:'Intermediate',time:'3–5 days',permit:false,
+ blurb:'Prep, prime and paint siding so the finish lasts years instead of peeling after one winter.',
+ vq:'how to paint exterior siding house',
+ tools:['Pressure washer or garden sprayer and scrub brush','Paint scrapers and wire brush','Caulk gun','Extension ladder with standoff','Brushes, rollers and extension pole (or airless sprayer)','Drop cloths and painter’s plastic'],
+ mats:['Exterior acrylic latex paint (about 1 gal per 250–350 sq ft per coat)','Exterior primer (stain-blocking for bare wood)','Exterior paintable caulk','Siding cleaner or mildewcide'],
+ safety:'Homes built before 1978 may have lead paint: test first, and if positive, never dry-scrape or pressure-wash it off. Set ladders at a 4:1 angle (1 ft out for every 4 ft up) on firm, level ground, and stay well away from overhead power lines.',
+ steps:[
+  ['Wash and dry','Wash the siding top to bottom with cleaner and rinse. Let it dry for one to two days.'],
+  ['Scrape and sand','Scrape off all loose and peeling paint and feather the edges with sandpaper.'],
+  ['Caulk gaps','Caulk gaps at trim, corners and around windows. Don’t caulk the bottom edges of lap siding; they let moisture escape.'],
+  ['Prime bare spots','Spot-prime all bare wood and patched areas with exterior primer.'],
+  ['Work top down','Paint from the top down, one wall at a time, keeping a wet edge. Move the ladder rather than overreaching.'],
+  ['Apply two coats','Apply two coats when the air and surface are 50 °F or warmer (or the label minimum) and no rain is expected for 24 hours.'],
+ ],
+ code:[['EPA RRP (40 CFR 745)','Pre-1978 homes: paid contractors must be lead-safe certified; homeowners should follow the same containment and cleanup practices.'],['OSHA 1926.1053','Ladder guidance: 4:1 setup angle, extend 3 ft above the landing, and keep three points of contact.'],['HOA / historic district','Color and material changes may need approval in historic districts and many HOAs.']]},
+
+{id:'wallpaper',trade:'Wallpaper',name:'Wallpaper',scene:'paper',title:'Hang Wallpaper',lvl:'Intermediate',time:'4–6 hrs',permit:false,
  blurb:'Use a plumb line and booking to get straight seams that do not shrink apart.',
  vq:'how to hang wallpaper for beginners',
  tools:['Plumb bob or laser level','Smoothing brush or plastic smoother','Seam roller','Utility knife with fresh blades','6 in taping knife','Tape measure'],
@@ -562,6 +810,22 @@ const D=[
   ['Trim and clean','Trim at the ceiling and baseboard with a sharp blade held against a taping knife. Sponge off paste immediately.'],
  ],
  code:[['IRC R302.9.1','Wallcoverings 0.036 in thick or less applied directly to the wall are exempt from flame-spread testing.'],['Tip','Prime with a wallpaper primer so the paper can be removed later without tearing the drywall face.']]},
+
+{id:'remove-wallpaper',trade:'Wallpaper',name:'Wallpaper',scene:'unpaper',title:'Remove Old Wallpaper',lvl:'Beginner',time:'1 day per room',permit:false,
+ blurb:'Strip old wallpaper and paste without gouging the drywall, so the wall is ready for paint or new paper.',
+ vq:'how to remove wallpaper easily',
+ tools:['Scoring tool','Garden pump sprayer or wallpaper steamer','6 in wide putty knife or wallpaper scraper','Sponges and buckets','Drop cloths and painter’s tape'],
+ mats:['Wallpaper remover concentrate (or hot water with a little dish soap)','Joint compound for repairs','Oil- or shellac-based primer (seals paste residue)'],
+ safety:'Turn off power to the room and tape over outlets and switches before soaking walls. Steamers get hot enough to burn: wear gloves and long sleeves.',
+ steps:[
+  ['Prepare the room','Turn off the power, remove cover plates, tape over the openings and lay drop cloths with towels along the baseboard.'],
+  ['Score the paper','Roll the scoring tool lightly over the paper so the solution can soak in. Don’t press hard enough to cut the drywall.'],
+  ['Soak or steam','Spray a section with remover solution and wait about 15 minutes, or hold a steamer plate on it until the paper softens.'],
+  ['Scrape','Peel and scrape at a low angle, working with the drywall surface, not into it.'],
+  ['Wash off the paste','Wash the walls with clean warm water until they no longer feel slippery.'],
+  ['Repair and prime','Fill any gouges with joint compound, sand, and prime with an oil- or shellac-based primer so leftover paste doesn’t crack new paint.'],
+ ],
+ code:[['No permit','Removing wallpaper does not need a permit.'],['Lead','Painted-over wallpaper in pre-1978 homes may carry lead paint: avoid dry sanding and follow lead-safe practices.']]},
 
 {id:'walls-ceilings',name:'Walls & Ceilings',scene:'wall',title:'Patch a Hole in Drywall',lvl:'Beginner',time:'3 hrs over 2 days',permit:false,
  blurb:'Repair holes up to 8 inches so the patch disappears under paint.',
@@ -745,6 +1009,17 @@ const D=[
 const PHOTOS=window.LP_CONFIG?{"air-conditioning": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Condenser_unit_for_central_air_conditioning.JPG/500px-Condenser_unit_for_central_air_conditioning.JPG", "cap": "Outdoor condenser unit for a central air system", "credit": "H Padleckas · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Condenser_unit_for_central_air_conditioning.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_%289328745%29.jpg/500px-HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_%289328745%29.jpg", "cap": "Technicians servicing HVAC equipment", "credit": "U.S. Air Force photo by Andrea Jenkins · Public domain", "page": "https://commons.wikimedia.org/wiki/File:HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_(9328745).jpg"}], "electrical": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Residential_GFCI_receptacle.jpg/500px-Residential_GFCI_receptacle.jpg", "cap": "A residential GFCI receptacle with TEST and RESET buttons", "credit": "Ben Kurtovic · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Residential_GFCI_receptacle.jpg"}], "plumbing": [{"src": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Plumber_under_kitchen_sink.jpg", "cap": "Working under a kitchen sink", "credit": "MoToMo · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Plumber_under_kitchen_sink.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/247_Home_Rescue_back_of_sink_plumbing.jpg/500px-247_Home_Rescue_back_of_sink_plumbing.jpg", "cap": "Supply lines and drain behind a sink", "credit": "247homerescue · CC0", "page": "https://commons.wikimedia.org/wiki/File:247_Home_Rescue_back_of_sink_plumbing.jpg"}], "painting": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Rolling_in_the_Middle_%2834571931105%29_%28cropped%29.jpg/500px-Rolling_in_the_Middle_%2834571931105%29_%28cropped%29.jpg", "cap": "Rolling paint across the middle of a wall", "credit": "Michael Coghlan from Adelaide, Australia · CC BY-SA 2.0", "page": "https://commons.wikimedia.org/wiki/File:Rolling_in_the_Middle_(34571931105)_(cropped).jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Paint_roller_4.jpg/500px-Paint_roller_4.jpg", "cap": "Paint roller", "credit": "Michael Cory · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Paint_roller_4.jpg"}], "wallpaper": [{"src": "https://upload.wikimedia.org/wikipedia/commons/1/18/5713696880_wallpaper_hanging.jpg", "cap": "Hanging a strip of wallpaper", "credit": "Rictor Norton & David Allen from London, United Kingdom · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:5713696880_wallpaper_hanging.jpg"}], "walls-ceilings": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Drywall_and_tools.jpg/500px-Drywall_and_tools.jpg", "cap": "Drywall sheets and taping tools", "credit": "Timothyjosephwood · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Drywall_and_tools.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Drywall_installation_in_unidentified_home_%2810926427913%29.jpg/500px-Drywall_installation_in_unidentified_home_%2810926427913%29.jpg", "cap": "Drywall installation in a home", "credit": "City of Boston Archives from West Roxbury, United States · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Drywall_installation_in_unidentified_home_(10926427913).jpg"}], "flooring": [{"src": "https://upload.wikimedia.org/wikipedia/commons/7/7a/2021_Popular_Vinyl_Plank_Flooring_Color.jpg", "cap": "Vinyl plank flooring", "credit": "BestRugPrices · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:2021_Popular_Vinyl_Plank_Flooring_Color.jpg"}], "windows": [{"src": "https://upload.wikimedia.org/wikipedia/commons/7/75/Picture_window_installation_in_Winnipeg.jpg", "cap": "A picture window being installed", "credit": "Alisher Akilov · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Picture_window_installation_in_Winnipeg.jpg"}], "cabinets": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kitchen_cabinet_installation.jpg/500px-Kitchen_cabinet_installation.jpg", "cap": "Kitchen cabinets being installed", "credit": "Akpeski · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_cabinet_installation.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Kitchen_cabinet_installations.jpg/500px-Kitchen_cabinet_installations.jpg", "cap": "Cabinet installation in progress", "credit": "Akpeski · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_cabinet_installations.jpg"}], "countertops": [{"src": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Kitchen_renovation_9a_measuring_prior_to_cutting_laminate_countertop_board.JPG", "cap": "Measuring a laminate countertop before cutting", "credit": "Tomwsulcer · CC0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_renovation_9a_measuring_prior_to_cutting_laminate_countertop_board.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg/500px-Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg", "cap": "Fitting a stone countertop", "credit": "Donovan Nimmo · CC0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg"}], "shelving": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg/500px-Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg", "cap": "Wooden shelf on wall brackets", "credit": "Cupofjoy · CC0", "page": "https://commons.wikimedia.org/wiki/File:Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg"}], "heating": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Honeywell_thermostat_open.jpg/500px-Honeywell_thermostat_open.jpg", "cap": "Thermostat with the cover off, showing the wiring terminals", "credit": "Vincent de Groot - http://www.videgro.net · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Honeywell_thermostat_open.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg/500px-Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg", "cap": "Setting a digital thermostat", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg"}], "ventilation": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Bathroom_exhaust_fan.jpg/500px-Bathroom_exhaust_fan.jpg", "cap": "Bathroom exhaust fan", "credit": "Antonio Mette · CC BY 3.0", "page": "https://commons.wikimedia.org/wiki/File:Bathroom_exhaust_fan.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Exhaust_fan_4.jpg/500px-Exhaust_fan_4.jpg", "cap": "Exhaust fan housing", "credit": "Antonio Mette · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Exhaust_fan_4.jpg"}], "generator-inlet": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Portable_electrical_generator_angle.jpg/500px-Portable_electrical_generator_angle.jpg", "cap": "Portable generator", "credit": "Unknown author · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Portable_electrical_generator_angle.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Square_D_20-Amp_Double-Pole_Breaker.JPG/500px-Square_D_20-Amp_Double-Pole_Breaker.JPG", "cap": "A 2-pole (double-pole) breaker", "credit": "CyberXRef · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Square_D_20-Amp_Double-Pole_Breaker.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg/500px-Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg", "cap": "Inside a residential breaker panel", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg"}]}:{};
 if(window.LP_CONFIG){const g=D.find(t=>t.id==='generator-inlet'),SP={"0": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Gasoline-powered_portable_generators_%285884715763%29.jpg/500px-Gasoline-powered_portable_generators_%285884715763%29.jpg", "cap": "Portable gasoline generators", "credit": "National Institute of Standards and Technology · Public domain", "page": "https://commons.wikimedia.org/wiki/File:Gasoline-powered_portable_generators_(5884715763).jpg"}, "1": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Voltage_test_light_active.jpg/500px-Voltage_test_light_active.jpg", "cap": "A voltage tester lit on a live circuit: always test before touching", "credit": "Simon A. Eugster · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Voltage_test_light_active.jpg"}, "3": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Black_Electrical_Conduits.jpg/500px-Black_Electrical_Conduits.jpg", "cap": "Electrical conduit runs on a wall", "credit": "Johnnybam · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Black_Electrical_Conduits.jpg"}, "4": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Square_D_20-Amp_Double-Pole_Breaker.JPG/500px-Square_D_20-Amp_Double-Pole_Breaker.JPG", "cap": "A 2-pole breaker like the one used for the generator feed", "credit": "CyberXRef · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Square_D_20-Amp_Double-Pole_Breaker.JPG"}, "5": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg/500px-Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg", "cap": "Inside a breaker panel: neutral and ground bars along the sides", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg"}};
  for(const i in SP){const st=g.steps[i];st[3]=Object.assign(st[3]||{},{photo:SP[i].src,cap:SP[i].cap,credit:`<a href="${SP[i].page}" target="_blank" rel="noopener">${SP[i].credit}</a>`})}}
+// ---------- project library (topics; full guides link through, others open an AI plan) ----------
+const LIB={
+ Painting:[['Choose a paint sheen','Flat, eggshell, satin, semi-gloss and gloss: where each works'],['Plan a color scheme','Use the color wheel to pick colors that go together'],['Choose brushes and rollers','Match bristles and roller nap to the paint and surface'],['Pick protective gear','Gloves, goggles and the right respirator for the job'],['Degloss before painting','Get new paint to stick to glossy trim and cabinets'],['Treat stains and mildew','Kill mildew and seal water stains so they don’t bleed through'],['Paint over wallpaper','When it’s safe to paint over paper and how to prep it'],['Paint an interior room','',"painting"],['Paint doors and trim','Smooth, drip-free enamel on doors, casing and baseboards'],['Paint windows','Clean lines on sashes and muntins without painting them shut'],['Stain wood windows and trim','Even stain color with no blotches or lap marks'],['Paint interior brick','Clean, prime and paint masonry fireplaces and walls'],['Paint a concrete floor','Etch, prime and coat basement and garage concrete'],['Dispose of leftover paint','Store, donate or legally dispose of latex and oil paint'],['Sponge and rag finishes','Layered decorative glazes with a sponge or rag'],['Stippling and textured effects','Add texture with stippling brushes and texture paint'],['Paint exterior walls','',"exterior-paint"],['Paint exterior trim and windows','Prep and paint fascia, casing and window frames outside']],
+ Wallpaper:[['Measure and estimate wallpaper','Count rolls with pattern repeat and waste'],['Hang wallpaper','',"wallpaper"],['Wallpaper inside and outside corners','Wrap and overlap corners so seams stay plumb'],['Wallpaper around windows and doors','Cut relief slits and trim around casings'],['Wallpaper a recessed window','Line the sides and top of a window recess'],['Wallpaper an archway','Paper the inside curve of an arch'],['Wallpaper around outlets and fixtures','Cut neat openings with the power off'],['Wallpaper a ceiling','Hang ceiling strips safely with a helper and scaffold'],['Repair wallpaper seams and bubbles','Re-glue lifted seams and flatten bubbles'],['Hang a wallpaper border','Level borders on painted walls or over paper'],['Combine two wallpapers','Use a chair-rail border to join two patterns'],['Remove old wallpaper','',"remove-wallpaper"]],
+ Plumbing:[['Glue PVC drain pipe','Prime and solvent-weld PVC joints that don’t leak'],['Join CPVC water pipe','Cut and cement CPVC supply lines'],['Glue ABS drain pipe','Solvent-weld black ABS drain and vent pipe'],['Solder copper pipe','Clean, flux and sweat copper joints'],['Fix a frozen or leaking pipe','Emergency thaw and temporary leak repairs'],['Run new PEX supply lines','Plan and connect PEX with crimp or expansion fittings'],['Add a fixture shutoff valve','',"shutoff-valve"],['Replace a sink strainer','Reseal a leaking kitchen sink basket strainer'],['Replace a sink P-trap','',"plumbing"],['Unclog a sink drain','',"unclog-drain"],['Unjam a garbage disposer','Free a stuck disposer with a hex key and reset it'],['Unclog a tub or shower drain','Pull hair clogs from tub and shower drains'],['Unclog a toilet','Plunge or auger a clogged toilet'],['Fix a compression faucet','Replace washers in an older two-handle faucet'],['Replace a faucet valve seat','Remove and replace a worn seat in a compression faucet'],['Repair a ceramic-disk faucet','Clean or replace the disk cylinder seals'],['Replace a faucet cartridge','',"faucet-cartridge"],['Repair a ball-type faucet','Rebuild a single-handle ball faucet'],['Repair a two-handle tub and shower faucet','Stop drips from a two-handle tub valve'],['Fix a tub diverter','Repair a diverter that leaks to the spout'],['Replace a tub spout','Swap a slip-on or threaded tub spout'],['Clean a showerhead','Remove mineral buildup for full flow'],['Adjust toilet handle and water level','Fix weak flushes and a running toilet'],['Fix a leaking toilet tank','Replace tank bolts and gaskets'],['Replace a toilet fill valve','',"toilet-fill-valve"],['Replace a toilet flapper','',"toilet-flapper"],['Install a drop-in countertop sink','Set and seal a self-rimming sink'],['Install a wall-hung or pedestal sink','Block, mount and level a pedestal sink'],['Install a bathroom faucet','',"install-faucet"],['Install a pop-up drain','Replace a lavatory pop-up assembly'],['Remove an old bathtub','Disconnect and get a tub out safely'],['Install a bathtub in an alcove','Set, level and connect a new tub'],['Install a shower surround','Glue up a panel shower surround'],['Install a new toilet','',"install-toilet"],['Install a garbage disposer','Mount and wire a new disposer'],['Replace a dishwasher','Disconnect, set and hook up a dishwasher'],['Replace an electric water heater','',"water-heater"],['Replace a gas water heater','What to prepare; gas and venting need a licensed plumber'],['Install a tankless water heater','Sizing, gas or electric supply, and venting']]
+};
+function libList(trade,skipId){
+  const items=LIB[trade]; if(!items) return '';
+  return `<div class="lib">${items.filter(it=>!skipId||it[2]!==skipId).map(([t,d,id])=>id?`<a class="libi guide" href="#${id}"><b>${t}</b><span>Full guide →</span></a>`
+    :`<div class="libi"><b>${t}</b>${d?`<span>${d}</span>`:''}<div class="libact"><button type="button" class="chip" data-ask="How to ${t.charAt(0).toLowerCase()+t.slice(1)}">Plan it</button><a class="chip" href="${yt('how to '+t)}" target="_blank" rel="noopener">▶ Videos</a></div></div>`).join('')}</div>`;
+}
 // ---------- state ----------
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let done=store.get('lp-done')||{};
@@ -895,7 +1170,7 @@ function nav(active){
   $('#nav').innerHTML=`<a href="#ask" class="navask" ${active==='ask'?'aria-current="page"':''}>Project Finder<span>AI</span></a><a href="#home" ${!active?'aria-current="page"':''}>All trades<span>${trades.length}</span></a>`+
    trades.map(tr=>{const ps=D.filter(t=>(t.trade||t.name)===tr);
      if(ps.length===1){const t=ps[0];return `<a href="#${t.id}" ${active===t.id?'aria-current="page"':''}>${tr}<span>${prog(t)}/${t.steps.length}</span></a>`}
-     return `<div class="grp">${tr}</div>`+ps.map(t=>`<a class="sub" href="#${t.id}" ${active===t.id?'aria-current="page"':''}>${t.title.replace(/^(Install|Replace) (an? )?/,'')}<span>${prog(t)}/${t.steps.length}</span></a>`).join('')}).join('');
+     return `<div class="grp">${tr}</div>`+ps.map(t=>`<a class="sub" href="#${t.id}" ${active===t.id?'aria-current="page"':''}>${t.title.replace(/^(Install|Replace|Add|Paint|Remove|Unclog) (an? |the )?/,'').replace(/^./,c=>c.toUpperCase())}<span>${prog(t)}/${t.steps.length}</span></a>`).join('')}).join('');
   const a=$('#nav a[aria-current]'); if(a&&innerWidth<900) a.scrollIntoView({inline:'center',block:'nearest'});
 }
 
@@ -917,7 +1192,7 @@ function home(q=''){
   const ql=q.trim(); const list=ql?match(ql):D;
   $('#view').innerHTML=`
   ${ql?'':`<section class="intro"><div><h1>Fix it right.<br><em>Build it to code.</em></h1></div>
-    <div><p>Sixteen trades with photos, illustrated step-by-step walkthroughs, tool and materials lists, the code sections an inspector checks with links to the code for your region, and video guides.</p>
+    <div><p>Sixteen trades and 27 full guides with photos, illustrated step-by-step walkthroughs, tool and materials lists, the code sections an inspector checks with links to the code for your region, and video guides.</p>
     <div class="legend"><span class="chip">Beginner · Intermediate · Advanced</span><span class="chip code">IRC · NEC · IPC</span><span class="chip permit">Permit flags</span></div></div></section>
     ${launcher()}`}
   ${ql?`<div class="askcta"><div><b>Get a full plan for “${esc(ql)}”</b><p>Materials, tools, safety, step-by-step instructions and code sections for ${esc(where())}.</p></div><a class="btn primary" href="#ask" data-ask="${esc(ql)}">Plan this project</a></div>
@@ -1122,7 +1397,7 @@ function finder(){
   const box=$('#result');
   if(pendingImg){const f=pendingImg;pendingImg=null;runIdentify(f,pendingAsk,box)}
   else if(pendingAsk){runPlan(pendingAsk,box)}
-  else box.innerHTML='';
+  else box.innerHTML=`<section class="sec"><h2>Browse projects</h2>${Object.keys(LIB).map(tr=>`<div class="box-title" style="margin-top:14px">${tr}</div>${libList(tr)}`).join('')}</section>`;
   scrollTo(0,0);
 }
 
@@ -1168,6 +1443,7 @@ function guide(t){
    <div><div class="box-title">Materials</div><ul class="list">${t.mats.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
   </section>
 
+  ${LIB[t.trade||t.name]?`<section class="sec"><h2>More ${t.trade||t.name} projects</h2>${libList(t.trade||t.name,t.id)}</section>`:''}
   <section class="sec"><h2>Meeting code</h2>
    ${localCode(t)}
    <div style="overflow-x:auto;margin-top:16px"><table class="code-table"><thead><tr><th>Section</th><th>Requirement</th><th>Your code</th></tr></thead>${t.code.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td><td class="lk">${refLink(c[0])}</td></tr>`).join('')}</table></div>
