@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Easy step-by-step DIY home improvement guides with illustrations, photos, videos and building-code checks for your region.">
+<meta name="theme-color" content="#1D2530">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script src="config.js"></script>
+<title>Level &amp; Plumb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: workshop manual — trade index rail on the left, a graph-paper drawing board beside a numbered step list. */
+:root{
+  --bg:#F2F3EE; --panel:#FFFFFF; --panel2:#E6E9E2; --ink:#1D2530; --muted:#5A6472; --line:#C9CEC9;
+  --accent:#D9531B; --accent-soft:#F8D9C8; --blue:#2C5FB8; --blue-soft:#DCE6F7;
+  --caution:#F3C433; --caution-soft:#FBF0C9; --green:#2E8B4E; --grid:#DCE0DA;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161B; --panel:#1A2028; --panel2:#252D37; --ink:#E5E9EE; --muted:#9AA5B2; --line:#33404D;
+  --accent:#FF7B42; --accent-soft:#4A2A1C; --blue:#86AEF5; --blue-soft:#1E2C44;
+  --caution:#F3C433; --caution-soft:#3A3217; --green:#5CC983; --grid:#202832; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161B; --panel:#1A2028; --panel2:#252D37; --ink:#E5E9EE; --muted:#9AA5B2; --line:#33404D;
+  --accent:#FF7B42; --accent-soft:#4A2A1C; --blue:#86AEF5; --blue-soft:#1E2C44;
+  --caution:#F3C433; --caution-soft:#3A3217; --green:#5CC983; --grid:#202832; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--blue)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.05;margin:0;letter-spacing:.01em}
+.wrap{max-width:1240px;margin:0 auto;padding-block:20px 60px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:38px;height:38px;flex:none}
+.brand b{font:700 30px/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.brand small{display:block;font:500 11px var(--mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.search{margin-left:auto;flex:1 1 260px;max-width:380px;position:relative}
+.search input{width:100%;padding:10px 12px 10px 36px;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted)}
+
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;margin-top:24px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;max-height:calc(100vh - 40px);overflow:auto}
+.rail h4{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.rail nav{display:flex;flex-direction:column;gap:2px}
+.rail a{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:5px;text-decoration:none;color:var(--ink);font-weight:500}
+.rail a:hover{background:var(--panel2)}
+.rail a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.rail a span{font:400 11px var(--mono);color:inherit;opacity:.6;align-self:center}
+main{min-width:0}
+
+/* home */
+.intro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:28px}
+.intro h1{font-size:clamp(40px,6vw,68px);text-transform:uppercase}
+.intro h1 em{font-style:normal;color:var(--accent)}
+.intro p{margin:0;color:var(--muted);max-width:52ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--panel);white-space:nowrap}
+.chip.permit{border-color:var(--caution);background:var(--caution-soft)}
+.chip.code{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1.5px solid var(--line);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.card .thumb{background:var(--panel2);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:16px 16px;padding:10px 14px;border-bottom:1.5px solid var(--line)}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .kicker{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-size:24px;text-transform:uppercase}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.card .foot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;font:500 12px var(--mono);color:var(--muted)}
+.bar{height:4px;background:var(--panel2);border-radius:4px;overflow:hidden;width:70px}
+.bar i{display:block;height:100%;background:var(--green)}
+.empty{padding:40px;text-align:center;color:var(--muted);border:1.5px dashed var(--line);border-radius:8px}
+
+/* guide */
+.crumb{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.crumb a{color:var(--muted)}
+.guide-head h1{font-size:clamp(34px,5vw,54px);text-transform:uppercase}
+.guide-head p{color:var(--muted);max-width:65ch;margin:8px 0 14px}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.guide{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;margin-top:24px;align-items:start}
+.board{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--panel);border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
+.board .paper{background:var(--panel);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;padding:14px}
+.board .cap{border-top:1.5px solid var(--ink);padding:12px 14px;min-height:92px}
+.board .cap b{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:block}
+.board .cap div{font:600 19px/1.25 var(--body);margin-top:2px}
+.controls{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--panel2);flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:6px;border:1.5px solid var(--ink);background:var(--panel);cursor:pointer;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08);color:#fff}
+.btn svg{width:14px;height:14px}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots button{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);background:var(--panel);font:500 10px var(--mono);cursor:pointer;padding:0}
+.dots button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.dots button.done{border-color:var(--green)}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.step{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;transition:border-color .15s}
+.step:hover{border-color:var(--muted)}
+.step.on{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.step .n{font:700 28px/1 var(--display);color:var(--muted)}
+.step.on .n{color:var(--accent)}
+.step h3{font:600 17px/1.3 var(--body);margin:0}
+.step p{margin:4px 0 0;font-size:15px;color:var(--muted)}
+.step .ref{display:inline-block;margin-top:6px;font:500 12px var(--mono);color:var(--blue)}
+.step label{display:flex;align-items:flex-start;padding-top:3px;cursor:pointer}
+.step input{width:20px;height:20px;accent-color:var(--green);cursor:pointer}
+.step.done h3{text-decoration:line-through;text-decoration-color:var(--green);text-decoration-thickness:2px}
+
+.sec{margin-top:28px}
+.sec h2{font-size:26px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec h2::after{content:"";flex:1;height:2px;background:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.list li{padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.list li::before{content:"□ ";font-family:var(--mono);color:var(--muted)}
+.box-title{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.code-table{width:100%;border-collapse:collapse;font-size:15px}
+.code-table td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.code-table td:first-child{font:500 13px var(--mono);color:var(--blue);white-space:nowrap;width:1%}
+.safety{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;padding:14px;border-radius:8px;background:var(--caution-soft);border:1.5px solid var(--caution);margin-top:16px}
+.safety svg{width:28px;height:28px}
+.safety b{display:block;font:700 18px var(--display);text-transform:uppercase;letter-spacing:.03em}
+.safety p{margin:2px 0 0;font-size:15px}
+.video{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px;border:1.5px solid var(--ink);border-radius:8px;background:var(--panel)}
+.video p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.video h3{font:600 18px var(--body)}
+.video .acts{display:flex;gap:8px;flex-wrap:wrap}
+.region{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.region .rlab{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.region select{font:inherit;font-size:14px;padding:6px 8px;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);max-width:100%}
+.region .rhint{font-size:13px;color:var(--muted)}
+.local{border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-soft);padding:14px}
+.local-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}
+.local-head p{margin:2px 0 0;font-size:14px;color:var(--muted);max-width:60ch}
+.local-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.lc{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.lc .kicker{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.lc b{font-weight:600;font-size:15px;line-height:1.3}
+.lc a{font-size:14px;overflow-wrap:anywhere}
+.safety.warn{background:var(--accent-soft);border-color:var(--accent);margin:0 0 14px}
+.code-table th{text-align:left;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--ink)}
+.code-table td.lk{white-space:nowrap;font-size:14px;width:1%}
+.rail .grp{font:600 15px var(--body);padding:7px 10px 2px;color:var(--ink)}
+.rail a.sub{padding-left:22px;font-size:14px;font-weight:400}
+.srow{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:6px}
+.srow .ref{margin-top:0}
+.vlink{font:500 12px var(--mono);color:var(--accent);text-decoration:none}
+.vlink:hover{text-decoration:underline}
+.sphoto{margin:10px 0 0}
+.sphoto img{display:block;width:100%;max-height:260px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.sphoto figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+.sphoto figcaption span{display:block;font-size:11px}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px}
+.gal figure{margin:0;background:var(--panel);border:1.5px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;max-width:100%}
+.gal figcaption{padding:8px 10px;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.gal figcaption a{font-size:11px;color:var(--muted);text-decoration:none;overflow-wrap:anywhere}
+.gal figcaption a:hover{text-decoration:underline}
+.card .thumb.ph{padding:0;position:relative}
+.card .thumb.ph img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;max-width:100%}
+.card .thumb .mini{position:absolute;right:8px;bottom:8px;width:38%;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+[hidden]{display:none!important}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.finder{margin:0 0 28px;padding:20px;border:2px solid var(--ink);border-radius:10px;background:var(--panel);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px}
+.finder .kicker{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.finder h2{font-size:clamp(26px,3.4vw,36px);text-transform:uppercase;margin:2px 0 12px}
+.askform{display:flex;flex-wrap:wrap;gap:8px}
+.askform input[type=text]{flex:1 1 280px;min-width:0;padding:12px 14px;font:inherit;font-size:17px;border:2px solid var(--ink);border-radius:8px;background:var(--panel);color:var(--ink)}
+.askform .btn{padding:10px 16px;font-size:15px}
+.btn.cam svg{width:18px;height:18px}
+.ex{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ex .chip{cursor:pointer;font-family:var(--body);font-size:13px;text-decoration:none;color:var(--ink);white-space:normal;text-align:left}
+.ex .chip:hover{border-color:var(--ink)}
+.ai-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+.askcta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px;border:2px solid var(--accent);border-radius:8px;background:var(--accent-soft);margin-bottom:16px}
+.askcta p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.planwait{display:flex;gap:14px;align-items:center;padding:16px;border:1.5px dashed var(--line);border-radius:8px;margin-top:16px;flex-wrap:wrap}
+.planwait>div{flex:1;min-width:0}.planwait p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.spin{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;flex:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.grid.small{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-top:6px}
+.grid.small .card p{display:none}
+.plan{margin-top:24px}.plan h1{font-size:clamp(30px,4.4vw,48px);text-transform:uppercase}
+.plan .lede{color:var(--muted);max-width:65ch;margin:8px 0 12px}
+.qty{font:500 12px var(--mono);color:var(--muted);margin-left:6px}
+.slist{margin:4px 0 0;padding-left:18px;font-size:15px}
+.olist{margin:4px 0 0;padding-left:22px}.olist li{margin:3px 0}
+.idwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;margin-top:20px;align-items:start}
+.idimg{width:100%;border-radius:8px;border:1.5px solid var(--ink);max-width:100%}
+.idout .kicker{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.idname{font-size:32px;text-transform:uppercase;margin:2px 0 6px}
+.buy{font-size:15px;margin-top:12px}
+.rail a.navask{border:1.5px solid var(--accent);color:var(--accent);font-weight:600;margin-bottom:6px}
+.rail a.navask[aria-current="page"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (max-width:700px){.idwrap{grid-template-columns:minmax(0,1fr)}}
+.aiset{margin-top:12px;padding:12px;border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-soft);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;font-size:14px}
+.keyform{display:flex;flex-direction:column;gap:8px;width:100%}
+.keyform label{display:flex;flex-direction:column;gap:2px}.keyform label span{color:var(--muted)}
+.keyrow{display:flex;gap:8px;flex-wrap:wrap}.keyrow input{flex:1 1 220px;min-width:0;padding:9px 10px;font:inherit;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}
+.note{font-size:13px;color:var(--muted);margin-top:28px;padding-top:12px;border-top:1px solid var(--line)}
+
+/* scene drawing */
+.scene{display:block;width:100%;height:auto}
+.scene .o{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.scene .th{stroke-width:1;opacity:.55}
+.scene .d{stroke-dasharray:5 4}
+.scene .f{fill:var(--panel2);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.scene .f2{fill:var(--panel);stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.scene .bg{fill:var(--bg);stroke:var(--ink);stroke-width:2}
+.scene .a{fill:var(--accent);stroke:none}
+.scene .ao{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+.scene .p{fill:none;stroke:var(--ink);stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+.scene .pi{fill:none;stroke:var(--panel2);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.scene .wb{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
+.scene .ww{fill:none;stroke:var(--muted);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1 0}
+.scene .wg{fill:none;stroke:var(--green);stroke-width:3.5;stroke-linecap:round}
+.scene .t{font:500 9px var(--mono);fill:var(--muted)}
+.scene .tb{font:700 11px var(--display);fill:var(--ink);letter-spacing:.04em}
+.scene g[data-s]{transition:opacity .45s ease}
+.scene g.fut{opacity:.07}
+.scene g.now .o,.scene g.now .f,.scene g.now .f2{stroke:var(--accent)}
+.scene g.now .f,.scene g.now .f2{fill:var(--accent-soft)}
+.scene g.now .t,.scene g.now .tb{fill:var(--accent)}
+.scene g.now .p{stroke:var(--accent)}
+.scene g.now{animation:pop .6s ease}
+@keyframes pop{from{opacity:.2}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.scene g[data-s]{transition:none}.scene g.now{animation:none}.card{transition:none}}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .rail{position:static;max-height:none}
+  .rail h4{display:none}
+  .rail nav{flex-direction:row;overflow-x:auto;padding-bottom:6px;gap:6px}
+  .rail a{white-space:nowrap;border:1px solid var(--line);background:var(--panel)}
+  .rail a span{display:none}
+  .rail .grp{display:none}
+  .rail a.sub{padding-left:10px}
+  .guide{grid-template-columns:minmax(0,1fr)}
+  .board{position:static}
+  .intro{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .video{grid-template-columns:minmax(0,1fr)}
+  .dots{margin-left:0;width:100%}
+  .step{grid-template-columns:30px minmax(0,1fr) auto;padding:12px}
+  .search{max-width:none}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#home" aria-label="Level and Plumb home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="13" width="36" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="14" y="16" width="12" height="8" rx="4" fill="var(--accent)"/><line x1="20" y1="15" x2="20" y2="25" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span><b>Level &amp; Plumb</b><small>Step-by-step home improvement</small></span>
+    </a>
+    <label class="search" for="q">
+      <svg viewBox="0 0 16 16" fill="none" stroke-width="2"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="15" y2="15"/></svg>
+      <input id="q" type="search" placeholder="Search guides: GFCI, P-trap, generator inlet…" autocomplete="off">
+    </label>
+  </header>
+  <div class="region" id="region"></div>
+  <div class="layout">
+    <aside class="rail"><h4>Trades</h4><nav id="nav"></nav></aside>
+    <main id="view"></main>
+  </div>
+</div>
+
+<script>
+// ---------- drawing helpers ----------
+const R=(x,y,w,h,c='f',rx=0)=>`<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>`;
+const L=(x1,y1,x2,y2,c='o')=>`<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+const P=(d,c='o')=>`<path class="${c}" d="${d}"/>`;
+const C=(cx,cy,r,c='o')=>`<circle class="${c}" cx="${cx}" cy="${cy}" r="${r}"/>`;
+const T=(x,y,s,c='t',a='start')=>`<text class="${c}" x="${x}" y="${y}" text-anchor="${a}">${s}</text>`;
+const G=(n,inner)=>`<g data-s="${n}">${inner}</g>`;
+const rep=(n,f)=>Array.from({length:n},(_, i)=>f(i)).join('');
+const pipe=d=>P(d,'p')+P(d,'pi');
+const arrow=(x1,y1,x2,y2,c='o')=>{const a=Math.atan2(y2-y1,x2-x1),h=7;return L(x1,y1,x2,y2,c)+P(`M${x2-h*Math.cos(a-.5)},${y2-h*Math.sin(a-.5)} L${x2},${y2} L${x2-h*Math.cos(a+.5)},${y2-h*Math.sin(a+.5)}`,c)};
+const shim=(x,y,flip)=>P(flip?`M${x},${y} l6,-4 v8 z`:`M${x},${y} l-6,-4 v8 z`,'a');
+
+// ---------- scenes (320 x 220) ----------
+const S={
+ac:()=>[
+  L(95,190,290,190), R(110,80,160,110,'f',4), rep(24,i=>L(118+i*6,90,118+i*6,180,'o th')), T(190,206,'CONDENSER','t','middle'),
+  G(1,R(28,62,40,52)+L(48,78,62,96)+T(32,126,'DISCONNECT')+L(68,90,110,100,'o d')),
+  G(2,R(104,40,172,12)+arrow(190,74,190,56)+T(316,34,'grille off, clear debris','t','end')),
+  G(3,R(150,120,34,9)+rep(6,i=>L(153+i*6,129,153+i*6,137))+T(150,152,'fin comb')),
+  G(4,P('M310,18 Q300,62 252,72')+rep(4,i=>L(252,72,226+i*6,100+i*3,'o d'))+T(316,14,'rinse inside → out','t','end')),
+  G(5,P('M270,176 h22 v24')+C(292,208,3,'a')+T(232,218,'condensate drain')),
+  G(6,R(28,140,40,40)+L(28,140,68,180,'o th')+L(68,140,28,180,'o th')+T(26,194,'NEW FILTER')),
+  G(7,T(28,54,'POWER ON ✓','tb')),
+],
+elec:()=>[
+  R(18,26,70,160,'f',3), rep(7,i=>R(30,38+i*20,46,12,'f2',2)), T(22,200,'BREAKER PANEL'),
+  R(165,34,100,150,'bg',6), T(170,200,'WALL BOX'),
+  G(1,R(52,58,24,12,'a',2)+T(92,68,'OFF')),
+  G(2,P('M300,18 L262,70','wb')+C(260,73,3,'a')+T(316,14,'non-contact tester','t','end')),
+  G(3,P('M185,34 C185,70 200,80 205,92','wb')+P('M215,34 C215,70 220,80 222,92','ww')+P('M245,34 C245,80 238,120 236,132','wg')+T(170,30,'LINE in')),
+  G(4,R(190,70,52,86,'f2',6)+rep(2,i=>R(206,84+i*36,20,16,'f',3))+R(198,114,16,6,'a',1)+R(218,114,16,6,'f',1)),
+  G(5,R(178,58,76,110,'o',8)),
+  G(6,R(170,170,92,14,'f2',2)+T(174,180,'GFCI PROTECTED')),
+],
+plumb:()=>[
+  L(296,20,296,215), R(24,40,230,14), P('M60,54 v40 q0,15 15,15 h90 q15,0 15,-15 v-40'), pipe('M120,109 v22'),
+  T(30,34,'SINK'),
+  G(1,P('M84,180 l8,32 h60 l8,-32 z','f')+T(92,200,'bucket')),
+  G(2,R(111,126,18,8,'a',1)+R(147,148,18,8,'a',1)+T(18,140,'slip nuts')),
+  G(3,pipe('M120,131 v36 a18,18 0 0 0 36,0 v-15 h138')+T(200,146,'trap arm → wall')),
+  G(4,T(170,170,'bevel side of washer')+T(170,180,'faces the joint')+arrow(168,166,158,156)),
+  G(5,P('M108,124 a14,14 0 1 1 6,18','ao')+T(18,118,'hand-tight +¼ turn')),
+  G(6,P('M135,40 v-16 h28 v8','o')+L(163,34,163,60,'ao')+T(170,20,'run water, check drips')),
+],
+paint:()=>[
+  R(20,20,280,180,'f2'), R(190,48,74,86,'f'), L(227,48,227,134), L(190,91,264,91), L(10,200,310,200),
+  G(1,C(70,66,5,'f')+C(110,120,4,'f')+T(52,52,'patch, sand, wipe')),
+  G(2,R(186,44,82,94,'ao')+L(22,196,298,196,'ao')+T(206,156,'tape trim')),
+  G(3,P('M10,212 q50,-8 100,0 t100,0 t100,0','o d')+T(30,214,'drop cloth')),
+  G(4,C(70,66,10,'f')+C(110,120,9,'f')+T(84,96,'spot-prime')),
+  G(5,R(20,20,280,8,'a')+P('M150,32 l14,22 l8,-6 z','f')+T(130,46,'cut in 2–3 in')),
+  G(6,P('M40,172 L60,74 L82,160 L104,74 L124,172','ao')+R(118,160,30,10,'f',4)+L(133,170,133,188)+T(40,190,'roll a W, fill in')),
+  G(7,T(52,140,'2nd COAT after recoat time','tb')),
+],
+paper:()=>[
+  R(20,20,280,180,'f2'), L(10,200,310,200),
+  G(1,L(96,8,96,196,'ao')+P('M92,196 l4,10 l4,-10 z','a')+T(102,30,'plumb line')),
+  G(2,R(240,8,46,204,'o d')+T(232,216,'+4 in extra','t')),
+  G(3,T(200,110,'book 3–5 min','tb')),
+  G(4,R(20,20,76,180,'f')+rep(5,i=>C(58,50+i*32,3,'o th'))),
+  G(5,arrow(58,110,88,90)+arrow(58,110,88,130)+T(30,214,'smooth center → edges')),
+  G(6,R(96,20,76,180,'f')+C(96,120,6,'a')+T(104,124,'seam roller')),
+  G(7,L(20,22,172,22,'ao')+L(20,198,172,198,'ao')+T(124,14,'trim at ceiling & base')),
+],
+wall:()=>[
+  R(20,20,280,180,'f2'), L(60,20,60,200,'o d'), L(260,20,260,200,'o d'), T(64,30,'stud'),T(222,30,'stud'),
+  G(1,P('M140,92 l18,-6 l20,10 l4,22 l-16,16 l-22,-4 l-8,-18 z','bg')+R(124,78,72,64,'ao')+T(124,72,'cut square')),
+  G(2,R(118,72,84,9,'a')+R(118,139,84,9,'a')+T(206,80,'wood cleats')),
+  G(3,R(124,78,72,64,'f')+rep(4,i=>C(130+i*20,84,2,'a'))+rep(4,i=>C(130+i*20,136,2,'a'))),
+  G(4,R(118,72,84,76,'o d')+T(206,150,'mesh tape')),
+  G(5,P('M90,110 a70,52 0 1 0 140,0 a70,52 0 1 0 -140,0','o d')+T(96,178,'3 thin coats, feather wider')),
+  G(6,R(232,150,44,18,'f',3)+T(222,190,'sand, prime')),
+],
+floor:()=>[
+  R(20,20,280,180,'bg'), T(24,14,'PLAN VIEW'),
+  G(1,L(36,40,284,40,'ao')+T(40,56,'flat within 3/16 in per 10 ft')),
+  G(2,R(26,26,268,168,'o d')+T(200,70,'underlayment')),
+  G(3,R(30,170,90,18)+R(120,170,90,18)+R(210,170,80,18)+R(21,174,6,10,'a')+T(30,212,'¼–⅜ in gap + spacers')),
+  G(4,R(30,150,40,18)+R(70,150,90,18)+R(160,150,90,18)+R(250,150,40,18)+R(30,130,70,18)+R(100,130,90,18)+R(190,130,100,18)),
+  G(5,rep(5,i=>R(30,30+i*20,260,18,'f')+L(80+(i%3)*60,30+i*20,80+(i%3)*60,48+i*20)+L(170+(i%3)*50,30+i*20,170+(i%3)*50,48+i*20))+T(150,214,'stagger seams ≥ 6 in')),
+  G(6,R(20,20,280,180,'ao')),
+],
+door:()=>[
+  R(60,20,14,190), R(246,20,14,190), R(60,20,200,22), L(20,210,300,210), T(18,16,'ROUGH OPENING'),
+  G(1,arrow(80,58,240,58)+arrow(240,58,80,58)+T(92,72,'door width + 2 in')),
+  G(2,R(80,46,160,164,'o')),
+  G(3,shim(80,64)+shim(80,124)+shim(80,192)+shim(240,64,1)+T(10,124,'shims')),
+  G(4,R(86,52,148,158,'f2')+rep(3,i=>R(84,70+i*58,6,14,'a'))+C(220,135,6,'o')),
+  G(5,T(150,84,'even ⅛ in reveal','t','middle')),
+  G(6,R(68,34,184,176,'ao')+T(258,200,'casing','t','start')),
+],
+window:()=>[
+  R(20,20,280,180,'f2'), R(90,46,140,118,'bg'),
+  G(1,arrow(96,60,224,60)+arrow(96,105,224,105)+arrow(96,150,224,150)+T(100,56,'W at top, middle, bottom')),
+  G(2,arrow(160,110,160,24)+T(170,30,'remove sashes & stops')),
+  G(3,P('M92,162 h136 M92,162 v-114 M228,162 v-114','ao')+T(92,180,'sealant / sill pan')),
+  G(4,R(98,54,124,102,'f')+L(98,105,222,105)+L(110,66,130,86,'o th')+L(110,116,130,136,'o th')),
+  G(5,shim(98,70,1)+shim(98,140,1)+shim(222,70)+shim(222,140)+T(236,110,'shim & low-')+T(236,120,'expansion foam')),
+  G(6,R(84,40,152,130,'ao')+T(90,190,'caulk exterior perimeter')),
+],
+cab:()=>[
+  R(20,10,280,198,'f2'), L(10,208,310,208),
+  G(1,L(26,150,294,150,'ao')+L(26,72,294,72,'ao')+T(30,66,'54 in to bottom of uppers')+T(30,164,'34½ in base height')),
+  G(2,rep(5,i=>L(60+i*48,12,60+i*48,206,'o d'))+T(62,24,'studs 16 in o.c.')),
+  G(3,R(30,72,240,5,'a')+T(200,88,'ledger')),
+  G(4,R(40,22,70,50)+R(110,22,70,50)+R(180,22,70,50)+L(75,26,75,68,'o th')+L(145,26,145,68,'o th')+L(215,26,215,68,'o th')),
+  G(5,R(40,150,210,56)+L(110,150,110,206)+L(180,150,180,206)+shim(46,206,1)+shim(244,206)),
+  G(6,C(110,40,3,'a')+C(180,40,3,'a')+C(110,176,3,'a')+C(180,176,3,'a')+T(116,110,'clamp, screw frames')),
+],
+counter:()=>[
+  L(296,10,296,210), R(30,108,262,100), L(117,112,117,206), L(204,112,204,206), L(10,208,310,208),
+  G(1,R(60,94,120,10,'f2',3)+R(112,96,16,6,'a',3)+T(60,86,'level both ways')),
+  G(2,R(20,92,276,16,'f2')+T(14,84,'1 in overhang')),
+  G(3,L(130,92,210,92,'ao')+T(140,70,'sink cutout from template')),
+  G(4,T(36,140,'seal all 6 faces','tb')),
+  G(5,P('M60,108 v10 h12','ao')+P('M240,108 v10 h12','ao')+T(36,132,'slotted fasteners')),
+  G(6,C(294,90,4,'a')+T(232,56,'caulk at wall')),
+],
+shelf:()=>[
+  R(20,20,280,180,'f2'), L(80,20,80,200,'o d'),L(160,20,160,200,'o d'),L(240,20,240,200,'o d'),
+  G(1,R(30,128,30,46,'f',6)+R(36,136,18,10,'a',2)+arrow(60,150,78,150)+T(26,190,'stud finder')),
+  G(2,L(50,100,270,100,'ao')+R(120,84,80,10,'f',3)+T(206,92,'level line')),
+  G(3,C(80,112,3,'a')+C(80,124,3,'a')+C(240,112,3,'a')+C(240,124,3,'a')+T(250,124,'pilot holes')),
+  G(4,R(76,100,8,34,'f')+R(236,100,8,34,'f')),
+  G(5,R(50,92,220,8,'f')),
+  G(6,R(100,62,14,30,'f')+R(114,66,12,26,'f')+R(126,58,16,34,'f')+T(160,80,'load up gradually')),
+],
+deck:()=>[
+  rep(4,i=>R(40+i*70,128,14,70)), L(10,210,310,210), T(30,206,'joists 16 in o.c.'),
+  G(1,R(20,116,280,12,'f2')+P('M120,118 l10,6 l-6,3 l12,2','ao')+T(110,108,'soft, cracked board')),
+  G(2,R(20,72,280,12,'o d')+arrow(160,112,160,88)),
+  G(3,L(184,140,204,120)+T(208,124,'probe joists')),
+  G(4,R(20,116,280,12,'f')),
+  G(5,rep(4,i=>C(44+i*70,122,2,'a')+C(52+i*70,122,2,'a'))+T(30,150,'2 coated/SS screws per joist')),
+  G(6,T(30,60,'⅛ in gap, seal end cuts','tb')),
+],
+heat:()=>[
+  R(20,20,280,180,'f2'), C(160,150,5,'bg'),
+  G(1,R(28,30,40,26,'f',3)+R(38,36,10,14,'a',2)+T(28,70,'furnace OFF')),
+  G(2,R(236,34,50,34,'f',4)+C(261,51,9,'o')+T(232,82,'photo wiring')),
+  G(3,P('M160,150 L130,124','wb')+P('M160,150 L145,124','ww')+P('M160,150 L160,124','wg')+P('M160,150 L175,124','wb')+P('M160,150 L190,124','ww')+T(118,190,'tag: R  W  Y  G  C')),
+  G(4,R(110,70,100,100,'o',10)+R(146,76,28,6,'a',3)),
+  G(5,rep(5,i=>C(130+i*15,120,4,'f2'))+T(122,108,'R W Y G C')),
+  G(6,R(104,64,112,112,'f',16)+C(160,120,30,'f2')+T(160,125,'68°','tb','middle')),
+],
+vent:()=>[
+  L(10,150,310,150), R(30,90,14,60), R(250,90,14,60), P('M10,48 L310,10'), T(14,170,'CEILING'),T(14,40,'ATTIC'),
+  G(1,T(110,200,'breaker OFF, verify dead','tb')),
+  G(2,R(110,120,80,30,'f')+L(44,126,110,126)+L(190,126,250,126)+T(112,114,'housing')),
+  G(3,P('M190,132 C230,132 240,70 260,40','p')+P('M190,132 C230,132 240,70 260,40','pi')),
+  G(4,R(248,14,26,16,'f',2)+T(316,48,'roof cap','t','end')+T(316,58,'+ damper','t','end')),
+  G(5,R(102,150,96,8,'f',2)+rep(3,i=>arrow(126+i*24,180,126+i*24,162,'ao'))),
+  G(6,T(110,214,'≥ 50 cfm, ducted outdoors','t')),
+],
+gen:()=>[
+  L(160,10,160,210), L(10,200,160,200), T(14,22,'OUTSIDE'), T(168,22,'INSIDE'),
+  R(220,30,84,156,'f',3), R(228,40,30,16,'f2',2), T(230,68,'MAIN'), rep(5,i=>R(232,76+i*18,24,10,'f2',2)+R(266,76+i*18,24,10,'f2',2)), R(208,80,6,90,'f2',2), T(304,198,'PANEL','t','end'),
+  G(1,T(14,40,'30 A inlet + interlock','tb')+T(14,52,'listed for your panel')),
+  G(2,R(228,40,30,16,'a',2)+T(166,44,'MAIN OFF','tb')+T(166,56,'service')+T(166,66,'wires LIVE')),
+  G(3,R(126,92,32,40,'f',3)+C(142,112,9,'f2')+C(139,109,1.6,'a')+C(145,109,1.6,'a')+C(139,115,1.6,'a')+C(145,115,1.6,'a')+T(100,146,'inlet box')),
+  G(4,P('M158,114 H208','wb')+T(168,108,'10/4 cable')),
+  G(5,R(262,40,30,16,'a',2)+C(296,48,2,'a')+T(316,24,'2-pole backfeed','t','end')),
+  G(6,P('M270,56 v14 h-22','o th')+P('M280,56 v14 h-60 v20','o th')+T(166,196,'N → neutral bar')),
+  G(7,R(224,34,74,28,'ao',3)+R(254,30,8,10,'a',1)+T(222,212,'interlock plate')),
+  G(8,R(20,152,60,36,'f',4)+C(32,192,6,'f2')+C(68,192,6,'f2')+R(30,160,18,10,'f2',1)+P('M80,166 C110,166 118,126 140,124','o d')+T(16,136,'generator ≥ 20 ft')+T(16,146,'from openings')),
+],
+frame:()=>[
+  L(10,24,310,24), L(10,206,310,206), T(14,18,'CEILING JOISTS'), T(14,218,'FLOOR'),
+  G(1,L(20,212,300,212,'ao')+T(200,218,'chalk line')),
+  G(2,R(20,192,280,12)+R(20,26,280,12)),
+  G(3,rep(7,i=>L(24+i*44,188,24+i*44,196,'ao'))+T(120,184,'16 in o.c.')),
+  G(4,rep(7,i=>R(20+i*44,38,8,154))),
+  G(5,R(266,60,10,100,'f2',3)+R(267,104,8,12,'a',2)+T(220,56,'plumb')),
+  G(6,rep(6,i=>R(28+i*44,110,36,8,'a'))+T(30,104,'fireblocking')),
+],
+};
+
+// ---------- content ----------
+const D=[
+{id:'air-conditioning',name:'Air Conditioning',scene:'ac',title:'Service a Central AC Condenser',lvl:'Beginner',time:'1–2 hrs',permit:false,
+ blurb:'Clean coils, clear the drain and swap the filter so your system runs cooler and cheaper.',
+ vq:'how to clean central ac condenser coil',
+ tools:['Garden hose with spray nozzle','Fin comb','Shop vacuum','Screwdriver / nut driver','Wet-dry vac for drain line'],
+ mats:['Correct-size air filter (check MERV & size on old one)','Foaming no-rinse coil cleaner','Distilled white vinegar (drain line)'],
+ safety:'Never open refrigerant lines. Handling refrigerant requires EPA Section 608 certification. Wait 5 minutes after cutting power before touching the unit; capacitors hold a charge.',
+ steps:[
+  ['Shut off power','Turn the thermostat off, then pull the disconnect block or switch at the outdoor disconnect box.','NEC 440.14 — disconnect within sight of unit'],
+  ['Remove the top grille','Unscrew the top fan grille, lift it aside without straining the fan wires, and vacuum out leaves and debris.'],
+  ['Straighten bent fins','Run a fin comb gently through flattened areas so air can pass through the coil.'],
+  ['Clean the coil','Spray coil cleaner, let it foam, then rinse from inside the cabinet outward at low pressure.'],
+  ['Clear the condensate drain','At the indoor air handler, vacuum the drain line from its outdoor end, then pour 1 cup of vinegar into the access tee.','IRC M1411.3 — condensate must drain to an approved place'],
+  ['Replace the filter','Slide in a new filter with the airflow arrow pointing toward the blower.'],
+  ['Restore power and test','Reinstall the grille, close the disconnect, wait 5 minutes, then set cooling and confirm cold air within 10 minutes.'],
+ ],
+ code:[['EPA §608','Only certified technicians may open the sealed refrigerant circuit or add refrigerant.'],['NEC 440.14','A disconnecting means must be within sight of and readily accessible from the condenser.'],['IRC M1411.3','Condensate must discharge to an approved location; a secondary drain or float switch is required where overflow would damage the building.'],['IRC M1305','Keep 30 in of working space in front of the service side of equipment.']]},
+
+{id:'electrical',name:'Electrical',scene:'elec',title:'Replace an Outlet with a GFCI',lvl:'Intermediate',time:'45 min',permit:'Varies',
+ blurb:'Add ground-fault protection near water: kitchens, baths, laundry, garages and outdoors.',
+ vq:'how to install gfci outlet step by step',
+ tools:['Non-contact voltage tester','Plug-in outlet tester','Screwdrivers (#2 Phillips, flat)','Wire stripper','Needle-nose pliers'],
+ mats:['Tamper-resistant GFCI receptacle (15 A or 20 A to match the circuit)','Wall plate','Painter\'s tape for labeling'],
+ safety:'Turn off the breaker and verify the wires are dead with a tester before touching them. If you find aluminum wiring, no ground, or more than two cables in the box, stop and call a licensed electrician.',
+ steps:[
+  ['Turn off the breaker','Switch off the circuit at the panel and tape over the breaker so no one switches it back on.'],
+  ['Verify it is dead','Test every wire with a non-contact tester. Test the tester on a known live outlet first.'],
+  ['Remove the old outlet and identify the LINE wires','Pull the outlet out and label the cable that brings power in from the panel as LINE. If there are two cables, separate them, restore power briefly, and test which one is live.'],
+  ['Connect the GFCI','Hot (black) goes to the brass LINE screw, neutral (white) to the silver LINE screw, and ground (bare/green) to the green screw. Connect downstream cables to the LOAD terminals to protect those outlets too.','NEC 406.4(D)(3) — GFCI allowed as replacement'],
+  ['Fold and mount','Fold the wires in neatly, screw the device in square, and attach the wall plate.'],
+  ['Restore power, test and label','Press RESET, then TEST, and check that the power cuts out. Label each downstream outlet "GFCI Protected".'],
+ ],
+ code:[['NEC 210.8(A)','GFCI is required for bathrooms, kitchens, garages, outdoors, crawlspaces, basements, laundry areas, and within 6 ft of any sink.'],['NEC 406.12','Replacement receptacles in dwellings must be tamper-resistant.'],['NEC 406.4(D)(4)','When you replace a receptacle on a circuit that now requires AFCI protection, you must provide AFCI (for example with a combo AFCI/GFCI breaker).'],['Permit','Many cities allow device-for-device swaps without a permit. New circuits always need one.']]},
+
+{id:'generator-inlet',trade:'Electrical',nk:'electrical',name:'Electrical',scene:'gen',title:'Install a Generator Inlet & Interlock',lvl:'Advanced',time:'4–6 hrs',permit:'Yes',
+ blurb:'Power your house from a portable generator safely through an outdoor inlet box and a breaker interlock, with no extension cords through windows and no backfeeding the utility.',
+ vq:'how to install generator inlet box and interlock kit',
+ tools:['Non-contact voltage tester and multimeter','Insulated screwdrivers and nut drivers','Torque screwdriver (panel lugs have torque specs)','Hammer drill with long masonry/wood bit','Hole saw and fish tape','Cable stripper'],
+ mats:['Power inlet box: 30 A NEMA L14-30 or 50 A CS6365 (match your generator outlet)','Interlock kit listed for your exact panel brand and model','2-pole breaker of the same brand as the panel, rated to match the inlet (30 A or 50 A)','Breaker hold-down / retainer kit','Cable: 10/4 copper for 30 A, 6/4 for 50 A (2 hots, neutral, ground), or THHN in conduit','Generator cord: L14-30 or CS6364 4-wire, sized to length','Exterior sealant, conduit body and connectors'],
+ safety:'Danger: power from the utility side of the main breaker is always live, even with the main off. Only licensed electricians should work in a live panel. A generator connected without a transfer switch or interlock can backfeed the grid and kill a line worker. Run the generator outdoors at least 20 ft from windows, doors and vents; carbon monoxide kills.',
+ steps:[
+  ['Plan and buy matched parts','Check your generator\'s 240 V outlet (L14-30 or 14-50/CS6365) and buy the same-rated inlet and cord. Order an interlock kit listed for your exact panel model, and check that the top-right breaker spaces next to the main are free.','NEC 702.5 — transfer equipment required',{vq:'generator interlock kit how to choose for your panel'}],
+  ['Pull the permit, then shut off the main','Get the electrical permit first. Turn off every branch breaker, then the main. Test that the bus is dead, and keep in mind that the main lugs and service wires above the main stay live.','',{vq:'how to safely work in breaker panel main off'}],
+  ['Mount the inlet box outside','Choose a spot on the exterior wall where the generator can sit 20 ft from openings. Drill through the rim joist or siding, mount the inlet box level, and seal around it.','NEC 110.3(B) — install per listing',{vq:'how to mount generator power inlet box outside wall'}],
+  ['Run the cable to the panel','Route 10/4 (30 A) or 6/4 (50 A) cable or conduit from the inlet to the panel. Staple it within 12 in of boxes and every 4½ ft, and use a cable clamp at the panel knockout.','NEC 334.30 — cable support',{vq:'running wire from generator inlet to breaker panel'}],
+  ['Install the backfeed breaker','Snap a 2-pole breaker matching the inlet rating into the position the interlock kit specifies, usually right next to the main. Install the hold-down retainer so it cannot be pulled off the bus.','NEC 408.36(D) — backfed breakers must be secured',{vq:'install backfeed breaker hold down kit generator'}],
+  ['Land the conductors','Connect the two hots to the breaker, the white neutral to the neutral bar, and the green/bare ground to the ground bar. Torque every screw to the label value.','NEC 110.14(D) — torque to spec',{vq:'wiring generator inlet to panel neutral ground'}],
+  ['Install the interlock plate','Fit the interlock to the panel cover so the main and generator breakers can never be ON at the same time. Test that it blocks both directions, then reinstall the cover.','NEC 702.5 — prevents backfeed to utility',{vq:'how to install generator interlock kit on panel'}],
+  ['Inspect, label and test run','After the inspection passes, label the panel. To test: set the generator outdoors, plug in the cord, start it, turn the main OFF, slide the interlock, turn the generator breaker ON, then switch on circuits one at a time. Reverse the order when utility power returns.','NEC 702.7 — signage required',{vq:'generator interlock startup and shutdown procedure'}],
+ ],
+ code:[['NEC 702.5','Transfer equipment (a transfer switch or a listed interlock) is required to prevent the generator from backfeeding the utility.'],['NEC 408.36(D)','Plug-in breakers that are backfed must be secured with an additional fastener (hold-down kit).'],['NEC 702.7','Install a sign at the service equipment showing that a standby power source is connected.'],['NEC 250.34 / 250.35','Most interlock setups keep the neutral solidly connected. Use a generator with a floating neutral, or a neutral-switching transfer switch if your generator\'s neutral is bonded.'],['NEC 445.20','Portable generators 15 kW or smaller need GFCI protection on their 125 V and 125/250 V receptacles. Some bonded-neutral generators trip when connected through an inlet, so check with the manufacturer.'],['Utility','Many utilities require notice of a generator connection. Check your utility\'s rules.'],['Permit','Generator inlet and interlock installations require an electrical permit and inspection in nearly every jurisdiction.']]},
+
+{id:'plumbing',name:'Plumbing',scene:'plumb',title:'Replace a Sink P-Trap',lvl:'Beginner',time:'30 min',permit:false,
+ blurb:'Fix a leaking or clogged trap under a bathroom or kitchen sink with slip-joint fittings.',
+ vq:'how to replace p trap under sink',
+ tools:['Bucket and rags','Groove-joint pliers','Hacksaw or PVC cutter (if trimming)','Flashlight'],
+ mats:['1¼ in (bath) or 1½ in (kitchen) P-trap kit','Slip-joint washers','Plumber\'s tape is not needed on slip joints'],
+ safety:'If the drain was treated with chemical cleaner, wear gloves and eye protection; the water in the trap is caustic.',
+ steps:[
+  ['Set a bucket under the trap','Clear the cabinet and place a bucket and rag under the trap to catch the water held in the bend.'],
+  ['Loosen the slip nuts','Unscrew the nut at the tailpiece and the one at the trap arm by hand or with pliers.'],
+  ['Remove and fit the new trap','Drop the old trap out. Dry-fit the new J-bend and trap arm, trimming the arm so it enters the wall fitting straight.','IPC 1002.3 — S-traps prohibited'],
+  ['Seat the washers','Slide nut then washer onto each pipe, with the tapered side of the washer facing into the joint.'],
+  ['Tighten','Hand-tighten each slip nut, then add a quarter turn with pliers. Over-tightening cracks plastic nuts.'],
+  ['Test for leaks','Fill the sink, pull the stopper, and run a dry tissue around every joint. Snug any nut that weeps.'],
+ ],
+ code:[['IPC 1002.4','Trap seal must be 2 to 4 inches deep.'],['IPC 1002.3','S-traps, bell traps and drum traps are prohibited.'],['IPC 906.1','Max trap-arm length to the vent: 5 ft for 1¼ in, 6 ft for 1½ in pipe.'],['IPC 405.8','Slip joints must remain accessible; never bury them in a wall.']]},
+
+{id:'painting',name:'Painting',scene:'paint',title:'Paint an Interior Room',lvl:'Beginner',time:'1–2 days',permit:false,
+ blurb:'Prep, cut in and roll for crisp edges and a finish without lap marks.',
+ vq:'how to paint a room like a pro cutting in rolling',
+ tools:['2½ in angled sash brush','9 in roller frame and ⅜ in nap cover','Extension pole','Tray','Putty knife','Sanding sponge'],
+ mats:['Interior latex paint (about 1 gal per 350 sq ft per coat)','Primer','Spackle','Painter\'s tape','Canvas drop cloths'],
+ safety:'Homes built before 1978 may have lead paint. Test first, and if it is present, avoid dry sanding and follow EPA lead-safe practices.',
+ steps:[
+  ['Patch and sand','Fill holes with spackle, let it dry, sand smooth, and wipe the walls down with a damp cloth.'],
+  ['Tape the trim','Apply tape to trim and baseboards, pressing the edge down with a putty knife.'],
+  ['Lay drop cloths','Cover the floor fully. Canvas stays put better than plastic.'],
+  ['Spot-prime patches','Prime every patch so it does not show through as a dull "flash" spot.'],
+  ['Cut in the edges','Brush a 2–3 in band along the ceiling, corners and trim, one wall at a time.'],
+  ['Roll the walls','While the cut-in is still wet, roll a 3 ft "W", fill it in without lifting, and keep a wet edge.'],
+  ['Apply the second coat','Wait for the recoat time on the can, then repeat. Pull the tape while the paint is slightly tacky.'],
+ ],
+ code:[['EPA RRP (40 CFR 745)','Paid contractors working on pre-1978 homes must be lead-safe certified. DIYers should follow the same practices.'],['IRC R302.9','Wall and ceiling finishes must have a flame-spread index of 200 or less; standard paints qualify.']]},
+
+{id:'wallpaper',name:'Wallpaper',scene:'paper',title:'Hang Wallpaper',lvl:'Intermediate',time:'4–6 hrs',permit:false,
+ blurb:'Use a plumb line and booking to get straight seams that do not shrink apart.',
+ vq:'how to hang wallpaper for beginners',
+ tools:['Plumb bob or laser level','Smoothing brush or plastic smoother','Seam roller','Utility knife with fresh blades','6 in taping knife','Tape measure'],
+ mats:['Wallpaper (add 15% for pattern match)','Paste (if not pre-pasted)','Wallpaper primer / sizing','Sponge and bucket'],
+ safety:'Turn off the power and remove cover plates before papering around outlets and switches.',
+ steps:[
+  ['Snap a plumb line','Measure out from the corner one roll width minus ½ in and draw a true vertical line.'],
+  ['Cut strips long','Cut each strip 4 in longer than the wall height so 2 in can be trimmed at the top and bottom. Match the pattern before cutting.'],
+  ['Paste and book','Paste the back, then fold the ends to the middle without creasing. Let it rest 3–5 minutes so it can expand before hanging.'],
+  ['Hang the first strip','Align the edge to the plumb line, not the corner. Wrap ½ in around the corner.'],
+  ['Smooth out bubbles','Work from the center outward to push out air and excess paste.'],
+  ['Butt the next seam','Slide the next strip tight against the first. Do not overlap. Roll the seam lightly.'],
+  ['Trim and clean','Trim at the ceiling and baseboard with a sharp blade held against a taping knife. Sponge off paste immediately.'],
+ ],
+ code:[['IRC R302.9.1','Wallcoverings 0.036 in thick or less applied directly to the wall are exempt from flame-spread testing.'],['Tip','Prime with a wallpaper primer so the paper can be removed later without tearing the drywall face.']]},
+
+{id:'walls-ceilings',name:'Walls & Ceilings',scene:'wall',title:'Patch a Hole in Drywall',lvl:'Beginner',time:'3 hrs over 2 days',permit:false,
+ blurb:'Repair holes up to 8 inches so the patch disappears under paint.',
+ vq:'how to patch large hole in drywall',
+ tools:['Drywall saw','Drill/driver','6 in and 10 in taping knives','Mud pan','Sanding sponge','Square'],
+ mats:['Drywall scrap of matching thickness (usually ½ in)','1×3 furring strips','1¼ in drywall screws','Mesh tape','Lightweight joint compound','Primer'],
+ safety:'Before cutting, check for wires and pipes. Cut shallow and look inside the hole with a flashlight.',
+ steps:[
+  ['Square up the hole','Draw a rectangle around the damage and cut it out cleanly with a drywall saw.'],
+  ['Install backer cleats','Screw wood strips inside the opening at the top and bottom, half exposed.'],
+  ['Screw in the patch','Cut a drywall piece to fit and screw it to the cleats with heads just below the surface.'],
+  ['Tape the seams','Apply mesh tape over all four seams.'],
+  ['Mud in thin coats','Apply 3 coats, each wider than the last (6, 8, 10 in), and let each dry fully.'],
+  ['Sand and prime','Sand lightly, check with a raking flashlight, then prime before painting.'],
+ ],
+ code:[['IRC R702.3','Gypsum board must be fastened per Table R702.3.5 (typically screws every 12 in on ceilings, 16 in on walls).'],['IRC R302.6','Walls and ceilings between the garage and the house need ½ in gypsum (⅝ in Type X under habitable rooms). Patch with the same type.']]},
+
+{id:'flooring',name:'Flooring',scene:'floor',title:'Install Click-Lock Vinyl Plank',lvl:'Intermediate',time:'1 day per room',permit:false,
+ blurb:'A floating floor goes over most existing hard surfaces with no glue or nails.',
+ vq:'how to install luxury vinyl plank flooring',
+ tools:['Tapping block and pull bar','Rubber mallet','Utility knife and straightedge','Spacers','Undercut / jamb saw','6 ft straightedge'],
+ mats:['Vinyl plank (room sq ft + 10% waste)','Underlayment (if not pre-attached)','Transition strips','Floor leveler (if needed)'],
+ safety:'Old sheet vinyl and black mastic can contain asbestos. Do not sand or scrape it; float over it or have it tested.',
+ steps:[
+  ['Check the subfloor','Flatten any high spots and fill low spots so the floor is within 3/16 in over 10 ft (or as the manufacturer specifies).'],
+  ['Lay underlayment','Roll out underlayment with seams butted and taped, unless your planks have it attached.'],
+  ['Start the first row','Start along the longest straight wall, tongue toward the wall, with spacers leaving an expansion gap.'],
+  ['Stagger the seams','Start each new row with the cut-off from the previous one, keeping end joints at least 6 in apart.'],
+  ['Fill the room','Angle, click and tap each plank. Rip the last row to width, keeping the expansion gap.'],
+  ['Install base and transitions','Remove the spacers and cover the gap with baseboard or quarter-round. Nail it to the wall, never to the floor.'],
+ ],
+ code:[['Manufacturer','Installation instructions are enforceable as part of the product listing and warranty: follow expansion gaps and maximum run lengths.'],['IRC R302.12','Do not seal off required draftstopping or fireblocking when removing old floors in multi-story framing.']]},
+
+{id:'doors',name:'Doors',scene:'door',title:'Hang a Prehung Interior Door',lvl:'Intermediate',time:'2–3 hrs',permit:false,
+ blurb:'Set, shim and plumb a door so it swings freely and latches every time.',
+ vq:'how to install prehung interior door',
+ tools:['4 ft and 6 ft levels','Finish nailer or hammer and nail set','Utility knife','Drill','Tape measure'],
+ mats:['Prehung door unit','Composite shims','2½ in finish nails','3 in screws (hinge side)','Casing trim'],
+ safety:'Doors are heavy and awkward. Get a helper to tip the unit into the opening.',
+ steps:[
+  ['Check the rough opening','It should be the door width + 2 in and the door height + 2½ in, with a level floor.'],
+  ['Set the unit','Tip the frame in, centered in the opening and flush with both wall faces.'],
+  ['Shim the hinge side plumb','Shim behind each hinge until the hinge jamb is perfectly plumb, then nail through the shims.'],
+  ['Close the door and check','Leave the shipping clips on until the hinge side is fixed, then cut them and swing the door.'],
+  ['Even the reveal','Shim the latch and head jambs for an even ⅛ in gap all around. Replace one hinge screw per hinge with a 3 in screw into the stud.'],
+  ['Install casing','Score off the shims, then nail the casing with a 3/16 in reveal from the jamb edge.'],
+ ],
+ code:[['IRC R311.2','At least one exterior egress door: 32 in clear width and 78 in high.'],['IRC R302.5.1','A door from the garage into the house must be solid wood, steel 1⅜ in or thicker, or 20-minute rated. Many editions also require self-closing.'],['IRC R308.4','Glass in or next to doors must be safety glazing.']]},
+
+{id:'windows',name:'Windows',scene:'window',title:'Install a Replacement Window',lvl:'Advanced',time:'3–4 hrs per window',permit:'Often',
+ blurb:'Fit a new insert window into the existing frame and seal it against air and water.',
+ vq:'how to install replacement window insert',
+ tools:['Tape measure','Level','Pry bar and putty knife','Drill/driver','Caulk gun','Foam gun'],
+ mats:['Replacement window (ordered to smallest measurement minus ¼ in)','Composite shims','Low-expansion window foam','Exterior sealant','Interior trim stops'],
+ safety:'Work from inside when possible. On upper floors, never lean out to work; use proper scaffolding or hire out the exterior.',
+ steps:[
+  ['Measure three times','Measure the width at the top, middle and bottom, and the height at the left, center and right. Use the smallest of each.'],
+  ['Remove the old sashes','Pry off the interior stops, remove the sashes and parting beads, and clean out the old frame.'],
+  ['Seal the opening','Run a continuous bead of sealant on the exterior blind stop and the sill.'],
+  ['Set the new window','Press the unit into the sealant from inside, centered in the opening.'],
+  ['Shim, fasten, insulate','Shim at the fastener points until it is level and square (diagonals equal), screw through the jamb, and fill the gaps with low-expansion foam.'],
+  ['Trim and caulk','Reinstall the interior stops and caulk the exterior perimeter.'],
+ ],
+ code:[['IRC R310','Sleeping-room egress: 5.7 sq ft net opening (5.0 on grade floor), 24 in min height, 20 in min width, sill no more than 44 in above floor. Do not reduce an existing egress opening.'],['IRC R308.4','Safety glass is required near doors, tubs and showers, and in large low panes.'],['IECC / IRC N1102','The new window must meet the U-factor for your climate zone.'],['IRC R312.2','Window-opening control is required where the sill is under 24 in and more than 72 in above outside grade.']]},
+
+{id:'cabinets',name:'Cabinets',scene:'cab',title:'Install Kitchen Cabinets',lvl:'Advanced',time:'1–2 days',permit:false,
+ blurb:'Hang the uppers first, then set level base cabinets ready for countertops.',
+ vq:'how to install kitchen cabinets diy',
+ tools:['4 ft level or laser','Stud finder','Drill/driver','Clamps','Jigsaw / hole saw for plumbing'],
+ mats:['Cabinets','2½ in cabinet screws','Shims','1×4 ledger board','Filler strips'],
+ safety:'Wall cabinets loaded with dishes weigh hundreds of pounds. Screw into studs only, never into drywall anchors.',
+ steps:[
+  ['Mark level reference lines','Find the floor high point. From it, mark 34½ in for the base tops and 54 in for the bottoms of the uppers.'],
+  ['Locate studs','Mark every stud center above and below the lines.'],
+  ['Screw on a ledger','Screw a straight 1×4 temporarily to the studs along the 54 in line to rest the uppers on.'],
+  ['Hang the uppers','Start in the corner. Rest each cabinet on the ledger and screw it through the hanging rail into the studs.'],
+  ['Set the bases','Starting in the corner, shim each base to level front-to-back and side-to-side, then screw it to the studs.'],
+  ['Join face frames','Clamp neighboring cabinets flush, pre-drill, and screw the face frames together.'],
+ ],
+ code:[['IRC M1901 / listing','Keep about 30 in between a cooktop and unprotected cabinets above it (24 in with protection, if the range listing allows).'],['NEC 210.52(C)','Plan countertop receptacles before the bases go in (see Countertops).']]},
+
+{id:'countertops',name:'Countertops',scene:'counter',title:'Install a Butcher-Block Countertop',lvl:'Intermediate',time:'1 day + finish cure',permit:false,
+ blurb:'A solid-wood top you can cut, finish and install yourself.',
+ vq:'how to install butcher block countertops',
+ tools:['Circular saw with fine blade + straightedge','Jigsaw','Drill','Level','Random-orbit sander'],
+ mats:['Butcher-block slab','Food-safe oil or waterborne poly','Slotted mounting brackets or figure-8 fasteners','Silicone caulk'],
+ safety:'Slabs are heavy. Use two people, and support both ends of a cut so the blade does not pinch.',
+ steps:[
+  ['Check the cabinets','Make sure the bases are level in both directions. Shim now; the wood will not hide dips.'],
+  ['Cut to length','Allow a 1 in front overhang and 1/8 in gap at walls. Cut with a fine blade, good face down.'],
+  ['Cut the sink opening','Trace the sink template, drill corner holes, and cut with a jigsaw.'],
+  ['Seal every face','Finish the top, bottom, edges and cutout equally so the slab does not cup.'],
+  ['Fasten with slotted hardware','Attach through slotted holes so the wood can expand and contract with the seasons.'],
+  ['Caulk the backsplash joint','Run a thin bead of silicone where the counter meets the wall.'],
+ ],
+ code:[['NEC 210.52(C)','Wall countertops: a receptacle so that no point along the wall is more than 24 in from one; each counter space 12 in or wider needs one.'],['NEC 406.5(E)','Receptacles must not be installed face-up in a countertop.'],['NEC 210.8(A)(6)','All kitchen countertop receptacles need GFCI protection.']]},
+
+{id:'shelving',name:'Shelving',scene:'shelf',title:'Mount Heavy-Duty Wall Shelves',lvl:'Beginner',time:'1 hr',permit:false,
+ blurb:'Anchor shelf brackets into studs so they hold books, tools or pantry goods.',
+ vq:'how to hang shelves into studs',
+ tools:['Stud finder','Level','Drill and bits','Tape measure','Pencil'],
+ mats:['Brackets rated for the load','#10 × 2½ in screws (into studs)','Shelf board','Rated toggle anchors (if a stud is unavailable)'],
+ safety:'Check for wires before drilling. Cables usually run straight up or down from outlets and switches.',
+ steps:[
+  ['Find the studs','Locate and mark stud centers, usually 16 in apart. Confirm with a small finish nail.'],
+  ['Draw a level line','Mark the shelf height with a level across all the brackets.'],
+  ['Drill pilot holes','Pre-drill at each bracket hole on the stud marks.'],
+  ['Mount the brackets','Drive screws snug. Every bracket should hit a stud; use rated toggles only for light loads.'],
+  ['Set the shelf','Place the board and screw it to the brackets from below.'],
+  ['Load it gradually','Add weight a little at a time and watch for any sag or pull-out.'],
+ ],
+ code:[['No permit','Shelving is not regulated by building code, but follow bracket load ratings.'],['ASTM F2057','Anchor tall freestanding furniture and shelving units to the wall to prevent tip-over.']]},
+
+{id:'exterior',name:'Exterior',scene:'deck',title:'Replace a Rotted Deck Board',lvl:'Beginner',time:'1–2 hrs',permit:false,
+ blurb:'Swap out soft or split boards before someone puts a foot through them.',
+ vq:'how to replace deck boards',
+ tools:['Pry bar / cat\'s paw','Drill/driver','Circular saw','Awl or screwdriver (probing)','Speed square'],
+ mats:['Pressure-treated or composite deck board','Coated or stainless deck screws','End-cut preservative'],
+ safety:'If joists, beams or the ledger are soft, stop. Structural rot needs a full repair or a professional.',
+ steps:[
+  ['Identify the bad board','Look for boards that are soft, split or cupped, or that flex when you step on them.'],
+  ['Remove it','Back out the screws or pry up the nails and lift the board off.'],
+  ['Probe the joists','Push an awl into the tops of the exposed joists. If it sinks more than ⅛ in, the joist needs repair.'],
+  ['Cut and set the new board','Cut to length with ends centered on joists. Place it bark side (crown) up.'],
+  ['Fasten','Drive 2 screws per joist, ¾ in from the edges, using fasteners rated for treated lumber.'],
+  ['Gap and seal','Keep about ⅛ in between boards for drainage and brush preservative on cut ends.'],
+ ],
+ code:[['IRC R317.3','Fasteners in treated lumber must be hot-dip galvanized, stainless steel, silicon bronze or copper.'],['IRC R507','Deck board span limits (typically 16 in o.c. for 5/4 boards, 12 in when run diagonally).'],['IRC R312','Guards are required where the deck is more than 30 in above grade: 36 in high, with openings that will not pass a 4 in sphere.']]},
+
+{id:'heating',name:'Heating',scene:'heat',title:'Install a Programmable Thermostat',lvl:'Beginner',time:'45 min',permit:false,
+ blurb:'Upgrade a 24-volt thermostat and cut heating bills with a schedule.',
+ vq:'how to install a smart thermostat wiring',
+ tools:['Screwdriver set','Drill (for new anchors)','Level','Phone camera','Small tape for labels'],
+ mats:['Thermostat compatible with your system (check gas/electric/heat pump)','C-wire adapter if no common wire','Wall plate to cover old marks'],
+ safety:'Only for low-voltage (24 V) systems. If the old thermostat has thick wires labeled 120/240 V (baseboard heat), it needs a line-voltage model.',
+ steps:[
+  ['Shut off the furnace','Turn off power at the furnace service switch or breaker.'],
+  ['Photograph the wiring','Remove the old cover and take a clear photo of which wire goes to each terminal.'],
+  ['Label the wires','Tag each wire with its terminal letter (R, W, Y, G, C) before disconnecting it.'],
+  ['Mount the new base','Feed the wires through, level the base and screw it to the wall.'],
+  ['Connect the terminals','Insert each wire into the matching terminal on the new base.'],
+  ['Attach and configure','Snap on the thermostat, restore power, and set the system type and schedule.'],
+ ],
+ code:[['NEC 725','Thermostat wiring is Class 2 low-voltage and does not need a permit in most areas.'],['Mercury','Old thermostats with glass bulbs contain mercury. Take them to a hazardous-waste drop-off; never put them in the trash.'],['IECC R403.1','New and replacement systems need a programmable thermostat.']]},
+
+{id:'ventilation',name:'Ventilation',scene:'vent',title:'Replace a Bathroom Exhaust Fan',lvl:'Intermediate',time:'2–3 hrs',permit:'Often',
+ blurb:'Clear steam and prevent mold with a quiet fan ducted to the outdoors.',
+ vq:'how to replace bathroom exhaust fan',
+ tools:['Voltage tester','Drywall saw','Drill/driver','Tin snips','Foil tape'],
+ mats:['Fan rated 50 cfm or more (HVI certified, sized 1 cfm per sq ft)','4 in insulated duct','Roof or wall cap with damper','Wire connectors'],
+ safety:'Cut power at the breaker and verify the wires are dead. Attics are hot; work early in the day and step only on joists.',
+ steps:[
+  ['Shut off the power','Turn off the breaker and verify with a tester at the fan.'],
+  ['Set the new housing','Remove the old fan, enlarge the opening if needed, and fasten the housing to a joist.'],
+  ['Run the duct','Connect insulated duct with foil tape. Keep it as short and straight as possible.'],
+  ['Terminate outdoors','Connect to a roof or wall cap with a backdraft damper. Never stop in the attic or at a soffit vent.'],
+  ['Wire and install the grille','Connect the wires (black–black, white–white, ground–ground), plug in the motor, and attach the grille.'],
+  ['Test airflow','Turn it on and hold a tissue to the grille. It should be pulled firmly against it.'],
+ ],
+ code:[['IRC M1505.4','Bathrooms need 50 cfm intermittent or 20 cfm continuous exhaust.'],['IRC M1501.1','Exhaust must discharge outdoors, not into an attic, soffit, ridge vent or crawlspace.'],['IRC R303.3','A bathroom needs either a 3 sq ft window (half openable) or mechanical exhaust.'],['NEC 210.8','Fans above showers or tubs must be listed for the location and may need GFCI protection.']]},
+
+{id:'structure',name:'Structure',scene:'frame',title:'Frame a Non-Load-Bearing Wall',lvl:'Advanced',time:'1 day',permit:'Yes',
+ blurb:'Divide a room with a partition wall built from 2×4 studs.',
+ vq:'how to frame a non load bearing wall',
+ tools:['Chalk line','Laser level or plumb bob','Circular saw / miter saw','Framing nailer or hammer','Speed square'],
+ mats:['2×4 studs and plates','Pressure-treated 2×4 for a concrete floor','16d and 8d nails or 3 in screws','Concrete screws / powder-actuated pins (slab)','Fireblocking material'],
+ safety:'Never remove or cut into an existing wall without confirming it is not load-bearing. If in doubt, consult a structural engineer.',
+ steps:[
+  ['Snap layout lines','Snap the wall location on the floor, then transfer it to the ceiling with a plumb bob or laser.'],
+  ['Cut the plates','Cut top and bottom plates to length. Use pressure-treated lumber where the plate sits on concrete.'],
+  ['Mark stud layout','Lay the plates together and mark studs every 16 in on center.'],
+  ['Install the studs','Fasten the plates to the floor and ceiling joists or blocking, then toenail studs in on each mark.'],
+  ['Check plumb','Check each stud with a level and correct before fastening.'],
+  ['Add blocking and fireblocking','Add blocking where shelves or grab bars will mount, and fireblocking where required.'],
+ ],
+ code:[['IRC R602.3','Studs at 16 in or 24 in on center; 2×4 interior non-bearing walls may be up to 14 ft tall.'],['IRC R602.6','Drilled holes no more than 60% of stud width in non-bearing walls (40% in bearing walls); notches limited to 25% (bearing) or 40% (non-bearing).'],['IRC R302.11','Fireblocking is required at ceiling and floor levels and at 10 ft intervals.'],['IRC R317.1','Wood in direct contact with concrete must be pressure-treated or naturally durable.'],['Permit','New walls generally require a permit, especially if they create a bedroom (egress, smoke alarms).']]},
+];
+
+// ---------- photos (Wikimedia Commons, credited) ----------
+// Hotlinked from Wikimedia Commons; only on the website (Claude's viewer blocks outside images).
+const PHOTOS=window.LP_CONFIG?{"air-conditioning": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Condenser_unit_for_central_air_conditioning.JPG/500px-Condenser_unit_for_central_air_conditioning.JPG", "cap": "Outdoor condenser unit for a central air system", "credit": "H Padleckas · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Condenser_unit_for_central_air_conditioning.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_%289328745%29.jpg/500px-HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_%289328745%29.jpg", "cap": "Technicians servicing HVAC equipment", "credit": "U.S. Air Force photo by Andrea Jenkins · Public domain", "page": "https://commons.wikimedia.org/wiki/File:HVAC_Techs_Bring_Lasting_Impact_to_rural_Panamanian_Clinic_(9328745).jpg"}], "electrical": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Residential_GFCI_receptacle.jpg/500px-Residential_GFCI_receptacle.jpg", "cap": "A residential GFCI receptacle with TEST and RESET buttons", "credit": "Ben Kurtovic · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Residential_GFCI_receptacle.jpg"}], "plumbing": [{"src": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Plumber_under_kitchen_sink.jpg", "cap": "Working under a kitchen sink", "credit": "MoToMo · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Plumber_under_kitchen_sink.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/247_Home_Rescue_back_of_sink_plumbing.jpg/500px-247_Home_Rescue_back_of_sink_plumbing.jpg", "cap": "Supply lines and drain behind a sink", "credit": "247homerescue · CC0", "page": "https://commons.wikimedia.org/wiki/File:247_Home_Rescue_back_of_sink_plumbing.jpg"}], "painting": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Rolling_in_the_Middle_%2834571931105%29_%28cropped%29.jpg/500px-Rolling_in_the_Middle_%2834571931105%29_%28cropped%29.jpg", "cap": "Rolling paint across the middle of a wall", "credit": "Michael Coghlan from Adelaide, Australia · CC BY-SA 2.0", "page": "https://commons.wikimedia.org/wiki/File:Rolling_in_the_Middle_(34571931105)_(cropped).jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Paint_roller_4.jpg/500px-Paint_roller_4.jpg", "cap": "Paint roller", "credit": "Michael Cory · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Paint_roller_4.jpg"}], "wallpaper": [{"src": "https://upload.wikimedia.org/wikipedia/commons/1/18/5713696880_wallpaper_hanging.jpg", "cap": "Hanging a strip of wallpaper", "credit": "Rictor Norton & David Allen from London, United Kingdom · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:5713696880_wallpaper_hanging.jpg"}], "walls-ceilings": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Drywall_and_tools.jpg/500px-Drywall_and_tools.jpg", "cap": "Drywall sheets and taping tools", "credit": "Timothyjosephwood · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Drywall_and_tools.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Drywall_installation_in_unidentified_home_%2810926427913%29.jpg/500px-Drywall_installation_in_unidentified_home_%2810926427913%29.jpg", "cap": "Drywall installation in a home", "credit": "City of Boston Archives from West Roxbury, United States · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Drywall_installation_in_unidentified_home_(10926427913).jpg"}], "flooring": [{"src": "https://upload.wikimedia.org/wikipedia/commons/7/7a/2021_Popular_Vinyl_Plank_Flooring_Color.jpg", "cap": "Vinyl plank flooring", "credit": "BestRugPrices · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:2021_Popular_Vinyl_Plank_Flooring_Color.jpg"}], "windows": [{"src": "https://upload.wikimedia.org/wikipedia/commons/7/75/Picture_window_installation_in_Winnipeg.jpg", "cap": "A picture window being installed", "credit": "Alisher Akilov · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Picture_window_installation_in_Winnipeg.jpg"}], "cabinets": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kitchen_cabinet_installation.jpg/500px-Kitchen_cabinet_installation.jpg", "cap": "Kitchen cabinets being installed", "credit": "Akpeski · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_cabinet_installation.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Kitchen_cabinet_installations.jpg/500px-Kitchen_cabinet_installations.jpg", "cap": "Cabinet installation in progress", "credit": "Akpeski · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_cabinet_installations.jpg"}], "countertops": [{"src": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Kitchen_renovation_9a_measuring_prior_to_cutting_laminate_countertop_board.JPG", "cap": "Measuring a laminate countertop before cutting", "credit": "Tomwsulcer · CC0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_renovation_9a_measuring_prior_to_cutting_laminate_countertop_board.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg/500px-Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg", "cap": "Fitting a stone countertop", "credit": "Donovan Nimmo · CC0", "page": "https://commons.wikimedia.org/wiki/File:Kitchen_Countertop_Installation_%26_Custom_Stone_Fitting.jpg"}], "shelving": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg/500px-Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg", "cap": "Wooden shelf on wall brackets", "credit": "Cupofjoy · CC0", "page": "https://commons.wikimedia.org/wiki/File:Wooden_shelf_with_wooden_brackets_affixed_to_wall_face_on.jpg"}], "heating": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Honeywell_thermostat_open.jpg/500px-Honeywell_thermostat_open.jpg", "cap": "Thermostat with the cover off, showing the wiring terminals", "credit": "Vincent de Groot - http://www.videgro.net · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Honeywell_thermostat_open.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg/500px-Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg", "cap": "Setting a digital thermostat", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Setting_the_temperature_on_a_digital_thermostat_while_standing_by_a_wall_in_the_home_during_an_indoor_activity.jpg"}], "ventilation": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Bathroom_exhaust_fan.jpg/500px-Bathroom_exhaust_fan.jpg", "cap": "Bathroom exhaust fan", "credit": "Antonio Mette · CC BY 3.0", "page": "https://commons.wikimedia.org/wiki/File:Bathroom_exhaust_fan.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Exhaust_fan_4.jpg/500px-Exhaust_fan_4.jpg", "cap": "Exhaust fan housing", "credit": "Antonio Mette · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Exhaust_fan_4.jpg"}], "generator-inlet": [{"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Portable_electrical_generator_angle.jpg/500px-Portable_electrical_generator_angle.jpg", "cap": "Portable generator", "credit": "Unknown author · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Portable_electrical_generator_angle.jpg"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Square_D_20-Amp_Double-Pole_Breaker.JPG/500px-Square_D_20-Amp_Double-Pole_Breaker.JPG", "cap": "A 2-pole (double-pole) breaker", "credit": "CyberXRef · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Square_D_20-Amp_Double-Pole_Breaker.JPG"}, {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg/500px-Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg", "cap": "Inside a residential breaker panel", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg"}]}:{};
+if(window.LP_CONFIG){const g=D.find(t=>t.id==='generator-inlet'),SP={"0": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Gasoline-powered_portable_generators_%285884715763%29.jpg/500px-Gasoline-powered_portable_generators_%285884715763%29.jpg", "cap": "Portable gasoline generators", "credit": "National Institute of Standards and Technology · Public domain", "page": "https://commons.wikimedia.org/wiki/File:Gasoline-powered_portable_generators_(5884715763).jpg"}, "1": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Voltage_test_light_active.jpg/500px-Voltage_test_light_active.jpg", "cap": "A voltage tester lit on a live circuit: always test before touching", "credit": "Simon A. Eugster · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Voltage_test_light_active.jpg"}, "3": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Black_Electrical_Conduits.jpg/500px-Black_Electrical_Conduits.jpg", "cap": "Electrical conduit runs on a wall", "credit": "Johnnybam · CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Black_Electrical_Conduits.jpg"}, "4": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Square_D_20-Amp_Double-Pole_Breaker.JPG/500px-Square_D_20-Amp_Double-Pole_Breaker.JPG", "cap": "A 2-pole breaker like the one used for the generator feed", "credit": "CyberXRef · CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Square_D_20-Amp_Double-Pole_Breaker.JPG"}, "5": {"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg/500px-Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg", "cap": "Inside a breaker panel: neutral and ground bars along the sides", "credit": "Shixart1985 · CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Electrical_panel_with_exposed_wiring_in_a_residential_setting.jpg"}};
+ for(const i in SP){const st=g.steps[i];st[3]=Object.assign(st[3]||{},{photo:SP[i].src,cap:SP[i].cap,credit:`<a href="${SP[i].page}" target="_blank" rel="noopener">${SP[i].credit}</a>`})}}
+// ---------- state ----------
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let done=store.get('lp-done')||{};
+// ---------- regions & local code ----------
+const gs=q=>'https://www.google.com/search?q='+encodeURIComponent(q);
+const ICC_IRC='https://codes.iccsafe.org/content/IRC2021P2', ICC='https://codes.iccsafe.org/', NEC='https://www.nfpa.org/70',
+  IAPMO='https://iapmo.org/read-iapmo-codes-online', AWC='https://awc.org/code-adoption-map/',
+  NRC='https://nrc.canada.ca/en/certifications-evaluations-standards/codes-canada/codes-canada-publications',
+  UKAD='https://www.gov.uk/government/collections/approved-documents', NCC='https://ncc.abcb.gov.au/';
+const SUBS={
+  US:['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
+  CA:['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+  UK:['England','Wales','Scotland','Northern Ireland'],
+  AU:['Australian Capital Territory','New South Wales','Northern Territory','Queensland','South Australia','Tasmania','Victoria','Western Australia'],
+  XX:[]
+};
+const COUNTRIES=[['US','United States'],['CA','Canada'],['UK','United Kingdom'],['AU','Australia'],['XX','Other / international']];
+const TZ={'America/Los_Angeles':['US','California'],'America/New_York':['US','New York'],'America/Chicago':['US','Illinois'],'America/Denver':['US','Colorado'],
+  'America/Phoenix':['US','Arizona'],'America/Anchorage':['US','Alaska'],'Pacific/Honolulu':['US','Hawaii'],'America/Detroit':['US','Michigan'],'America/Boise':['US','Idaho'],
+  'America/Indiana/Indianapolis':['US','Indiana'],'America/Kentucky/Louisville':['US','Kentucky'],'America/Puerto_Rico':['XX',''],
+  'America/Toronto':['CA','Ontario'],'America/Vancouver':['CA','British Columbia'],'America/Edmonton':['CA','Alberta'],'America/Winnipeg':['CA','Manitoba'],
+  'America/Regina':['CA','Saskatchewan'],'America/Halifax':['CA','Nova Scotia'],'America/St_Johns':['CA','Newfoundland and Labrador'],'America/Montreal':['CA','Quebec'],
+  'Europe/London':['UK','England'],'Australia/Sydney':['AU','New South Wales'],'Australia/Melbourne':['AU','Victoria'],'Australia/Brisbane':['AU','Queensland'],
+  'Australia/Perth':['AU','Western Australia'],'Australia/Adelaide':['AU','South Australia'],'Australia/Hobart':['AU','Tasmania'],'Australia/Darwin':['AU','Northern Territory']};
+function guessRegion(){
+  try{const z=Intl.DateTimeFormat().resolvedOptions().timeZone;if(TZ[z])return{c:TZ[z][0],s:TZ[z][1],auto:true};
+    if(/^America\//.test(z))return{c:'US',s:'',auto:true}; if(/^Australia\//.test(z))return{c:'AU',s:'',auto:true}}catch(e){}
+  return{c:'US',s:'',auto:true};
+}
+let region=store.get('lp-region')||guessRegion();
+const where=()=>region.s||(COUNTRIES.find(c=>c[0]===region.c)||[])[1]||'your area';
+
+function codesFor(){
+  const s=region.s, c=region.c;
+  if(c==='US'){
+    const st=s||'your state';
+    const r={intl:false,
+      bldg:{name:`${s?s+' residential code':'State residential code'} (based on the IRC)`,links:[['Read the IRC free (ICC)',ICC_IRC],[`Edition ${s||'your state'} adopted`,s?gs(`${s} adopted residential building code edition`):AWC]]},
+      elec:{name:`National Electrical Code (NFPA 70) as adopted by ${st}`,links:[['Read the NEC free (NFPA)',NEC],['NEC edition in force',gs(`${s} NEC edition adopted electrical code`)]]},
+      plumb:{name:`${s?s+' plumbing code':'State plumbing code'} (IPC or UPC)`,links:[['IPC / IRC plumbing (ICC)',ICC],['UPC (IAPMO)',IAPMO],['Which one applies',gs(`${s} plumbing code adopted IPC or UPC`)]]},
+      mech:{name:'IRC mechanical chapters / IMC as adopted',links:[['ICC Digital Codes',ICC]]},
+      epa:{name:'U.S. EPA rules (apply nationwide)',links:[['EPA Section 608 (refrigerants)','https://www.epa.gov/section608'],['EPA lead-safe renovation','https://www.epa.gov/lead']]},
+      adopt:['Code adoption map by state',AWC], permit:['Find your local building department',gs(`${s} local building department residential permit`)],notes:{}};
+    if(s==='California'){
+      Object.assign(r,{bldg:{name:'California Residential Code (Title 24, Part 2.5)',links:[['CA Building Standards Commission','https://www.dgs.ca.gov/BSC'],['Base model code: IRC',ICC_IRC]]},
+        elec:{name:'California Electrical Code (Title 24, Part 3, based on the NEC)',links:[['CA Building Standards Commission','https://www.dgs.ca.gov/BSC'],['Base model code: NEC',NEC]]},
+        plumb:{name:'California Plumbing Code (Title 24, Part 5, based on the UPC)',links:[['Read the UPC (IAPMO)',IAPMO],['CA Building Standards Commission','https://www.dgs.ca.gov/BSC']]},
+        mech:{name:'California Mechanical Code (Title 24, Part 4) and Energy Code (Part 6)',links:[['CA Building Standards Commission','https://www.dgs.ca.gov/BSC']]}});
+    }
+    if(s==='Florida'){
+      Object.assign(r,{bldg:{name:'Florida Building Code – Residential',links:[['Florida Building Commission','https://www.floridabuilding.org']]},
+        plumb:{name:'Florida Building Code – Plumbing (based on the IPC)',links:[['Florida Building Commission','https://www.floridabuilding.org']]},
+        mech:{name:'Florida Building Code – Mechanical / Energy Conservation',links:[['Florida Building Commission','https://www.floridabuilding.org']]}});
+    }
+    return r;
+  }
+  if(c==='CA'){
+    const own={Ontario:['Ontario Building Code','https://www.ontario.ca/page/ontarios-building-code'],'British Columbia':['British Columbia Building Code','https://www2.gov.bc.ca/gov/content/industry/construction-industry/building-codes-standards'],
+      Quebec:['Quebec Construction Code, Chapter I (Building)',gs('Quebec Construction Code Chapter I Building RBQ')],Alberta:['National Building Code – Alberta Edition',gs('National Building Code Alberta Edition')]}[s];
+    return{intl:true,
+      bldg:{name:own?own[0]:'National Building Code of Canada, Part 9 (Housing and Small Buildings)',links:own?[[own[0],own[1]],['National codes (NRC)',NRC]]:[['National codes, free (NRC)',NRC]]},
+      elec:{name:'Canadian Electrical Code, Part I (CSA C22.1)'+(s?` with ${s} amendments`:''),links:[['Find the CE Code',gs(`${s} Canadian Electrical Code CSA C22.1 homeowner permit`)]]},
+      plumb:{name:own&&s!=='Alberta'?own[0]+' (plumbing part)':'National Plumbing Code of Canada',links:[['National codes, free (NRC)',NRC]]},
+      mech:{name:'National Building Code Part 9 ventilation & heating, plus provincial gas codes',links:[['National codes (NRC)',NRC]]},
+      epa:{name:'Federal Halocarbon Regulations & provincial lead guidance',links:[['Search requirements',gs(`${s} refrigerant halocarbon certificate homeowner`)]]},
+      adopt:['Codes Canada publications',NRC], permit:['Find your municipal building department',gs(`${s} municipal building permit homeowner`)],
+      notes:{electrical:`Most provinces require a homeowner electrical permit and inspection for wiring changes${s==='Quebec'?'; in Quebec, electrical work is restricted to licensed electricians':''}.`,
+        plumbing:'Many municipalities require a plumbing permit for drain and supply changes; like-for-like trap replacement usually does not.'}};
+  }
+  if(c==='UK'){
+    const nat={England:['Building Regulations – Approved Documents (England)',UKAD],Wales:['Building Regulations – Approved Documents (Wales)',gs('Wales building regulations approved documents gov.wales')],
+      Scotland:['Building Standards Technical Handbook – Domestic',gs('Scotland building standards technical handbook domestic gov.scot')],
+      'Northern Ireland':['Building Regulations (NI) Technical Booklets',gs('Northern Ireland building regulations technical booklets')]}[s||'England'];
+    return{intl:true,
+      bldg:{name:nat[0],links:[[nat[0],nat[1]]]},
+      elec:{name:'BS 7671 Wiring Regulations'+((s||'England')==='England'||s==='Wales'?' + Approved Document P':''),links:[['Approved Document P',UKAD],['About BS 7671',gs('BS 7671 wiring regulations homeowner')]]},
+      plumb:{name:'Approved Documents G & H + Water Supply (Water Fittings) Regulations 1999',links:[['Approved Documents',UKAD]]},
+      mech:{name:'Approved Documents F (ventilation) & J (heating); gas work by Gas Safe engineers only',links:[['Approved Documents',UKAD],['Gas Safe Register','https://www.gassaferegister.co.uk/']]},
+      epa:{name:'F-gas regulations (refrigerants)',links:[['F-gas guidance',gs('UK F-gas regulations air conditioning certification')]]},
+      adopt:['All Approved Documents',UKAD], permit:['Find your local authority building control',gs('local authority building control '+(s||'England'))],
+      notes:{electrical:'Under Part P, new circuits, consumer-unit work and work in bathroom zones are notifiable: use a registered electrician or apply to building control. Like-for-like socket replacement is not notifiable.',
+        heating:'Any work on gas appliances must be done by a Gas Safe registered engineer. Low-voltage thermostat swaps are fine.',
+        'air-conditioning':'Refrigerant work requires an F-gas certified engineer.'}};
+  }
+  if(c==='AU'){
+    return{intl:true,
+      bldg:{name:'National Construction Code Vol. Two + ABCB Housing Provisions'+(s?` (${s} variations)`:''),links:[['Read the NCC free',NCC]]},
+      elec:{name:'AS/NZS 3000 Wiring Rules',links:[['DIY electrical rules',gs(`${s} DIY electrical work law licensed electrician`)]]},
+      plumb:{name:'Plumbing Code of Australia (NCC Vol. Three) + AS/NZS 3500',links:[['Read the NCC free',NCC]]},
+      mech:{name:'NCC energy & ventilation provisions; ARCtick licence for refrigerant work',links:[['Read the NCC free',NCC],['ARCtick','https://www.arctick.org/']]},
+      epa:{name:'Ozone Protection and Synthetic Greenhouse Gas Management Act',links:[['ARCtick','https://www.arctick.org/']]},
+      adopt:['National Construction Code',NCC], permit:['Find your council or building surveyor',gs(`${s} council building approval renovation`)],
+      notes:{electrical:'Stop: in every Australian state and territory it is illegal for an unlicensed person to do fixed electrical wiring, including replacing an outlet. Hire a licensed electrician.',
+        plumbing:'Most plumbing and drainage work must be done by a licensed plumber in Australia. Check what your state allows homeowners to do.',
+        ventilation:'Wiring a new fan is licensed electrical work in Australia; you can do the ducting and an electrician makes the connection.',
+        'air-conditioning':'Installing or opening split-system refrigerant lines requires an ARCtick licence. Cleaning and filter changes are fine.'}};
+  }
+  return{intl:true,
+    bldg:{name:'Your national building regulations (US model code shown for reference)',links:[['International Residential Code (ICC)',ICC_IRC],['Find your national code',gs('national residential building code')]]},
+    elec:{name:'Your national wiring regulations (often IEC 60364-based)',links:[['Search your wiring rules',gs('national electrical wiring regulations homeowner')]]},
+    plumb:{name:'Your national plumbing regulations',links:[['Search your plumbing rules',gs('national plumbing code residential')]]},
+    mech:{name:'Your national ventilation & heating rules',links:[['ICC Digital Codes',ICC]]},
+    epa:{name:'Your national refrigerant & lead rules',links:[]},
+    adopt:['ICC Digital Codes',ICC], permit:['Find your local building authority',gs('local building permit authority')],notes:{}};
+}
+const famOf=ref=>/^NEC/.test(ref)?'elec':/^IPC/.test(ref)?'plumb':/^EPA/.test(ref)?'epa':/^(IRC M|IECC|IRC N)/.test(ref)?'mech':/^(IRC|Permit|Manufacturer)/.test(ref)?'bldg':null;
+const FAMNAME={bldg:'Building',elec:'Electrical',plumb:'Plumbing',mech:'Mechanical & energy',epa:'Environmental'};
+const famOfTopic={electrical:'elec',plumbing:'plumb','air-conditioning':'mech',heating:'mech',ventilation:'mech'};
+
+function regionBar(){
+  const el=$('#region');
+  el.innerHTML=`<span class="rlab">Your code region</span>
+   <select id="rc" aria-label="Country">${COUNTRIES.map(c=>`<option value="${c[0]}"${c[0]===region.c?' selected':''}>${c[1]}</option>`).join('')}</select>
+   ${SUBS[region.c].length?`<select id="rs" aria-label="State or province"><option value="">${region.c==='US'?'Choose state':region.c==='CA'?'Choose province':region.c==='UK'?'Choose nation':'Choose state'}</option>${SUBS[region.c].map(s=>`<option${s===region.s?' selected':''}>${s}</option>`).join('')}</select>`:''}
+   ${region.auto?'<span class="rhint">Guessed from your time zone. Change it if it is wrong.</span>':''}`;
+  $('#rc').onchange=e=>{region={c:e.target.value,s:''};store.set('lp-region',region);regionBar();route()};
+  const rs=$('#rs'); if(rs) rs.onchange=e=>{region={c:region.c,s:e.target.value};store.set('lp-region',region);regionBar();route()};
+}
+
+function localCode(t){
+  const R=codesFor(), fams=['bldg'];
+  t.code.forEach(c=>{const f=famOf(c[0]);if(f&&!fams.includes(f))fams.push(f)});
+  const tf=famOfTopic[t.nk||t.id]; if(tf&&!fams.includes(tf)) fams.splice(1,0,tf);
+  const note=R.notes[t.nk||t.id];
+  return `${note?`<div class="safety warn" style="display:none"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="var(--accent)"/><path d="M14 7v9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="20.5" r="1.7" fill="#fff"/></svg><div><b>Rule in ${esc(where())}</b><p>${note}</p></div></div>`:''}
+  <div class="local">
+   <div class="local-head"><div><div class="box-title">Codes that apply in ${esc(where())}</div><p>${R.intl?'Section numbers in the table below come from the U.S. model codes. Use them to find the matching rule in your code.':'Most states adopt these model codes with local changes, often a few years after publication.'}</p></div>
+    <button class="btn" id="chg" type="button">Change region</button></div>
+   <div class="local-grid">${fams.map(f=>R[f]?`<div class="lc"><span class="kicker">${FAMNAME[f]}</span><b>${R[f].name}</b>${R[f].links.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join('')}</div>`:'').join('')}
+    <div class="lc"><span class="kicker">Permits</span><b>Your building department decides whether you need a permit</b><a href="${R.permit[1]}" target="_blank" rel="noopener">${R.permit[0]} ↗</a><a href="${R.adopt[1]}" target="_blank" rel="noopener">${R.adopt[0]} ↗</a></div>
+   </div></div>`;
+}
+const topNote=t=>{const n=codesFor().notes[t.nk||t.id];return n?`<div class="safety warn" style="margin-top:14px"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="var(--accent)"/><path d="M14 7v9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="20.5" r="1.7" fill="#fff"/></svg><div><b>Rule in ${esc(where())}</b><p>${n}</p></div></div>`:''};
+const gallery=t=>{const ps=PHOTOS[t.id];if(!ps)return '';
+  return `<div class="gal">${ps.map(p=>`<figure><img src="${p.src}" alt="${esc(p.cap)}" loading="lazy"><figcaption><b>${esc(p.cap)}</b><a href="${p.page}" target="_blank" rel="noopener">Photo: ${esc(p.credit)} ↗</a></figcaption></figure>`).join('')}</div>`};
+const refLink=ref=>{const f=famOf(ref),R=codesFor();if(!f||!R[f]||!R[f].links.length)return '';return `<a href="${R[f].links[0][1]}" target="_blank" rel="noopener">Look up ↗</a>`};
+
+let cur=0, timer=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const svgOf=t=>`<svg class="scene" viewBox="0 0 320 222" role="img" aria-label="Illustration: ${esc(t.title)}">${S[t.scene]().join('')}</svg>`;
+const prog=t=>{const d=done[t.id]||[];return d.filter(Boolean).length};
+const permitChip=p=>p===false?'<span class="chip">No permit usually</span>':`<span class="chip permit">Permit: ${p}</span>`;
+const yt=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+
+function nav(active){
+  const trades=[...new Set(D.map(t=>t.trade||t.name))];
+  $('#nav').innerHTML=`<a href="#ask" class="navask" ${active==='ask'?'aria-current="page"':''}>Project Finder<span>AI</span></a><a href="#home" ${!active?'aria-current="page"':''}>All trades<span>${trades.length}</span></a>`+
+   trades.map(tr=>{const ps=D.filter(t=>(t.trade||t.name)===tr);
+     if(ps.length===1){const t=ps[0];return `<a href="#${t.id}" ${active===t.id?'aria-current="page"':''}>${tr}<span>${prog(t)}/${t.steps.length}</span></a>`}
+     return `<div class="grp">${tr}</div>`+ps.map(t=>`<a class="sub" href="#${t.id}" ${active===t.id?'aria-current="page"':''}>${t.title.replace(/^(Install|Replace) (an? )?/,'')}<span>${prog(t)}/${t.steps.length}</span></a>`).join('')}).join('');
+  const a=$('#nav a[aria-current]'); if(a&&innerWidth<900) a.scrollIntoView({inline:'center',block:'nearest'});
+}
+
+const STOP=new Set('how to do i a an the in on my of for and with your can is it into from at by this that want need diy project projects home house step steps install installing build building create make put add new'.split(' '));
+const toks=q=>q.toLowerCase().replace(/[^a-z0-9\- ]/g,' ').split(/\s+/).filter(w=>w.length>1&&!STOP.has(w));
+function match(q){
+  const ts=toks(q); if(!ts.length) return D.slice();
+  return D.map(t=>{const h=JSON.stringify([t.name,t.title,t.blurb,t.steps,t.code,t.tools,t.mats]).toLowerCase();
+    const head=(t.name+' '+t.title).toLowerCase();
+    const sc=ts.reduce((n,w)=>n+(head.includes(w)?3:h.includes(w.replace(/s$/,''))?1:0),0);return{t,sc}})
+   .filter(x=>x.sc>=Math.max(1,Math.ceil(ts.length*0.4))).sort((x,y)=>y.sc-x.sc).map(x=>x.t);
+}
+const cardHtml=t=>`
+    <a class="card" href="#${t.id}"><div class="thumb${PHOTOS[t.id]?' ph':''}">${PHOTOS[t.id]?`<img src="${PHOTOS[t.id][0].src}" alt="" loading="lazy"><span class="mini">${svgOf(t)}</span>`:svgOf(t)}</div>
+     <div class="body"><span class="kicker">${t.trade||t.name}</span><h3>${t.title}</h3><p>${t.blurb}</p>
+     <div class="foot"><span>${t.lvl} · ${t.time}</span><span class="bar" title="${prog(t)} of ${t.steps.length} steps done"><i style="width:${prog(t)/t.steps.length*100}%"></i></span></div></div></a>`;
+function home(q=''){
+  stop();
+  const ql=q.trim(); const list=ql?match(ql):D;
+  $('#view').innerHTML=`
+  ${ql?'':`<section class="intro"><div><h1>Fix it right.<br><em>Build it to code.</em></h1></div>
+    <div><p>Sixteen trades with photos, illustrated step-by-step walkthroughs, tool and materials lists, the code sections an inspector checks with links to the code for your region, and video guides.</p>
+    <div class="legend"><span class="chip">Beginner · Intermediate · Advanced</span><span class="chip code">IRC · NEC · IPC</span><span class="chip permit">Permit flags</span></div></div></section>
+    ${launcher()}`}
+  ${ql?`<div class="askcta"><div><b>Get a full plan for “${esc(ql)}”</b><p>Materials, tools, safety, step-by-step instructions and code sections for ${esc(where())}.</p></div><a class="btn primary" href="#ask" data-ask="${esc(ql)}">Plan this project</a></div>
+   <p class="crumb">${list.length} matching guide${list.length===1?'':'s'}</p>`:''}
+  ${list.length?`<div class="grid">${list.map(cardHtml).join('')}</div>`
+   :`<div class="empty">No ready-made guide matches yet. Use <b>Plan this project</b> above to get a custom plan.</div>`}`;
+  wireLauncher(); nav(null);
+}
+const EXAMPLES=['How to install a generator inlet outlet in my home','How to build a non-load-bearing wall in my basement','How to replace a toilet wax ring','How to add a dimmer switch','How to tile a shower wall','How to install a ceiling fan'];
+function launcher(v=''){
+  return `<section class="finder" aria-labelledby="fh">
+   <div class="finder-top"><div><span class="kicker">Project Finder</span><h2 id="fh">What do you want to build or fix?</h2></div></div>
+   <form class="askform" id="askform"><label class="sr" for="askq">Describe your project</label>
+    <input id="askq" type="text" placeholder="e.g. How to install a generator inlet outlet in my home" value="${esc(v)}" autocomplete="off">
+    <button class="btn primary" type="submit">Plan it</button>
+    <label class="btn cam" id="camlbl" for="camfile" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h3l1.5-2h5L14 6h3v10H3z"/><circle cx="10" cy="11" r="3"/></svg>Photo search</label>
+    <input id="camfile" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr" tabindex="-1">
+   </form>
+   <div class="ex">${EXAMPLES.map(e=>`<button type="button" class="chip exq">${e}</button>`).join('')}</div>
+   <div class="aiset" id="aiset" hidden></div>
+   <p class="ai-note" id="ainote">Plans are written by Claude for ${esc(where())} using your own Claude account. Photo search identifies tools, devices, materials and remodel ideas from a picture; on a phone it opens your camera.</p>
+  </section>`;
+}
+let AI=null, ctl=null, pendingAsk='', pendingImg=null;
+// AI adapter: inside Claude it uses the viewer's Claude account; on the website it calls the Claude API
+// through the site's proxy (config.js) or with a key the visitor saves in this browser.
+const SITE=!!window.LP_CONFIG;
+const getKey=()=>{try{return localStorage.getItem('lp-api-key')||''}catch(e){return ''}};
+async function initAI(){
+  try{const smp=window.claude&&window.claude.use?await window.claude.use('sample'):null;
+    if(smp){let lim=null;try{lim=await smp.limits()}catch(e){}
+      return{mode:'claude',ready:true,images:!!(lim&&lim.images),json:(prompt,o)=>{const{schema,...rest}=o||{};return smp.json(prompt,rest)}}}}catch(e){}
+  if(!SITE) return null;
+  const proxy=(window.LP_CONFIG.proxyUrl||'').replace(/\/$/,'');
+  return{mode:proxy?'proxy':'key',get ready(){return !!(proxy||getKey())},images:true,json:(prompt,o)=>apiJson(prompt,o||{},proxy)};
+}
+let SDK=null;
+async function apiJson(prompt,{images,signal,schema},proxy){
+  const key=getKey(); if(!proxy&&!key) throw{code:'no_key'};
+  if(!SDK) SDK=(await import('./vendor/anthropic.mjs')).default;
+  const client=new SDK({apiKey:proxy?'via-proxy':key,baseURL:proxy||undefined,dangerouslyAllowBrowser:true,maxRetries:1});
+  const content=[];
+  for(const img of images||[]) content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:await toJpegB64(img)}});
+  content.push({type:'text',text:prompt});
+  let r;
+  try{
+    r=await client.beta.messages.create({
+      model:'claude-opus-5-5',max_tokens:16000,
+      betas:['server-side-fallback-2026-07-01'],fallbacks:'default',
+      output_config:{effort:'medium',...(schema?{format:{type:'json_schema',schema}}:{})},
+      messages:[{role:'user',content}]},{signal});
+  }catch(e){
+    if(e instanceof SDK.APIUserAbortError||(signal&&signal.aborted)) throw{code:'cancelled'};
+    if(e instanceof SDK.AuthenticationError||e instanceof SDK.PermissionDeniedError) throw{code:'bad_key'};
+    if(e instanceof SDK.RateLimitError) throw{code:'rate_limited'};
+    if(e instanceof SDK.APIConnectionError) throw{code:'network'};
+    throw{code:'upstream_error',message:String(e&&e.message||e)};
+  }
+  if(r.stop_reason==='refusal') throw{code:'refused'};
+  if(r.stop_reason==='max_tokens') throw{code:'invalid_json'};
+  const text=r.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+  try{return JSON.parse(text)}catch(e){throw{code:'invalid_json'}}
+}
+async function toJpegB64(file){
+  const bmp=await createImageBitmap(file,{imageOrientation:'from-image'}).catch(()=>null);
+  if(!bmp) throw{code:'image_rejected'};
+  const k=Math.min(1,1568/Math.max(bmp.width,bmp.height));
+  const c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
+  c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+  const blob=await new Promise(res=>c.toBlob(res,'image/jpeg',0.85));
+  const buf=new Uint8Array(await blob.arrayBuffer());let bin='';for(let i=0;i<buf.length;i+=0x8000)bin+=String.fromCharCode.apply(null,buf.subarray(i,i+0x8000));
+  return btoa(bin);
+}
+(async()=>{AI=await initAI();updateAI()})();
+function updateAI(){
+  const cl=$('#camlbl'), note=$('#ainote'), set=$('#aiset');
+  if(!AI){ if(note) note.textContent='The planner and photo search are not available here. The ready-made guides below still work.'; if(cl) cl.hidden=true; return }
+  if(cl) cl.hidden=!AI.images;
+  if(note&&AI.mode!=='claude') note.textContent=AI.mode==='proxy'?'Plans and photo search are written by Claude for '+where()+'. On a phone, Photo search opens your camera.':'Plans and photo search are written by Claude for '+where()+' using your own Claude API key. On a phone, Photo search opens your camera.';
+  if(set) set.hidden=AI.mode!=='key', renderKeyBox();
+}
+function renderKeyBox(){
+  const box=$('#aiset'); if(!box||box.hidden) return;
+  const k=getKey();
+  box.innerHTML=k?`<span>AI is on with your API key ending in <b>${esc(k.slice(-4))}</b>, saved only in this browser.</span><button class="btn" type="button" id="keyrm">Remove key</button>`
+   :`<form id="keyform" class="keyform"><label for="apikey"><b>Turn on the AI planner and photo search</b><span>Paste a Claude API key from <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>. It is saved only in this browser and usage is billed to your Anthropic account.</span></label>
+     <div class="keyrow"><input id="apikey" type="password" autocomplete="off" placeholder="sk-ant-…" required><button class="btn primary" type="submit">Save key</button></div></form>`;
+  const f=$('#keyform'); if(f) f.onsubmit=e=>{e.preventDefault();const v=$('#apikey').value.trim();if(!v)return;try{localStorage.setItem('lp-api-key',v)}catch(err){};renderKeyBox()};
+  const rm=$('#keyrm'); if(rm) rm.onclick=()=>{try{localStorage.removeItem('lp-api-key')}catch(err){};renderKeyBox()};
+}
+function wireLauncher(){
+  const f=$('#askform'); if(!f) return;
+  f.onsubmit=e=>{e.preventDefault();const v=$('#askq').value.trim();if(!v)return;pendingAsk=v;pendingImg=null;location.hash==='#ask'?finder():location.hash='#ask'};
+  document.querySelectorAll('.exq').forEach(b=>b.onclick=()=>{$('#askq').value=b.textContent;f.requestSubmit()});
+  const cf=$('#camfile'); if(cf) cf.onchange=()=>{const fl=cf.files&&cf.files[0];if(!fl)return;pendingImg=fl;pendingAsk=$('#askq').value.trim();cf.value='';location.hash==='#ask'?finder():location.hash='#ask'};
+  updateAI();
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-ask]');if(a){e.preventDefault();pendingAsk=a.dataset.ask;pendingImg=null;$('#q').value='';location.hash==='#ask'?finder():location.hash='#ask'}});
+
+function regionBrief(){const R=codesFor();return `Region: ${where()}${region.s&&region.c!=='XX'?', '+(COUNTRIES.find(c=>c[0]===region.c)||[])[1]:''}.
+Codes in force: building = ${R.bldg.name}; electrical = ${R.elec.name}; plumbing = ${R.plumb.name}; mechanical = ${R.mech.name}.
+Local rules to respect: ${Object.values(R.notes).join(' ')||'none listed'}`}
+const S_=t=>({type:t}), STRS={type:'array',items:{type:'string'}};
+const OBJ=(props)=>({type:'object',additionalProperties:false,required:Object.keys(props),properties:props});
+const PLAN_SCHEMA=OBJ({title:S_('string'),summary:S_('string'),difficulty:{type:'string',enum:['Beginner','Intermediate','Advanced','Hire a pro']},time:S_('string'),
+  permit:{type:'string',enum:['Usually not','Varies','Yes']},stopFirst:S_('string'),tools:STRS,
+  materials:{type:'array',items:OBJ({item:S_('string'),qty:S_('string')})},safety:STRS,
+  steps:{type:'array',items:OBJ({title:S_('string'),detail:S_('string'),code:S_('string')})},
+  codes:{type:'array',items:OBJ({ref:S_('string'),text:S_('string')})},video:S_('string'),inspect:STRS});
+const ID_SCHEMA=OBJ({kind:{type:'string',enum:['tool','device','material','fixture','remodel idea','problem','unknown']},name:S_('string'),confidence:{type:'string',enum:['high','medium','low']},
+  whatItIs:S_('string'),details:STRS,howToUse:STRS,safety:STRS,codeNotes:STRS,projects:STRS,buyTips:S_('string')});
+const PLAN_SHAPE=`{"title":string,"summary":string (2 sentences),"difficulty":"Beginner"|"Intermediate"|"Advanced"|"Hire a pro","time":string,"permit":"Usually not"|"Varies"|"Yes",
+"stopFirst":string|null (a blunt warning if this is dangerous, illegal for homeowners in this region, or usually structural — e.g. exterior walls are normally load-bearing or shear walls; else an empty string),
+"tools":[string],"materials":[{"item":string,"qty":string}],"safety":[string],
+"steps":[{"title":string,"detail":string (2-3 sentences, concrete measurements),"code":string (empty if none; section ref like "NEC 210.8(A)" or "IRC R602.3")}],
+"codes":[{"ref":string,"text":string}],"video":string (a YouTube search query),"inspect":[string] (what the inspector will check)}`;
+async function runPlan(q,box){
+  ctl?.abort(); ctl=new AbortController();
+  const local=match(q).slice(0,3);
+  box.innerHTML=`${local.length?`<div class="box-title">Ready-made guides that match</div><div class="grid small">${local.map(cardHtml).join('')}</div>`:''}
+   <div class="planwait"><span class="spin"></span><div><b>Writing your plan for ${esc(where())}…</b><p>This usually takes 20–60 seconds${AI&&AI.mode==='claude'?'. If Claude asks for permission, allow it to continue':''}.</p></div><button class="btn" id="stopai" type="button">Stop</button></div>`;
+  $('#stopai').onclick=()=>ctl.abort();
+  if(!AI){box.querySelector('.planwait').innerHTML='<div><b>The planner is not available here.</b><p>The ready-made guides above still work.</p></div>';return}
+  const prompt=`You are a licensed general contractor and code inspector writing a do-it-yourself plan for a homeowner.
+Project request: "${q.slice(0,500)}"
+${regionBrief()}
+Follow the codes in force for this region (cite real section numbers from the model code the region uses; if unsure of a number, cite the chapter, not an invented section). Be specific: sizes, spacing, wire gauges, fastener types, torque, cure times. Give 6-10 steps in order. If the request is unsafe or not legal for a homeowner in this region, say so in stopFirst and still explain what the homeowner can prepare and what the pro does.
+Reply with ONLY one JSON object of this shape:
+${PLAN_SHAPE}`;
+  try{
+    const p=await AI.json(prompt,{signal:ctl.signal,cache:{gcTime:3600000},schema:PLAN_SCHEMA});
+    if(!p||!Array.isArray(p.steps)) throw {code:'invalid_json'};
+    box.querySelector('.planwait').outerHTML=renderPlan(p);
+    wirePlan(box,p);
+  }catch(e){
+    const msg={no_key:'Add your Claude API key above to turn on the AI features.',bad_key:'That API key was not accepted. Check it, or remove it and paste a new one.',network:'Could not reach Claude. Check your connection and try again.',cancelled:'Stopped.',not_granted:'Claude was not allowed for this page, so custom plans are off. The ready-made guides still work.',rate_limited:'Too many requests right now. Try again in a minute.',refused:'Claude could not write a plan for that request. Try describing the project differently.',invalid_json:'The plan came back incomplete. Try again.',sampling_disabled:'Claude is not available for this account.'}[e&&e.code]||'Something went wrong while writing the plan. Try again.';
+    const w=box.querySelector('.planwait'); if(w) w.innerHTML=`<div><b>${msg}</b></div><button class="btn" type="button" data-ask="${esc(q)}">Try again</button>`;
+  }
+}
+const L1=v=>Array.isArray(v)?v.filter(Boolean).map(x=>typeof x==='string'?x:JSON.stringify(x)):[];
+function renderPlan(p){
+  const steps=Array.isArray(p.steps)?p.steps:[];
+  return `<article class="plan">
+   <div class="crumb">Custom plan · ${esc(where())}</div>
+   <h1>${esc(p.title||'Your project plan')}</h1><p class="lede">${esc(p.summary||'')}</p>
+   <div class="meta"><span class="chip">${esc(p.difficulty||'')}</span><span class="chip">⏱ ${esc(p.time||'')}</span><span class="chip${p.permit==='Usually not'?'':' permit'}">Permit: ${esc(p.permit||'Check locally')}</span></div>
+   ${p.stopFirst?`<div class="safety warn" style="margin-top:14px"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="var(--accent)"/><path d="M14 7v9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="14" cy="20.5" r="1.7" fill="#fff"/></svg><div><b>Read this first</b><p>${esc(p.stopFirst)}</p></div></div>`:''}
+   <section class="sec"><h2>Tools &amp; materials</h2><div class="cols">
+    <div><div class="box-title">Tools</div><ul class="list">${L1(p.tools).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div><div class="box-title">Materials</div><ul class="list">${(Array.isArray(p.materials)?p.materials:[]).map(m=>`<li>${esc(m.item||m)}${m.qty?` <span class="qty">${esc(m.qty)}</span>`:''}</li>`).join('')}</ul></div></div></section>
+   <div class="safety"><svg viewBox="0 0 28 28"><path d="M14 2 27 25H1z" fill="var(--caution)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 10v7" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="21" r="1.6" fill="var(--ink)"/></svg>
+    <div><b>Safety</b><ul class="slist">${L1(p.safety).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+   <section class="sec"><h2>Step by step</h2><ol class="steps">${steps.map((st,i)=>`
+    <li class="step"><span class="n">${String(i+1).padStart(2,'0')}</span><div><h3>${esc(st.title||'')}</h3><p>${esc(st.detail||'')}</p>
+     <div class="srow">${st.code?`<span class="ref">§ ${esc(st.code)}</span>`:''}<a class="vlink" href="${yt((p.title||'')+' '+(st.title||''))}" target="_blank" rel="noopener">▶ Watch this step</a></div></div>
+     <label title="Mark done"><input type="checkbox" aria-label="Mark step ${i+1} done"></label></li>`).join('')}</ol></section>
+   <section class="sec"><h2>Video guides</h2><div class="video"><div><h3>Watch it done: ${esc(p.title||'')}</h3><p>Opens a YouTube search in a new tab.</p></div><div class="acts"><a class="btn primary" href="${yt(p.video||p.title||'')}" target="_blank" rel="noopener">Watch videos</a></div></div></section>
+   <section class="sec"><h2>Meeting code</h2>
+    <div style="overflow-x:auto"><table class="code-table"><thead><tr><th>Section</th><th>Requirement</th><th>Your code</th></tr></thead>${(Array.isArray(p.codes)?p.codes:[]).map(c=>`<tr><td>${esc(c.ref||'')}</td><td>${esc(c.text||'')}</td><td class="lk">${refLink(String(c.ref||''))||`<a href="${gs((c.ref||'')+' '+where())}" target="_blank" rel="noopener">Look up ↗</a>`}</td></tr>`).join('')}</table></div>
+    ${L1(p.inspect).length?`<div class="box-title" style="margin-top:14px">What the inspector checks</div><ul class="list">${L1(p.inspect).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+   </section>
+   <p class="note">This plan was written by AI for ${esc(where())}. Section numbers can be wrong or out of date. Confirm them with the code links above and your building department before you start.</p>
+  </article>`;
+}
+function wirePlan(box,p){box.querySelectorAll('.plan .step input').forEach(i=>i.onchange=()=>i.closest('.step').classList.toggle('done',i.checked))}
+
+const ID_SHAPE=`{"kind":"tool"|"device"|"material"|"fixture"|"remodel idea"|"problem"|"unknown","name":string,"confidence":"high"|"medium"|"low",
+"whatItIs":string (2 sentences),"details":[string] (specs or identifying features visible: brand/model if readable, size, rating),
+"howToUse":[string] (short ordered steps, or how to fix/build it if a problem or remodel idea),"safety":[string],"codeNotes":[string] (relevant code rules for the region),
+"projects":[string] (3-5 DIY project requests this photo suggests, phrased like "How to ..."),"buyTips":string}`;
+async function runIdentify(file,q,box){
+  ctl?.abort(); ctl=new AbortController();
+  const url=URL.createObjectURL(file);
+  box.innerHTML=`<div class="idwrap"><img class="idimg" src="${url}" alt="Your photo"><div class="idout"><div class="planwait"><span class="spin"></span><div><b>Looking at your photo…</b><p>Identifying it and finding related projects.</p></div><button class="btn" id="stopai" type="button">Stop</button></div></div></div>`;
+  $('#stopai').onclick=()=>ctl.abort();
+  if(!AI){box.querySelector('.planwait').innerHTML='<div><b>Photo search is not available here.</b></div>';return}
+  const prompt=`The homeowner took this photo with a home-improvement app.${q?` Their question: "${q.slice(0,300)}".`:''} Identify the main tool, device, building material, fixture, remodel idea or problem shown. ${regionBrief()}
+If it is a problem (leak, crack, rot, scorched outlet, mold), say how serious it is and whether to call a pro in safety. Reply with ONLY one JSON object of this shape:
+${ID_SHAPE}`;
+  try{
+    const r=await AI.json(prompt,{images:[file],signal:ctl.signal,schema:ID_SCHEMA});
+    const out=box.querySelector('.idout');
+    out.innerHTML=`<span class="kicker">${esc(r.kind||'')} · ${esc(r.confidence||'')} confidence</span><h2 class="idname">${esc(r.name||'Not sure')}</h2><p>${esc(r.whatItIs||'')}</p>
+     ${L1(r.details).length?`<div class="box-title">What I can see</div><ul class="list">${L1(r.details).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+     ${L1(r.howToUse).length?`<div class="box-title" style="margin-top:12px">How to use it / fix it</div><ol class="olist">${L1(r.howToUse).map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}
+     ${L1(r.safety).length?`<div class="safety" style="margin-top:12px"><svg viewBox="0 0 28 28"><path d="M14 2 27 25H1z" fill="var(--caution)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 10v7" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="21" r="1.6" fill="var(--ink)"/></svg><div><b>Safety</b><ul class="slist">${L1(r.safety).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`:''}
+     ${L1(r.codeNotes).length?`<div class="box-title" style="margin-top:12px">Code notes for ${esc(where())}</div><ul class="list">${L1(r.codeNotes).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+     ${r.buyTips?`<p class="buy"><b>Buying tip:</b> ${esc(r.buyTips)}</p>`:''}
+     <div class="box-title" style="margin-top:12px">Projects you can plan from this</div>
+     <div class="ex">${L1(r.projects).map(x=>`<button type="button" class="chip" data-ask="${esc(x)}">${esc(x)} →</button>`).join('')}<a class="chip" href="${yt(r.name||'')}" target="_blank" rel="noopener">▶ Videos about ${esc(r.name||'this')}</a></div>`;
+    const loc=match((r.name||'')+' '+L1(r.projects).join(' ')).slice(0,3);
+    if(loc.length) box.insertAdjacentHTML('beforeend',`<div class="box-title" style="margin-top:20px">Ready-made guides that match</div><div class="grid small">${loc.map(cardHtml).join('')}</div>`);
+  }catch(e){
+    const msg={no_key:'Add your Claude API key above to turn on the AI features.',bad_key:'That API key was not accepted. Check it, or remove it and paste a new one.',network:'Could not reach Claude. Check your connection and try again.',cancelled:'Stopped.',not_granted:'Claude was not allowed for this page, so photo search is off.',image_rejected:'That photo could not be read. Try a JPEG or PNG under 20 MB.',images_unavailable:'Photo search is not available in this view.',rate_limited:'Too many requests right now. Try again in a minute.'}[e&&e.code]||'Something went wrong. Try another photo.';
+    const w=box.querySelector('.planwait'); if(w) w.innerHTML=`<div><b>${msg}</b></div>`;
+  }
+}
+function finder(){
+  stop();
+  $('#view').innerHTML=`<div class="crumb"><a href="#home">All trades</a> / Project Finder</div>${launcher(pendingAsk)}<div id="result" class="result"></div>`;
+  wireLauncher(); nav('ask');
+  const box=$('#result');
+  if(pendingImg){const f=pendingImg;pendingImg=null;runIdentify(f,pendingAsk,box)}
+  else if(pendingAsk){runPlan(pendingAsk,box)}
+  else box.innerHTML='';
+  scrollTo(0,0);
+}
+
+function guide(t){
+  stop(); cur=0;
+  const d=done[t.id]||[];
+  $('#view').innerHTML=`
+  <div class="crumb"><a href="#home">All trades</a> / ${t.name}</div>
+  <div class="guide-head"><h1>${t.title}</h1><p>${t.blurb}</p>
+   <div class="meta"><span class="chip">${t.lvl}</span><span class="chip">⏱ ${t.time}</span>${permitChip(t.permit)}<span class="chip code">${t.code.length} code checks</span><span class="chip">Region: ${esc(where())}</span></div>${topNote(t)}</div>
+  ${gallery(t)}
+  <div class="guide">
+   <div class="board" aria-live="polite">
+     <div class="paper" id="art">${svgOf(t)}</div>
+     <div class="cap"><b id="capn"></b><div id="capt"></div></div>
+     <div class="controls">
+       <button class="btn" id="prev" aria-label="Previous step"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2 4 7l5 5"/></svg></button>
+       <button class="btn primary" id="play"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg><span>Play walkthrough</span></button>
+       <button class="btn" id="next" aria-label="Next step"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 2 5 5-5 5"/></svg></button>
+       <div class="dots" id="dots">${t.steps.map((s,i)=>`<button data-i="${i}" aria-label="Step ${i+1}">${i+1}</button>`).join('')}</div>
+     </div>
+   </div>
+   <div>
+    <ol class="steps" id="steps">${t.steps.map((s,i)=>`
+      <li class="step${d[i]?' done':''}" data-i="${i}">
+        <span class="n">${String(i+1).padStart(2,'0')}</span>
+        <div><h3>${s[0]}</h3><p>${s[1]}</p>${s[3]&&s[3].photo?`<figure class="sphoto"><img src="${s[3].photo}" alt="${esc(s[0])}" loading="lazy"><figcaption>${s[3].cap||''} <span>Photo: ${s[3].credit}</span></figcaption></figure>`:''}<div class="srow">${s[2]?`<span class="ref">§ ${s[2]}</span>`:''}<a class="vlink" href="${yt((s[3]&&s[3].vq)||(t.title+' '+s[0]))}" target="_blank" rel="noopener">▶ Watch this step</a></div></div>
+        <label for="ck-${t.id}-${i}" title="Mark done"><input type="checkbox" id="ck-${t.id}-${i}" data-i="${i}" ${d[i]?'checked':''} aria-label="Mark step ${i+1} done"></label>
+      </li>`).join('')}</ol>
+    <div class="safety"><svg viewBox="0 0 28 28"><path d="M14 2 27 25H1z" fill="var(--caution)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 10v7" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="21" r="1.6" fill="var(--ink)"/></svg>
+      <div><b>Safety first</b><p>${t.safety}</p></div></div>
+   </div>
+  </div>
+
+  <section class="sec"><h2>Video guides</h2>
+   <div class="video"><div><h3>Watch it done: ${t.title}</h3><p>Opens a curated YouTube search in a new tab. Use the step numbers above to follow along, and pause each video at the matching step.</p></div>
+    <div class="acts"><a class="btn primary" href="${yt(t.vq)}" target="_blank" rel="noopener"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5v11l9-5.5z"/></svg>Watch videos</a>
+    <a class="btn" href="${yt(t.vq+' code requirements')}" target="_blank" rel="noopener">Code explainers</a></div></div>
+  </section>
+
+  <section class="sec"><h2>Tools &amp; materials</h2>
+   <div class="cols"><div><div class="box-title">Tools</div><ul class="list">${t.tools.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+   <div><div class="box-title">Materials</div><ul class="list">${t.mats.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+  </section>
+
+  <section class="sec"><h2>Meeting code</h2>
+   ${localCode(t)}
+   <div style="overflow-x:auto;margin-top:16px"><table class="code-table"><thead><tr><th>Section</th><th>Requirement</th><th>Your code</th></tr></thead>${t.code.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td><td class="lk">${refLink(c[0])}</td></tr>`).join('')}</table></div>
+  </section>
+  <p class="note">Section references follow the 2021 International Residential Code (IRC), 2021 International Plumbing Code (IPC), and 2023 National Electrical Code (NEC). Your state, province or city may adopt different editions or local amendments. Call your building department before you start, and get a permit and inspection where required.</p>`;
+
+  const go=i=>{cur=(i+t.steps.length)%t.steps.length;paint(t)};
+  $('#prev').onclick=()=>{stop();go(cur-1)};
+  $('#next').onclick=()=>{stop();go(cur+1)};
+  $('#play').onclick=()=>timer?stop():play(t);
+  $('#dots').onclick=e=>{const b=e.target.closest('button');if(b){stop();go(+b.dataset.i)}};
+  $('#steps').addEventListener('click',e=>{
+    if(e.target.matches('input')){const i=+e.target.dataset.i;(done[t.id]=done[t.id]||[])[i]=e.target.checked;store.set('lp-done',done);
+      e.target.closest('.step').classList.toggle('done',e.target.checked);paint(t);nav(t.id);return}
+    if(e.target.closest('label'))return;
+    const li=e.target.closest('.step'); if(li){stop();go(+li.dataset.i); if(innerWidth<900) $('.board').scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+  $('#chg').onclick=()=>{scrollTo({top:0,behavior:'smooth'});$('#rc').focus()};
+  paint(t); nav(t.id); scrollTo(0,0);
+}
+
+function paint(t){
+  document.querySelectorAll('#art g[data-s]').forEach(g=>{const n=+g.dataset.s-1;g.classList.toggle('fut',n>cur);g.classList.toggle('now',n===cur)});
+  $('#capn').textContent=`Step ${cur+1} of ${t.steps.length}`;
+  $('#capt').textContent=t.steps[cur][0];
+  const d=done[t.id]||[];
+  document.querySelectorAll('#dots button').forEach((b,i)=>{b.classList.toggle('on',i===cur);b.classList.toggle('done',!!d[i])});
+  document.querySelectorAll('#steps .step').forEach((li,i)=>li.classList.toggle('on',i===cur));
+}
+function play(t){
+  $('#play span').textContent='Pause';
+  timer=setInterval(()=>{ if(cur>=t.steps.length-1){stop();return} cur++; paint(t)},3200);
+}
+function stop(){ if(timer){clearInterval(timer);timer=null} const s=$('#play span'); if(s) s.textContent='Play walkthrough'}
+
+function route(){
+  const id=location.hash.slice(1); const t=D.find(x=>x.id===id);
+  if(id==='ask'){ctl?.abort();finder();return}
+  ctl?.abort();
+  if(t){$('#q').value='';guide(t)} else home($('#q').value);
+}
+$('#q').addEventListener('input',e=>{ if(location.hash&&location.hash!=='#home'){history.replaceState(null,'','#home')} home(e.target.value)});
+addEventListener('hashchange',route);
+regionBar();
+route();
+</script>
+
+<script>if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(function(){});</script>
+</body>
+</html>

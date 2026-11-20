@@ -1,0 +1,10 @@
+name = "level-and-plumb-ai"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Comma-separated list of sites allowed to use this proxy.
+ALLOWED_ORIGINS = "https://vick008.github.io"
+
+# Set your key as a secret (never commit it):
+#   npx wrangler secret put ANTHROPIC_API_KEY
